@@ -17,13 +17,21 @@ import {
   Sun,
   Moon,
   ShieldCheck,
+  Save
 } from "lucide-react";
+import api from "../../api/axios";
+import toast from "react-hot-toast";
 const AdminLayout = ({ children, title }) => {
   const { user, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [showProfileModal, setShowProfileModal] = useState(false);
+  const [profileName, setProfileName] = useState(user?.name || "Administrator");
+  const [profileEmail, setProfileEmail] = useState(user?.email || "");
+  const [profilePassword, setProfilePassword] = useState("");
+  const [isUpdating, setIsUpdating] = useState(false);
   const navigation = [
     { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
     {
@@ -48,6 +56,24 @@ const AdminLayout = ({ children, title }) => {
     }
     return location.pathname.startsWith(path);
   };
+  
+  const handleUpdateProfile = async (e) => {
+    e.preventDefault();
+    setIsUpdating(true);
+    try {
+      const payload = { name: profileName, email: profileEmail };
+      if (profilePassword) payload.password = profilePassword;
+      const res = await api.put("/auth/profile", payload);
+      toast.success("Profile updated successfully!");
+      // Optionally update user context here, but since the frontend will reload or we can just keep state
+      setShowProfileModal(false);
+      setProfilePassword("");
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Failed to update profile");
+    } finally {
+      setIsUpdating(false);
+    }
+  };
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col md:flex-row relative">
       {" "}
@@ -63,7 +89,7 @@ const AdminLayout = ({ children, title }) => {
           <div>
             {" "}
             <span className="text-base font-extrabold tracking-tight bg-gradient-to-r from-slate-900 dark:from-white to-slate-600 dark:to-slate-400 bg-clip-text text-transparent">
-              PngWorld Admin
+              Pixelink Admin
             </span>{" "}
             <p className="text-[10px] text-brand-400 font-semibold tracking-wider uppercase">
               Control Panel
@@ -119,7 +145,7 @@ const AdminLayout = ({ children, title }) => {
           {" "}
           <ShieldCheck className="w-5 h-5 text-brand-500" />{" "}
           <span className="font-extrabold text-sm text-slate-900 dark:text-white">
-            PngWorld Admin
+            Pixelink Admin
           </span>{" "}
         </div>{" "}
         <button
@@ -209,14 +235,18 @@ const AdminLayout = ({ children, title }) => {
               <ExternalLink className="w-3.5 h-3.5 ml-1.5" />{" "}
             </Link>{" "}
             <div className="h-5 w-[1px] bg-slate-100 dark:bg-slate-850"></div>{" "}
-            <div className="flex items-center space-x-2">
+            <div 
+              className="flex items-center space-x-2 cursor-pointer hover:opacity-80 transition-opacity"
+              onClick={() => setShowProfileModal(true)}
+              title="Edit Profile"
+            >
               {" "}
-              <div className="w-8 h-8 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-400 flex items-center justify-center font-bold text-xs uppercase">
+              <div className="w-8 h-8 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-400 flex items-center justify-center font-bold text-xs uppercase shadow-sm">
                 {" "}
-                {user?.name ? user.name[0] : "A"}{" "}
+                {profileName ? profileName[0] : "A"}{" "}
               </div>{" "}
               <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-                {user?.name || "Administrator"}
+                {profileName}
               </span>{" "}
             </div>{" "}
           </div>{" "}
@@ -244,6 +274,58 @@ const AdminLayout = ({ children, title }) => {
           </div>{" "}
         </main>{" "}
       </div>{" "}
+      {showProfileModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onClick={() => setShowProfileModal(false)}></div>
+          <div className="relative bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 w-full max-w-md shadow-2xl glass">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-xl font-extrabold text-slate-900 dark:text-white">Admin Profile</h3>
+              <button onClick={() => setShowProfileModal(false)} className="p-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 rounded-xl text-slate-500 transition-colors">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <form onSubmit={handleUpdateProfile} className="space-y-4 text-left">
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Display Name</label>
+                <input 
+                  type="text" 
+                  value={profileName} 
+                  onChange={(e) => setProfileName(e.target.value)}
+                  className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none dark:text-white"
+                  placeholder="Administrator"
+                />
+              </div>
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Email Address</label>
+                <input 
+                  type="email" 
+                  value={profileEmail} 
+                  onChange={(e) => setProfileEmail(e.target.value)}
+                  className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none dark:text-white"
+                  required
+                />
+              </div>
+              <div className="space-y-1.5 pt-2">
+                <label className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">New Password (Optional)</label>
+                <input 
+                  type="password" 
+                  value={profilePassword} 
+                  onChange={(e) => setProfilePassword(e.target.value)}
+                  className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none dark:text-white"
+                  placeholder="Leave blank to keep current"
+                />
+              </div>
+              <button 
+                type="submit" 
+                disabled={isUpdating}
+                className="w-full flex justify-center items-center py-3 px-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl shadow-lg mt-6 transition-all"
+              >
+                {isUpdating ? 'Saving...' : <><Save className="w-4 h-4 mr-2"/> Save Changes</>}
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

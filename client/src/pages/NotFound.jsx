@@ -25,7 +25,7 @@ const NotFound = () => {
         <div className="space-y-3">
           <h1 className="text-5xl font-extrabold tracking-tight">Asset Not Found</h1>
           <p className="text-base text-slate-350 leading-relaxed max-w-md mx-auto">
-            The page or transparent cutout you are looking for has been removed, renamed, or is temporarily unavailable.
+            The page or transparent Png's you are looking for has been removed, renamed, or is temporarily unavailable.
           </p>
         </div>
 

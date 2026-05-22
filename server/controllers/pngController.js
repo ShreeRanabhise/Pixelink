@@ -2,6 +2,41 @@ import Png from '../models/Png.js';
 import Category from '../models/Category.js';
 import { uploadBuffer, deleteAsset } from '../config/cloudinary.js';
 import { processUploadAI } from '../services/aiService.js';
+import geoip from 'geoip-lite';
+import AnalyticsEvent from '../models/AnalyticsEvent.js';
+import PngPerformance from '../models/PngPerformance.js';
+
+const logAnalyticsEvent = async (req, eventType, data = {}) => {
+  try {
+    const ip = req.headers['x-forwarded-for'] || req.socket?.remoteAddress || req.ip || 'unknown';
+    let country = 'unknown';
+    if (ip && ip !== 'unknown') {
+      const geo = geoip.lookup(ip);
+      if (geo) country = geo.country;
+    }
+    let referer = req.headers.referer || 'direct';
+    // Clean up local referers
+    if (referer.includes('localhost') || referer.includes('127.0.0.1')) {
+      referer = 'direct';
+    } else {
+      try {
+        const url = new URL(referer);
+        referer = url.hostname;
+      } catch (e) {}
+    }
+
+    await AnalyticsEvent.create({
+      eventType,
+      ipAddress: ip,
+      country,
+      referer,
+      userAgent: req.headers['user-agent'] || '',
+      ...data
+    });
+  } catch (err) {
+    console.error('Analytics log error:', err);
+  }
+};
 
 // Helper to generate slugs
 const slugify = (text) => {
@@ -52,6 +87,11 @@ export const getPngs = async (req, res, next) => {
     // Search query
     if (req.query.search) {
       query.$text = { $search: req.query.search };
+      
+      // Log search analytics (only on first page to prevent duplicates)
+      if (page === 1) {
+        logAnalyticsEvent(req, 'search', { searchQuery: req.query.search });
+      }
     }
 
     // Sorting
@@ -100,6 +140,9 @@ export const getPngBySlug = async (req, res, next) => {
     // Increment views
     png.views += 1;
     await png.save();
+
+    // Log Analytics View Event
+    logAnalyticsEvent(req, 'view', { pngId: png._id, category: png.category?._id || png.category });
 
     res.status(200).json({ success: true, data: png });
   } catch (error) {
@@ -268,6 +311,59 @@ export const deletePng = async (req, res, next) => {
 };
 
 /**
+ * @desc Get global system stats for Admin Dashboard
+ * @route GET /api/pngs/stats/global
+ * @access Private/Admin
+ */
+export const getGlobalStats = async (req, res, next) => {
+  try {
+    const stats = await Png.aggregate([
+      {
+        $group: {
+          _id: null,
+          totalViews: { $sum: '$views' },
+          totalDownloads: { $sum: '$downloads' },
+          totalLikes: { $sum: '$likes' },
+        },
+      },
+    ]);
+
+    const result = stats[0] || { totalViews: 0, totalDownloads: 0, totalLikes: 0 };
+    res.status(200).json({ success: true, data: result });
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * @desc Increment or decrement like count
+ * @route POST /api/pngs/:id/like
+ * @access Public
+ */
+export const incrementLikes = async (req, res, next) => {
+  try {
+    const { action } = req.body; // 'like' or 'unlike'
+    const png = await Png.findById(req.params.id);
+
+    if (!png) {
+      return res.status(404).json({ success: false, message: 'PNG not found' });
+    }
+
+    if (action === 'unlike') {
+      png.likes = Math.max(0, png.likes - 1);
+    } else {
+      png.likes += 1;
+    }
+    
+    await png.save();
+
+    res.status(200).json({ success: true, likes: png.likes });
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
  * @desc Increment download counts
  * @route POST /api/pngs/:id/download
  * @access Public
@@ -282,6 +378,9 @@ export const incrementDownloads = async (req, res, next) => {
 
     png.downloads += 1;
     await png.save();
+
+    // Log Analytics Download Event
+    logAnalyticsEvent(req, 'download', { pngId: png._id, category: png.category });
 
     res.status(200).json({ success: true, downloads: png.downloads });
   } catch (error) {

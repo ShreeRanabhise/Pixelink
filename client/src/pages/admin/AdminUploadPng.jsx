@@ -219,7 +219,7 @@ const AdminUploadPng = () => {
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  placeholder="e.g. Vintage Leather Chair Cutout"
+                  placeholder="e.g. Vintage Leather Chair Png's"
                   className="w-full rounded-2xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-950/40 px-4 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-650 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all"
                   required
                 />{" "}

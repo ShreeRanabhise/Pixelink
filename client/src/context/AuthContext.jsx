@@ -9,8 +9,8 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const savedToken = localStorage.getItem('pngworld_token');
-    const savedUser = localStorage.getItem('pngworld_user');
+    const savedToken = localStorage.getItem('pixelink_token');
+    const savedUser = localStorage.getItem('pixelink_user');
     
     if (savedToken && savedUser) {
       setToken(savedToken);
@@ -24,8 +24,8 @@ export const AuthProvider = ({ children }) => {
       const response = await api.post('/auth/login', { email, password });
       const { token: jwtToken, user: userProfile } = response.data;
       
-      localStorage.setItem('pngworld_token', jwtToken);
-      localStorage.setItem('pngworld_user', JSON.stringify(userProfile));
+      localStorage.setItem('pixelink_token', jwtToken);
+      localStorage.setItem('pixelink_user', JSON.stringify(userProfile));
       
       setToken(jwtToken);
       setUser(userProfile);
@@ -38,8 +38,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    localStorage.removeItem('pngworld_token');
-    localStorage.removeItem('pngworld_user');
+    localStorage.removeItem('pixelink_token');
+    localStorage.removeItem('pixelink_user');
     setToken(null);
     setUser(null);
   };

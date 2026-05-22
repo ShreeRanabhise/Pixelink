@@ -16,7 +16,7 @@ const Categories = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 space-y-12">
-      <SEO title="Categories" description="Browse free transparent PNG cutouts by topic: animals, tech, nature, food, and more." />
+      <SEO title="Categories" description="Browse free transparent PNG Png's by topic: animals, tech, nature, food, and more." />
 
       <div className="space-y-3">
         <div className="flex items-center space-x-2">
@@ -26,7 +26,7 @@ const Categories = () => {
           </h1>
         </div>
         <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400">
-          Browse through our curated collections to find the perfect background-free cutout for your design layouts.
+          Browse through our curated collections to find the perfect background-free Png's for your design layouts.
         </p>
       </div>
 
@@ -64,7 +64,7 @@ const Categories = () => {
                   {cat.name}
                 </h2>
                 <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed">
-                  {cat.description || 'Discover handpicked collections of background-free transparent cutouts.'}
+                  {cat.description || "Discover handpicked collections of background-free transparent Png's."}
                 </p>
                 <div className="pt-2 flex items-center text-xs font-semibold text-brand-500 dark:text-brand-400 group-hover:translate-x-1.5 transition-transform">
                   <span>Browse assets</span>

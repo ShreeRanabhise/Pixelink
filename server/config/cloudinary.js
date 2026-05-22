@@ -33,7 +33,7 @@ export const uploadBuffer = async (buffer, folder, originalName = 'image.png') =
     return new Promise((resolve, reject) => {
       const uploadStream = cloudinary.uploader.upload_stream(
         {
-          folder: `pngworld/${folder}`,
+          folder: `pixelink/${folder}`,
           resource_type: 'image',
         },
         (error, result) => {

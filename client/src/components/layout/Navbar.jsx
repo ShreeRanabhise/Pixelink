@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
+import { useSettings } from '../../context/SettingsContext';
 import { Menu, X, Sun, Moon, UploadCloud, LayoutDashboard, LogOut, LogIn, Search } from 'lucide-react';
 
 const Navbar = () => {
   const { isAuthenticated, isAdmin, logout } = useAuth();
   const { isDark, toggleTheme } = useTheme();
+  const { settings } = useSettings();
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
@@ -43,8 +45,9 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
             <Link to="/" className="flex items-center space-x-2">
-              <span className="text-2xl font-extrabold tracking-tight bg-gradient-brand bg-clip-text text-transparent">
-                PngWorld
+              <img src={settings.logoUrl} alt={`${settings.siteName} Logo`} className="h-8 w-auto sm:h-10 object-contain drop-shadow-sm" />
+              <span className="text-2xl font-extrabold tracking-tight bg-gradient-brand bg-clip-text text-transparent hidden sm:block">
+                {settings.siteName}
               </span>
             </Link>
           </div>

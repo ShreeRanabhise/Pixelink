@@ -185,7 +185,7 @@ const realCategories = [
 
 const seedDatabase = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/pngworld');
+    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/pixelink');
     console.log('Connected to MongoDB for real-world data seeding...');
 
     await User.deleteMany();
@@ -194,11 +194,11 @@ const seedDatabase = async () => {
     console.log('Database wiped.');
 
     const adminUser = await User.create({
-      email: 'admin@pngworld.com',
+      email: 'admin@pixelink.com',
       password: 'admin12345',
       role: 'admin',
     });
-    console.log('Admin user recreated: admin@pngworld.com');
+    console.log('Admin user recreated: admin@pixelink.com');
 
     console.log('Inserting 10 Real Categories...');
     const createdCategories = [];
@@ -220,7 +220,7 @@ const seedDatabase = async () => {
         pngsToInsert.push({
           title: item.title,
           slug: slugify(item.title) + '-' + Math.floor(Math.random() * 1000),
-          description: `High-quality transparent PNG cutout of ${item.title}. Perfect for your next design project, completely free to download and use without attribution.`,
+          description: `High-quality transparent PNG Png's of ${item.title}. Perfect for your next design project, completely free to download and use without attribution.`,
           imageUrl: MOCK_PNG_DATA,
           thumbnailUrl: MOCK_PNG_DATA,
           category: catObj.model._id,

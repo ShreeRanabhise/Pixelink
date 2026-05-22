@@ -69,7 +69,7 @@ const SearchResults = () => {
       </div>
 
       {isLoading ? (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
           {[...Array(8)].map((_, i) => <SkeletonCard key={i} />)}
         </div>
       ) : !searchRes || searchRes.data.length === 0 ? (
@@ -94,13 +94,13 @@ const SearchResults = () => {
               to="/submit"
               className="inline-flex items-center justify-center px-5 py-2.5 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl transition text-sm shadow-md"
             >
-              Upload PNG Cutout
+              Upload PNG Png's
             </Link>
           </div>
         </div>
       ) : (
         <div className="space-y-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
             {searchRes.data.map((png) => (
               <PngCard key={png._id} png={png} />
             ))}

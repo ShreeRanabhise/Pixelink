@@ -7,7 +7,7 @@ dotenv.config();
 
 const clearDatabase = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/pngworld');
+    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/pixelink');
     console.log('Connected to MongoDB to wipe data...');
 
     await Category.deleteMany();

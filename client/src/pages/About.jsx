@@ -10,10 +10,10 @@ const About = () => {
       {/* Hero Section */}
       <div className="text-center max-w-3xl mx-auto space-y-4">
         <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
-          About PngWorld
+          About Pixelink
         </h1>
         <p className="text-lg text-slate-500 dark:text-slate-400 leading-relaxed">
-          We build tools to empower creators. PngWorld is a crowd-sourced transparent PNG platform providing crisp, transparent cutouts for visual designs.
+          We build tools to empower creators. Pixelink is a crowd-sourced transparent PNG platform providing crisp, transparent Png's for visual designs.
         </p>
       </div>
 
@@ -25,7 +25,7 @@ const About = () => {
           </div>
           <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100">No Backgrounds</h2>
           <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-            Every file published on PngWorld is verified to have an alpha channel. No solid white borders, no fake grids.
+            Every file published on Pixelink is verified to have an alpha channel. No solid white borders, no fake grids.
           </p>
         </div>
 
@@ -54,7 +54,7 @@ const About = () => {
       <div className="bg-slate-50 dark:bg-slate-900/30 rounded-3xl p-8 sm:p-12 border border-slate-100 dark:border-slate-800/40 space-y-6">
         <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-100">Our Mission</h2>
         <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
-          Design workflows should be frictionless. Searching for a transparent cutout of a product or an animal shouldn't result in clicking links that redirect to spam or download fake PNGs with hardcoded grids. PngWorld is built to offer direct, clean, and instant transparent graphic assets.
+          Design workflows should be frictionless. Searching for a transparent Png's of a product or an animal shouldn't result in clicking links that redirect to spam or download fake PNGs with hardcoded grids. Pixelink is built to offer direct, clean, and instant transparent graphic assets.
         </p>
         <div className="flex flex-wrap gap-4 pt-2">
           {['Alpha checks', 'Auto-tagging suggestions', 'Vibrant community', 'CC0 licensing'].map((item) => (

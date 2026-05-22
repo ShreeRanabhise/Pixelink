@@ -16,7 +16,7 @@ const MOCK_PNG_DATA = {
 
 const seedDatabase = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/pngworld');
+    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/pixelink');
     console.log('Connected to MongoDB for seeding...');
 
     // Clear existing data
@@ -27,11 +27,11 @@ const seedDatabase = async () => {
 
     // 1. Create Admin
     const adminUser = await User.create({
-      email: 'admin@pngworld.com',
+      email: 'admin@pixelink.com',
       password: 'admin12345',
       role: 'admin',
     });
-    console.log('Admin user created successfully: admin@pngworld.com / admin12345');
+    console.log('Admin user created successfully: admin@pixelink.com / admin12345');
 
     // 2. Create Categories
     const categoriesData = [
@@ -131,7 +131,7 @@ const seedDatabase = async () => {
       {
         title: 'Golden Retriever Sitting Portrait',
         slug: 'golden-retriever-sitting-portrait',
-        description: 'Adorable golden retriever puppy sitting down. Beautiful crisp transparent cutout.',
+        description: 'Adorable golden retriever puppy sitting down. Beautiful crisp transparent Png's.',
         imageUrl: MOCK_PNG_DATA.dog,
         thumbnailUrl: MOCK_PNG_DATA.dog,
         category: catMap['animals'],
@@ -159,7 +159,7 @@ const seedDatabase = async () => {
       {
         title: 'Tropical Monstera Green Leaf',
         slug: 'tropical-monstera-green-leaf',
-        description: 'Detailed green monstera leaf cutout. Perfect for jungle aesthetic prints and organic web assets.',
+        description: 'Detailed green monstera leaf Png's. Perfect for jungle aesthetic prints and organic web assets.',
         imageUrl: MOCK_PNG_DATA.leaf,
         thumbnailUrl: MOCK_PNG_DATA.leaf,
         category: catMap['nature'],

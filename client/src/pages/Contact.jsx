@@ -74,8 +74,8 @@ const Contact = () => {
                   </div>
                   <div>
                     <p className="text-xs text-slate-400">Email us</p>
-                    <a href="mailto:support@pngworld.com" className="text-sm font-semibold text-slate-800 dark:text-slate-200 hover:text-brand-500 dark:hover:text-brand-400 transition-colors">
-                      support@pngworld.com
+                    <a href="mailto:support@pixelink.com" className="text-sm font-semibold text-slate-800 dark:text-slate-200 hover:text-brand-500 dark:hover:text-brand-400 transition-colors">
+                      support@pixelink.com
                     </a>
                   </div>
                 </div>

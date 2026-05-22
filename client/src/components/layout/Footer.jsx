@@ -9,10 +9,10 @@ const Footer = () => {
           {/* Brand Info */}
           <div className="space-y-4">
             <span className="text-xl font-extrabold tracking-tight bg-gradient-brand bg-clip-text text-transparent">
-              PngWorld
+              Pixelink
             </span>
             <p className="text-sm text-slate-500 dark:text-slate-400">
-              The premier source for completely transparent, high-resolution PNG images. Download free cutouts for UI/UX projects, graphic designs, and marketing assets.
+              The premier source for completely transparent, high-resolution PNG images. Download free Png's for UI/UX projects, graphic designs, and marketing assets.
             </p>
           </div>
 
@@ -101,7 +101,7 @@ const Footer = () => {
 
         <div className="mt-8 pt-8 border-t border-slate-200 dark:border-slate-800/60 flex flex-col sm:flex-row justify-between items-center">
           <p className="text-xs text-slate-400 dark:text-slate-500">
-            &copy; {new Date().getFullYear()} PngWorld Inc. All rights reserved.
+            &copy; {new Date().getFullYear()} Pixelink Inc. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 sm:mt-0">
             <span className="text-xs text-slate-400 dark:text-slate-500">

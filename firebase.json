@@ -10,7 +10,7 @@
       {
         "source": "/api/**",
         "run": {
-          "serviceId": "pngworld-backend",
+          "serviceId": "pixelink-backend",
           "region": "us-central1"
         }
       },

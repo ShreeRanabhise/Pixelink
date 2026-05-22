@@ -54,7 +54,7 @@ const CategoryDetail = () => {
       {category && (
         <SEO
           title={`${category.name} Transparent PNGs`}
-          description={`Download free high-quality ${category.name} transparent PNG cutouts and clipart.`}
+          description={`Download free high-quality ${category.name} transparent PNG Png's and clipart.`}
         />
       )}
 
@@ -86,7 +86,7 @@ const CategoryDetail = () => {
 
       {/* PNG Grid list */}
       {isLoading ? (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
           {[...Array(8)].map((_, i) => <SkeletonCard key={i} />)}
         </div>
       ) : pngsRes?.data?.length === 0 ? (
@@ -103,7 +103,7 @@ const CategoryDetail = () => {
         </div>
       ) : (
         <div className="space-y-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
             {pngsRes.data.map((png) => (
               <PngCard key={png._id} png={png} />
             ))}

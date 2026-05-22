@@ -35,7 +35,7 @@ const TrendingPngs = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 space-y-12">
-      <SEO title="Trending PNGs" description="Browse most popular transparent PNG downloads on PngWorld." />
+      <SEO title="Trending PNGs" description="Browse most popular transparent PNG downloads on Pixelink." />
 
       <div className="space-y-3">
         <div className="flex items-center space-x-2">
@@ -45,17 +45,17 @@ const TrendingPngs = () => {
           </h1>
         </div>
         <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400">
-          The most popular transparent cutouts, vectors, and graphic clipart assets downloaded by our designer community.
+          The most popular transparent Png's, vectors, and graphic clipart assets downloaded by our designer community.
         </p>
       </div>
 
       {isLoading ? (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
           {[...Array(8)].map((_, i) => <SkeletonCard key={i} />)}
         </div>
       ) : (
         <div className="space-y-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
             {trendingRes?.data?.map((png) => (
               <PngCard key={png._id} png={png} />
             ))}

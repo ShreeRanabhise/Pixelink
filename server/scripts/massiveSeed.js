@@ -15,7 +15,7 @@ const MOCK_PNG_DATA = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAY
 
 const seedDatabase = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/pngworld');
+    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/pixelink');
     console.log('Connected to MongoDB for realistic seeding...');
 
     // Clear existing data
@@ -26,11 +26,11 @@ const seedDatabase = async () => {
 
     // 1. Create Admin
     const adminUser = await User.create({
-      email: 'admin@pngworld.com',
+      email: 'admin@pixelink.com',
       password: 'admin12345',
       role: 'admin',
     });
-    console.log('Admin user recreated: admin@pngworld.com');
+    console.log('Admin user recreated: admin@pixelink.com');
 
     // 2. Generate 200 Unique Categories
     console.log('Generating 200 realistic categories...');
@@ -83,7 +83,7 @@ const seedDatabase = async () => {
         ]));
 
         pngsData.push({
-          title: title + ' Cutout PNG',
+          title: title + ' Png's PNG',
           slug: slug,
           description: faker.lorem.paragraph({ min: 2, max: 4 }),
           imageUrl: MOCK_PNG_DATA,

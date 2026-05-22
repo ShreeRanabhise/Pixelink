@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
 import { Search, ArrowRight, Upload, Sparkles, TrendingUp, RefreshCw } from 'lucide-react';
 import api from '../api/axios';
 import useDebounce from '../hooks/useDebounce';
@@ -8,13 +8,16 @@ import PngCard from '../components/cards/PngCard';
 import SkeletonCard from '../components/loaders/SkeletonCard';
 import SEO from '../components/common/SEO';
 import AdBanner from '../components/common/AdBanner';
+import { useSettings } from '../context/SettingsContext';
 
 const Home = () => {
   const navigate = useNavigate();
+  const { settings } = useSettings();
   const [searchVal, setSearchVal] = useState('');
   const debouncedSearch = useDebounce(searchVal, 300);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const suggestionRef = useRef(null);
+  const observerTarget = useRef(null);
 
   // Close suggestions on outside click
   useEffect(() => {
@@ -27,14 +30,6 @@ const Home = () => {
     return () => document.removeEventListener('mousedown', handleOutsideClick);
   }, []);
 
-  // Fetch Categories
-  const { data: categoriesRes, isLoading: catsLoading } = useQuery({
-    queryKey: ['categories'],
-    queryFn: async () => {
-      const res = await api.get('/categories');
-      return res.data;
-    },
-  });
 
   // Fetch Search Suggestions
   const { data: suggestionsRes } = useQuery({
@@ -47,14 +42,49 @@ const Home = () => {
     enabled: debouncedSearch.trim().length > 1,
   });
 
-  // Fetch Featured PNGs
-  const { data: featuredRes, isLoading: featLoading } = useQuery({
-    queryKey: ['featuredPngs'],
-    queryFn: async () => {
-      const res = await api.get('/pngs?featured=true&limit=8');
+  // Infinite query for All PNGs
+  const {
+    data: allPngsRes,
+    isLoading: allLoading,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage
+  } = useInfiniteQuery({
+    queryKey: ['allPngs'],
+    queryFn: async ({ pageParam = 1 }) => {
+      const res = await api.get(`/pngs?page=${pageParam}&limit=12`);
       return res.data;
     },
+    getNextPageParam: (lastPage) => {
+      if (lastPage.currentPage < lastPage.totalPages) {
+        return lastPage.currentPage + 1;
+      }
+      return undefined;
+    },
+    initialPageParam: 1,
   });
+
+  // Infinite Scroll Observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
+          fetchNextPage();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (observerTarget.current) {
+      observer.observe(observerTarget.current);
+    }
+
+    return () => {
+      if (observerTarget.current) {
+        observer.unobserve(observerTarget.current);
+      }
+    };
+  }, [observerTarget.current, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   // Fetch Popular PNGs
   const { data: popularRes, isLoading: popLoading } = useQuery({
@@ -82,7 +112,7 @@ const Home = () => {
   const popularSearches = ['iPhone', 'Cheeseburger', 'Monstera', 'Sakura'];
 
   return (
-    <div className="space-y-20 pb-20">
+    <div className="pb-20">
       <SEO title="Home" />
 
       {/* 1. Hero / Search Banner */}
@@ -97,11 +127,10 @@ const Home = () => {
             No account needed submit your PNG in seconds
           </span>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
-            Download <span className="bg-gradient-to-r from-pink-500 to-orange-400 bg-clip-text text-transparent">High-Quality Transparent</span><br />
-            PNG Images <span className="bg-gradient-to-r from-orange-400 to-rose-500 bg-clip-text text-transparent">Free</span>
+            {settings.heroTitle}
           </h1>
           <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto font-medium">
-            Discover and share millions of free transparent PNGs across 0+ categories no sign up required.
+            {settings.heroSubtitle}
           </p>
 
           {/* Search Box Wrapper */}
@@ -172,77 +201,40 @@ const Home = () => {
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
-        <AdBanner adSlot="home_hero_bottom" />
-      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 pt-8">
-        {/* 2. Categories Grid */}
-        <section className="space-y-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
-                Browse by Category
-              </h2>
-              <p className="text-sm text-slate-500 dark:text-slate-400">
-                Find curated assets tailored to your layout needs
-              </p>
-            </div>
-            <Link to="/categories" className="text-sm font-semibold text-brand-500 hover:text-brand-600 flex items-center space-x-1">
-              <span>View All</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
 
-          {catsLoading ? (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {[...Array(4)].map((_, i) => (
-                <div key={i} className="h-40 rounded-2xl bg-slate-200 dark:bg-slate-800 animate-pulse"></div>
-              ))}
-            </div>
-          ) : (
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-              {categoriesRes?.data?.map((cat) => (
-                <Link
-                  key={cat._id}
-                  to={`/category/${cat.slug}`}
-                  className="group relative h-40 rounded-2xl overflow-hidden border border-slate-200/40 dark:border-slate-800/40 shadow-sm hover:shadow-lg transition-all"
-                >
-                  <img
-                    src={cat.image}
-                    alt={cat.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 filter brightness-75 dark:brightness-50"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent p-4 flex flex-col justify-end">
-                    <h3 className="font-extrabold text-white text-base tracking-tight">{cat.name}</h3>
-                    <p className="text-xs text-slate-300 truncate mt-1">{cat.description}</p>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          )}
-        </section>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 mt-12">
 
-        {/* 3. Featured PNGs */}
+        {/* All PNGs Infinite Feed */}
         <section className="space-y-6">
           <div className="flex items-center space-x-2">
             <Sparkles className="w-5 h-5 text-brand-500" />
-            <h2 className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
-              Featured Transparents
-            </h2>
+            <div>
+              <h2 className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
+                All PNGs
+              </h2>
+              <p className="text-sm text-slate-500 dark:text-slate-400">
+                Scroll for more fresh uploads from the community
+              </p>
+            </div>
           </div>
 
-          {featLoading ? (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {[...Array(4)].map((_, i) => <SkeletonCard key={i} />)}
-            </div>
-          ) : (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {featuredRes?.data?.map((png) => (
-                <PngCard key={png._id} png={png} />
-              ))}
-            </div>
-          )}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+            {allPngsRes?.pages.map((page, i) => (
+              <React.Fragment key={i}>
+                {page.data.map((png) => (
+                  <PngCard key={png._id} png={png} />
+                ))}
+              </React.Fragment>
+            ))}
+            
+            {(allLoading || isFetchingNextPage) && (
+              [...Array(4)].map((_, i) => <SkeletonCard key={`sk-${i}`} />)
+            )}
+          </div>
+          
+          {/* Intersection Observer Target */}
+          <div ref={observerTarget} className="h-10 w-full" />
         </section>
 
         {/* 4. Popular/Trending PNGs */}
@@ -255,11 +247,11 @@ const Home = () => {
           </div>
 
           {popLoading ? (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
               {[...Array(4)].map((_, i) => <SkeletonCard key={i} />)}
             </div>
           ) : (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
               {popularRes?.data?.map((png) => (
                 <PngCard key={png._id} png={png} />
               ))}
@@ -273,10 +265,10 @@ const Home = () => {
           
           <div className="space-y-3 max-w-xl text-center md:text-left z-10">
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-              Submit Your PNG and Join PngWorld!
+              Submit Your PNG and Join Pixelink!
             </h2>
             <p className="text-sm text-brand-100">
-              Have background-free cutout images you made? Share them with our community! Your contributions are reviewed by admins and posted for everyone. No account required.
+              Have background-free Png's images you made? Share them with our community! Your contributions are reviewed by admins and posted for everyone. No account required.
             </p>
           </div>
 

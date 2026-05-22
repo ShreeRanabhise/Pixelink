@@ -13,6 +13,7 @@ import {
   RefreshCw,
   Download,
   Eye,
+  Heart,
 } from "lucide-react";
 import api from "../../api/axios";
 import AdminLayout from "../../components/layout/AdminLayout";
@@ -260,7 +261,7 @@ const AdminManagePngs = () => {
                     Featured Asset
                   </span>{" "}
                   <span className="text-[10px] text-slate-600 dark:text-slate-500">
-                    Showcase this cutout on homepage panels
+                    Showcase this Png's on homepage panels
                   </span>{" "}
                 </label>{" "}
               </div>{" "}
@@ -373,15 +374,20 @@ const AdminManagePngs = () => {
                       {" "}
                       <div className="flex items-center space-x-4 text-slate-600 dark:text-slate-500 dark:text-slate-400 font-medium">
                         {" "}
-                        <span className="flex items-center">
+                        <span className="flex items-center" title="Views">
                           {" "}
                           <Eye className="w-3.5 h-3.5 mr-1 text-slate-600 dark:text-slate-500" />{" "}
                           {png.views}{" "}
                         </span>{" "}
-                        <span className="flex items-center">
+                        <span className="flex items-center" title="Downloads">
                           {" "}
                           <Download className="w-3.5 h-3.5 mr-1 text-slate-600 dark:text-slate-500" />{" "}
                           {png.downloads}{" "}
+                        </span>{" "}
+                        <span className="flex items-center" title="Likes">
+                          {" "}
+                          <Heart className="w-3.5 h-3.5 mr-1 text-slate-600 dark:text-slate-500" />{" "}
+                          {png.likes || 0}{" "}
                         </span>{" "}
                       </div>{" "}
                     </td>{" "}

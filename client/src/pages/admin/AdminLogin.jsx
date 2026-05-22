@@ -58,7 +58,7 @@ const AdminLogin = () => {
             <Lock className="w-6 h-6 animate-pulse" />{" "}
           </div>{" "}
           <h1 className="text-3xl font-extrabold tracking-tight">
-            PngWorld Admin
+            Pixelink Admin
           </h1>{" "}
           <p className="text-sm text-slate-600 dark:text-slate-500 dark:text-slate-455">
             Enter your credentials to access the management portal
@@ -94,7 +94,7 @@ const AdminLogin = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@pngworld.com"
+                  placeholder="admin@pixelink.com"
                   className="w-full rounded-2xl border border-slate-300 dark:border-slate-800 bg-slate-950/50 pl-10 pr-4 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-650 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all"
                   required
                 />{" "}
@@ -147,7 +147,7 @@ const AdminLogin = () => {
           {" "}
           Default seed account:{" "}
           <code className="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 px-1 py-0.5 rounded text-brand-400">
-            admin@pngworld.com
+            admin@pixelink.com
           </code>{" "}
           /{" "}
           <code className="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 px-1 py-0.5 rounded text-brand-400">

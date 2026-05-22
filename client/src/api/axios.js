@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: '/api/v1',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -10,7 +10,7 @@ const api = axios.create({
 // Interceptor to attach token
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('pngworld_token');
+    const token = localStorage.getItem('pixelink_token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -26,7 +26,7 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 401) {
-      localStorage.removeItem('pngworld_token');
+      localStorage.removeItem('pixelink_token');
       // If we are on admin dashboard pages, redirect to login
       if (window.location.pathname.startsWith('/admin') && window.location.pathname !== '/admin/login') {
         window.location.href = '/admin/login';

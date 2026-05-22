@@ -192,7 +192,7 @@ const AdminManageCategories = () => {
                 <textarea
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  placeholder="Describe what kinds of cutout graphics belong here..."
+                  placeholder="Describe what kinds of Png's graphics belong here..."
                   rows="3"
                   className="w-full rounded-2xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-950/40 px-4 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-650 focus:border-brand-500 focus:outline-none resize-none transition-all"
                 />{" "}

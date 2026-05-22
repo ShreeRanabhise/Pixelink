@@ -1,7 +1,7 @@
 {
-  "name": "pngworld-root",
+  "name": "pixelink-root",
   "version": "1.0.0",
-  "description": "PngWorld - Transparent PNG Marketplace Platform",
+  "description": "Pixelink - Transparent PNG Marketplace Platform",
   "main": "server/server.js",
   "scripts": {
     "install-all": "npm install && npm run install-server && npm run install-client",

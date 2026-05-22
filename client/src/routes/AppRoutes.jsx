@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext';
 // Layout wraps
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
+import AdBanner from '../components/common/AdBanner';
 
 // Loaders
 import LoaderCircle from 'lucide-react/dist/esm/icons/loader'; // standard loader icon or styling
@@ -12,7 +13,13 @@ import LoaderCircle from 'lucide-react/dist/esm/icons/loader'; // standard loade
 const AppLayout = ({ children }) => (
   <div className="flex flex-col min-h-screen">
     <Navbar />
+    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+      <AdBanner adSlot="global-top-header" className="min-h-[90px]" />
+    </div>
     <main className="flex-grow">{children}</main>
+    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 mt-12">
+      <AdBanner adSlot="global-bottom-footer" className="min-h-[90px]" />
+    </div>
     <Footer />
   </div>
 );
@@ -20,7 +27,7 @@ const AppLayout = ({ children }) => (
 const PageLoader = () => (
   <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-4">
     <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-brand-500"></div>
-    <p className="text-sm text-slate-500 dark:text-slate-400">Loading PngWorld...</p>
+    <p className="text-sm text-slate-500 dark:text-slate-400">Loading Pixelink...</p>
   </div>
 );
 

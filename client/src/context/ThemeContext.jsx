@@ -5,7 +5,7 @@ const ThemeContext = createContext();
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
     // Default to dark theme for premium aesthetics, or check localstorage
-    const saved = localStorage.getItem('pngworld_theme');
+    const saved = localStorage.getItem('pixelink_theme');
     if (saved) return saved;
     return 'dark'; // Always default to dark mode first
   });
@@ -19,7 +19,7 @@ export const ThemeProvider = ({ children }) => {
       root.classList.remove('dark');
       root.style.colorScheme = 'light';
     }
-    localStorage.setItem('pngworld_theme', theme);
+    localStorage.setItem('pixelink_theme', theme);
   }, [theme]);
 
   const toggleTheme = () => {

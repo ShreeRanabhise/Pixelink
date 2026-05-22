@@ -8,6 +8,7 @@ import SEO from '../components/common/SEO';
 
 const PublicUpload = () => {
   const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   const [categoryId, setCategoryId] = useState('');
   const [tags, setTags] = useState('');
   const [file, setFile] = useState(null);
@@ -89,6 +90,7 @@ const PublicUpload = () => {
       const formData = new FormData();
       formData.append('image', file);
       formData.append('title', title.trim());
+      formData.append('description', description.trim());
       formData.append('categoryId', categoryId);
       formData.append('tags', tags.trim());
 
@@ -111,6 +113,7 @@ const PublicUpload = () => {
         
         // Reset form
         setTitle('');
+        setDescription('');
         setCategoryId('');
         setTags('');
         removeFile();
@@ -125,11 +128,11 @@ const PublicUpload = () => {
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-12 sm:py-16">
-      <SEO title="Submit Your PNG" description="Upload your custom transparent cutout PNG files to help the developer community. Submissions are reviewed by admins." />
+      <SEO title="Submit Your PNG" description="Upload your custom transparent Png's PNG files to help the developer community. Submissions are reviewed by admins." />
 
       <div className="space-y-6 text-center mb-10">
         <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
-          Submit Your Cutout PNG
+          Submit Your Png's PNG
         </h1>
         <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400 max-w-lg mx-auto">
           Share your high-quality transparent PNG graphics. Submissions go to a review queue and will be published once approved.
@@ -216,11 +219,26 @@ const PublicUpload = () => {
             <input
               type="text"
               id="title"
-              placeholder="e.g. Red Rose Branch Cutout"
+              placeholder="e.g. Red Rose Branch Png's"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
               className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-colors text-sm"
+            />
+          </div>
+
+          {/* Description input */}
+          <div className="space-y-2">
+            <label htmlFor="description" className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+              Description (Optional)
+            </label>
+            <textarea
+              id="description"
+              placeholder="e.g. Describe the Png's, context, or usage..."
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              rows="3"
+              className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-colors text-sm resize-none"
             />
           </div>
 
@@ -255,7 +273,7 @@ const PublicUpload = () => {
               <input
                 type="text"
                 id="tags"
-                placeholder="e.g. flower, rose, nature, plant, cutout"
+                placeholder="e.g. flower, rose, nature, plant, Png's"
                 value={tags}
                 onChange={(e) => setTags(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-colors text-sm"

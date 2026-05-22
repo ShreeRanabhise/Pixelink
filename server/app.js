@@ -5,6 +5,8 @@ import morgan from 'morgan';
 import mongoSanitize from 'express-mongo-sanitize';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import rateLimit from 'express-rate-limit';
+import xss from 'xss-clean';
 
 // Middleware
 import errorHandler from './middleware/errorHandler.js';
@@ -15,6 +17,8 @@ import categoryRoutes from './routes/categories.js';
 import pngRoutes from './routes/pngs.js';
 import submissionRoutes from './routes/submissions.js';
 import searchRoutes from './routes/search.js';
+import settingsRoutes from './routes/settings.js';
+import analyticsRoutes from './routes/analytics.js';
 
 const app = express();
 
@@ -48,15 +52,27 @@ if (process.env.NODE_ENV !== 'production') {
 // Sanitize data to prevent NoSQL query injection
 app.use(mongoSanitize());
 
+// Prevent XSS attacks
+app.use(xss());
+
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 1000 // limit each IP to 1000 requests per windowMs
+});
+app.use('/api/', limiter);
+
 // Serve uploads static folder for local fallback storage
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Mount routers
-app.use('/api/auth', authRoutes);
-app.use('/api/categories', categoryRoutes);
-app.use('/api/pngs', pngRoutes);
-app.use('/api/submissions', submissionRoutes);
-app.use('/api/search', searchRoutes);
+app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/categories', categoryRoutes);
+app.use('/api/v1/pngs', pngRoutes);
+app.use('/api/v1/submissions', submissionRoutes);
+app.use('/api/v1/search', searchRoutes);
+app.use('/api/v1/settings', settingsRoutes);
+app.use('/api/v1/analytics', analyticsRoutes);
 
 // Error handler middleware
 app.use(errorHandler);

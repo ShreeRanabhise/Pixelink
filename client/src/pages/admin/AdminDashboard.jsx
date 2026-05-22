@@ -37,15 +37,29 @@ const AdminDashboard = () => {
       const res = await api.get("/categories");
       return res.data;
     },
-  }); /* Get recent 4 pending reviews  */
+  }); 
+
+  /* Fetch global stats */
+  const { data: statsRes, isLoading: statsLoading } = useQuery({
+    queryKey: ["adminGlobalStats"],
+    queryFn: async () => {
+      const res = await api.get("/pngs/stats/global");
+      return res.data;
+    },
+  });
+
+  /* Get recent 4 pending reviews  */
   const recentSubmissions = pendingRes?.data?.slice(0, 4) || [];
   const totalSubmissionsCount =
     pendingRes?.total || pendingRes?.data?.length || 0;
   const totalPngsCount = pngsRes?.total || 0;
   const totalCategoriesCount =
-    categoriesRes?.data?.length || 0; /* Mock analytics totals  */
-  const totalDownloads = 1248; /* seeded default mock  */
-  const totalViews = 3840;
+    categoriesRes?.data?.length || 0; 
+    
+  /* Real analytics totals  */
+  const totalDownloads = statsRes?.data?.totalDownloads || 0; 
+  const totalViews = statsRes?.data?.totalViews || 0;
+  const totalLikes = statsRes?.data?.totalLikes || 0;
   const stats = [
     {
       name: "Active Gallery Size",
@@ -74,7 +88,7 @@ const AdminDashboard = () => {
     },
     {
       name: "System Downloads",
-      value: `${totalDownloads} files`,
+      value: statsLoading ? "..." : `${totalDownloads} files`,
       icon: Download,
       color:
         "from-emerald-600/20 to-teal-600/10 text-emerald-400 border-emerald-500/20",
@@ -177,7 +191,7 @@ const AdminDashboard = () => {
                     <div className="w-12 h-12 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 overflow-hidden bg-checkerboard bg-[size:6px_6px] flex items-center justify-center">
                       {" "}
                       <img
-                        src={sub.image}
+                        src={sub.imageUrl}
                         alt={sub.title}
                         className="w-10 h-10 object-contain"
                       />{" "}
@@ -305,16 +319,16 @@ const AdminDashboard = () => {
                 {" "}
                 <div className="flex justify-between text-xs font-semibold mb-1.5">
                   {" "}
-                  <span className="text-slate-350">
-                    Avg. Click-Through Rate
+                  <span className="text-slate-500">
+                    Total System Views
                   </span>{" "}
-                  <span className="text-emerald-450">12.4%</span>{" "}
+                  <span className="text-emerald-500">{totalViews}</span>{" "}
                 </div>{" "}
                 <div className="w-full bg-white dark:bg-slate-900 rounded-full h-1.5 overflow-hidden border border-slate-300 dark:border-slate-800">
                   {" "}
                   <div
                     className="bg-emerald-500 h-1.5 rounded-full"
-                    style={{ width: "65%" }}
+                    style={{ width: "75%" }}
                   ></div>{" "}
                 </div>{" "}
               </div>{" "}
@@ -322,16 +336,16 @@ const AdminDashboard = () => {
                 {" "}
                 <div className="flex justify-between text-xs font-semibold mb-1.5">
                   {" "}
-                  <span className="text-slate-355">
-                    Server Disk Storage
+                  <span className="text-slate-500">
+                    Community Likes
                   </span>{" "}
-                  <span className="text-brand-450">14% used</span>{" "}
+                  <span className="text-rose-500">{totalLikes}</span>{" "}
                 </div>{" "}
                 <div className="w-full bg-white dark:bg-slate-900 rounded-full h-1.5 overflow-hidden border border-slate-300 dark:border-slate-800">
                   {" "}
                   <div
-                    className="bg-brand-500 h-1.5 rounded-full"
-                    style={{ width: "14%" }}
+                    className="bg-rose-500 h-1.5 rounded-full"
+                    style={{ width: "45%" }}
                   ></div>{" "}
                 </div>{" "}
               </div>{" "}

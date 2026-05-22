@@ -35,7 +35,7 @@ const LatestUploads = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 space-y-12">
-      <SEO title="Latest Uploads" description="Browse newest transparent PNG cutouts uploaded on PngWorld." />
+      <SEO title="Latest Uploads" description="Browse newest transparent PNG Png's uploaded on Pixelink." />
 
       <div className="space-y-3">
         <div className="flex items-center space-x-2">
@@ -45,17 +45,17 @@ const LatestUploads = () => {
           </h1>
         </div>
         <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400">
-          Fresh transparent cutouts, templates, and icons added to the collection by our creators.
+          Fresh transparent Png's, templates, and icons added to the collection by our creators.
         </p>
       </div>
 
       {isLoading ? (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
           {[...Array(8)].map((_, i) => <SkeletonCard key={i} />)}
         </div>
       ) : (
         <div className="space-y-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
             {latestRes?.data?.map((png) => (
               <PngCard key={png._id} png={png} />
             ))}

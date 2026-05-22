@@ -1,18 +1,23 @@
 import { useEffect } from 'react';
+import { useSettings } from '../../context/SettingsContext';
 
 /**
  * SEO helper component to dynamically inject meta tags into head.
  */
 const SEO = ({ 
   title, 
-  description = 'Download free transparent PNG images, clipart, and graphic vectors with high quality.', 
-  keywords = 'png, free download, transparent image, clipart, cutout, photoshop assets',
-  image = '/logo.png',
+  description = "Download free transparent PNG images, clipart, and graphic vectors with high quality.",
+  keywords = "png, free download, transparent image, clipart, Png's, photoshop assets",
   url = window.location.href
 }) => {
+  const { settings } = useSettings();
+
   useEffect(() => {
+    const siteName = settings.siteName || 'PixelInk';
+    const image = settings.logoUrl || '/logo.png';
+
     // 1. Title
-    const formattedTitle = title ? `${title} | PngWorld` : 'PngWorld - High-Quality Transparent PNG Marketplace';
+    const formattedTitle = title ? `${title} | ${siteName}` : `${siteName} - High-Quality Transparent PNG Marketplace`;
     document.title = formattedTitle;
 
     // Helper to update or create meta tags
@@ -48,7 +53,16 @@ const SEO = ({
     updateMetaTag('twitter:description', description);
     updateMetaTag('twitter:image', image);
 
-  }, [title, description, keywords, image, url]);
+    // 6. Favicon
+    let link = document.querySelector("link[rel~='icon']");
+    if (!link) {
+      link = document.createElement('link');
+      link.rel = 'icon';
+      document.head.appendChild(link);
+    }
+    link.href = image;
+
+  }, [title, description, keywords, url, settings]);
 
   return null; // Side-effect only component
 };
