@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 dark:bg-[#0b0f19] dark:text-slate-100 font-sans transition-colors duration-200 antialiased overflow-x-hidden;
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-slate-100 dark:bg-slate-950;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 dark:bg-slate-800 rounded-full hover:bg-brand-500 transition-colors;
+}
+
+/* Premium Glassmorphism styling */
+.glass {
+  @apply bg-white/70 dark:bg-slate-900/60 backdrop-blur-md border border-white/20 dark:border-slate-800/50 shadow-lg;
+}
+
+.glass-navbar {
+  @apply bg-white/80 dark:bg-slate-950/80 backdrop-blur-lg border-b border-slate-200/50 dark:border-slate-800/40;
+}
+
+/* Transparent PNG Checkerboard Background */
+.checkerboard-bg {
+  background-color: #f1f5f9;
+  background-image: 
+    linear-gradient(45deg, #cbd5e1 25%, transparent 25%), 
+    linear-gradient(-45deg, #cbd5e1 25%, transparent 25%), 
+    linear-gradient(45deg, transparent 75%, #cbd5e1 75%), 
+    linear-gradient(-45deg, transparent 75%, #cbd5e1 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+.dark .checkerboard-bg {
+  background-color: #1e293b;
+  background-image: 
+    linear-gradient(45deg, #0f172a 25%, transparent 25%), 
+    linear-gradient(-45deg, #0f172a 25%, transparent 25%), 
+    linear-gradient(45deg, transparent 75%, #0f172a 75%), 
+    linear-gradient(-45deg, transparent 75%, #0f172a 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+/* Custom Gradients */
+.bg-gradient-brand {
+  @apply bg-gradient-to-r from-brand-500 via-purple-500 to-pink-500;
+}
+
+.text-gradient-brand {
+  @apply bg-gradient-to-r from-brand-500 via-purple-500 to-pink-500 bg-clip-text text-transparent;
+}
+
+/* Glowing card highlights */
+.glow-card {
+  position: relative;
+}
+
+.glow-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(to bottom right, rgba(139, 92, 246, 0.4), transparent 50%, rgba(236, 72, 153, 0.2));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.glow-card:hover::after {
+  opacity: 1;
+}

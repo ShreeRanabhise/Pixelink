@@ -1,0 +1,50 @@
+import User from '../models/User.js';
+import jwt from 'jsonwebtoken';
+
+/**
+ * @desc Login user & get token
+ * @route POST /api/auth/login
+ * @access Public
+ */
+export const login = async (req, res, next) => {
+  const { email, password } = req.body;
+
+  try {
+    // Validation
+    if (!email || !password) {
+      return res.status(400).json({ success: false, message: 'Please provide email and password' });
+    }
+
+    // Check user
+    const user = await User.findOne({ email }).select('+password'); // Explicitly select password if schema select is false (but we didn't specify select: false, so it's fine)
+    
+    if (!user) {
+      return res.status(401).json({ success: false, message: 'Invalid credentials' });
+    }
+
+    // Match password
+    const isMatch = await user.comparePassword(password);
+    if (!isMatch) {
+      return res.status(401).json({ success: false, message: 'Invalid credentials' });
+    }
+
+    // Generate Token
+    const token = jwt.sign(
+      { id: user._id, role: user.role },
+      process.env.JWT_SECRET || 'supersecretjwttokenkey123!@#',
+      { expiresIn: '7d' }
+    );
+
+    res.status(200).json({
+      success: true,
+      token,
+      user: {
+        id: user._id,
+        email: user.email,
+        role: user.role,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
