@@ -66,6 +66,21 @@ app.use('/api/', limiter);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Mount routers
+import User from './models/User.js';
+app.get('/api/v1/setup-admin', async (req, res) => {
+  try {
+    const adminExists = await User.findOne({ email: 'admin@pixelink.com' });
+    if (!adminExists) {
+      await User.create({ email: 'admin@pixelink.com', password: 'admin12345', role: 'admin' });
+      res.send('<h1>Admin created successfully!</h1><p>Email: admin@pixelink.com</p><p>Password: admin12345</p>');
+    } else {
+      res.send('<h1>Admin already exists!</h1><p>Email: admin@pixelink.com</p><p>Password: admin12345</p>');
+    }
+  } catch (err) { 
+    res.status(500).send(err.message); 
+  }
+});
+
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/categories', categoryRoutes);
 app.use('/api/v1/pngs', pngRoutes);
