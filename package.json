@@ -4,6 +4,7 @@
   "description": "Pixelink - Transparent PNG Marketplace Platform",
   "main": "server/server.js",
   "scripts": {
+    "postinstall": "npm run install-server && npm run install-client",
     "install-all": "npm install && npm run install-server && npm run install-client",
     "install-server": "npm --prefix server install",
     "install-client": "npm --prefix client install --legacy-peer-deps",
