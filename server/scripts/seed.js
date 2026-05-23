@@ -131,7 +131,7 @@ const seedDatabase = async () => {
       {
         title: 'Golden Retriever Sitting Portrait',
         slug: 'golden-retriever-sitting-portrait',
-        description: 'Adorable golden retriever puppy sitting down. Beautiful crisp transparent Png's.',
+        description: 'Adorable golden retriever puppy sitting down. Beautiful crisp transparent PNGs.',
         imageUrl: MOCK_PNG_DATA.dog,
         thumbnailUrl: MOCK_PNG_DATA.dog,
         category: catMap['animals'],
@@ -159,7 +159,7 @@ const seedDatabase = async () => {
       {
         title: 'Tropical Monstera Green Leaf',
         slug: 'tropical-monstera-green-leaf',
-        description: 'Detailed green monstera leaf Png's. Perfect for jungle aesthetic prints and organic web assets.',
+        description: 'Detailed green monstera leaf PNGs. Perfect for jungle aesthetic prints and organic web assets.',
         imageUrl: MOCK_PNG_DATA.leaf,
         thumbnailUrl: MOCK_PNG_DATA.leaf,
         category: catMap['nature'],
