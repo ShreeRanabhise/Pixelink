@@ -52,7 +52,7 @@ const AdminDashboard = () => {
   const recentSubmissions = pendingRes?.data?.slice(0, 4) || [];
   const totalSubmissionsCount =
     pendingRes?.total || pendingRes?.data?.length || 0;
-  const totalPngsCount = pngsRes?.total || 0;
+  const totalPngsCount = pngsRes?.totalCount || pngsRes?.total || 0;
   const totalCategoriesCount =
     categoriesRes?.data?.length || 0; 
     

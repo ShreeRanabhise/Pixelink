@@ -63,17 +63,13 @@ const AdminSettings = () => {
     mutationFn: async (file) => {
       const formData = new FormData();
       formData.append("logo", file);
-      const token = localStorage.getItem('pixelink_token');
-      const res = await fetch("/api/v1/settings/logo", {
-        method: "POST",
+      
+      const res = await api.post("/settings/logo", formData, {
         headers: {
-          Authorization: `Bearer ${token}`
-        },
-        body: formData
+          'Content-Type': 'multipart/form-data'
+        }
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Failed to upload logo");
-      return data;
+      return res.data;
     },
     onSuccess: () => {
       toast.success("Logo updated successfully!");
