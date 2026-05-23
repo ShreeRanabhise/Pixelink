@@ -94,7 +94,7 @@ const AdminLogin = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@pixelink.com"
+                  placeholder="you@company.com"
                   className="w-full rounded-2xl border border-slate-300 dark:border-slate-800 bg-slate-950/50 pl-10 pr-4 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-650 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all"
                   required
                 />{" "}
@@ -143,17 +143,7 @@ const AdminLogin = () => {
             )}{" "}
           </button>{" "}
         </form>{" "}
-        <p className="text-center text-xs text-slate-600">
-          {" "}
-          Default seed account:{" "}
-          <code className="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 px-1 py-0.5 rounded text-brand-400">
-            admin@pixelink.com
-          </code>{" "}
-          /{" "}
-          <code className="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 px-1 py-0.5 rounded text-brand-400">
-            admin12345
-          </code>{" "}
-        </p>{" "}
+
       </div>{" "}
     </div>
   );
