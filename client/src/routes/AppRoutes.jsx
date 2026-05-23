@@ -13,9 +13,7 @@ import LoaderCircle from 'lucide-react/dist/esm/icons/loader'; // standard loade
 const AppLayout = ({ children }) => (
   <div className="flex flex-col min-h-screen">
     <Navbar />
-    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
-      <AdBanner adSlot="global-top-header" className="min-h-[90px]" />
-    </div>
+
     <main className="flex-grow">{children}</main>
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 mt-12">
       <AdBanner adSlot="global-bottom-footer" className="min-h-[90px]" />
