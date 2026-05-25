@@ -156,250 +156,138 @@ const AdminDashboard = () => {
         ))}{" "}
       </div>{" "}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {" "}
-        {/* Recent Pending Submissions Table */}{" "}
-        <div className="lg:col-span-2 glass p-6 rounded-3xl border border-slate-200 dark:border-slate-850 bg-white/80 dark:bg-slate-900/20 space-y-6">
-          {" "}
-          <div className="flex items-center justify-between">
-            {" "}
+        {/* System Actions */}
+        <div className="glass p-6 rounded-3xl border border-slate-200 dark:border-slate-850 bg-white/80 dark:bg-slate-900/20 space-y-4">
+          <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+            System Actions
+          </h2>
+          <div className="grid grid-cols-1 gap-3">
+            <Link
+              to="/admin/upload"
+              className="flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 hover:border-brand-500/30 hover:bg-slate-100 dark:bg-slate-850 transition-all text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:text-white"
+            >
+              <div className="flex items-center space-x-3">
+                <div className="p-2.5 rounded-xl bg-brand-500/10 text-brand-400">
+                  <UploadCloud className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="text-sm font-bold">
+                    Direct Admin Upload
+                  </p>
+                  <p className="text-[11px] text-slate-600 dark:text-slate-450">
+                    Bypass queue directly to live catalog
+                  </p>
+                </div>
+              </div>
+              <ArrowRight className="w-4 h-4 text-slate-600 dark:text-slate-500" />
+            </Link>
+            <Link
+              to="/admin/categories"
+              className="flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 hover:border-purple-500/30 hover:bg-slate-100 dark:bg-slate-850 transition-all text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:text-white"
+            >
+              <div className="flex items-center space-x-3">
+                <div className="p-2.5 rounded-xl bg-purple-500/10 text-purple-400">
+                  <FolderTree className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="text-sm font-bold">Category Builder</p>
+                  <p className="text-[11px] text-slate-600 dark:text-slate-450">
+                    Create & manage taxonomy structures
+                  </p>
+                </div>
+              </div>
+              <ArrowRight className="w-4 h-4 text-slate-600 dark:text-slate-500" />
+            </Link>
+            <Link
+              to="/admin/pngs"
+              className="flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 hover:border-cyan-500/30 hover:bg-slate-100 dark:bg-slate-850 transition-all text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:text-white"
+            >
+              <div className="flex items-center space-x-3">
+                <div className="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-400">
+                  <Image className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="text-sm font-bold">Gallery Audit</p>
+                  <p className="text-[11px] text-slate-600 dark:text-slate-450">
+                    Update tags, feature, or delete assets
+                  </p>
+                </div>
+              </div>
+              <ArrowRight className="w-4 h-4 text-slate-600 dark:text-slate-500" />
+            </Link>
+          </div>
+        </div>
+        
+        {/* Quick Analytics Insight */}
+        <div className="glass p-6 rounded-3xl border border-slate-200 dark:border-slate-850 bg-white/80 dark:bg-slate-900/20 space-y-4">
+          <div className="flex items-center space-x-2">
+            <TrendingUp className="w-5 h-5 text-emerald-500" />
+            <h2 className="text-sm font-extrabold uppercase tracking-wider text-slate-600 dark:text-slate-500 dark:text-slate-400">
+              Engagement Status
+            </h2>
+          </div>
+          <div className="space-y-4">
             <div>
-              {" "}
-              <h2 className="text-lg font-bold text-slate-900 dark:text-white">
-                Pending Moderation
-              </h2>{" "}
-              <p className="text-xs text-slate-600 dark:text-slate-500 dark:text-slate-400 mt-0.5">
-                Approve user submissions to include them in the live index
-              </p>{" "}
-            </div>{" "}
-            {totalSubmissionsCount > 0 && (
-              <Link
-                to="/admin/submissions"
-                className="text-xs font-semibold text-brand-400 hover:text-brand-300 flex items-center"
-              >
-                {" "}
-                <span>View All</span>{" "}
-                <ArrowRight className="w-3.5 h-3.5 ml-1" />{" "}
-              </Link>
-            )}{" "}
-          </div>{" "}
-          {pendingLoading ? (
-            <div className="space-y-3 py-6">
-              {" "}
-              {[...Array(3)].map((_, i) => (
-                <div
-                  key={i}
-                  className="h-14 rounded-2xl bg-white dark:bg-slate-900 animate-pulse border border-slate-200 dark:border-slate-850"
-                ></div>
-              ))}{" "}
+              <div className="flex justify-between text-xs font-semibold mb-1.5">
+                <span className="text-slate-500">System Views</span>
+                <span className="text-slate-800 dark:text-slate-200">{totalViews.toLocaleString()}</span>
+              </div>
+              <div className="w-full bg-slate-100 dark:bg-slate-900 rounded-full h-1.5 overflow-hidden border border-slate-200 dark:border-slate-800">
+                <div className="bg-slate-500 dark:bg-slate-400 h-1.5 rounded-full" style={{ width: "100%" }}></div>
+              </div>
             </div>
-          ) : recentSubmissions.length === 0 ? (
-            <div className="text-center py-12 border border-dashed border-slate-300 dark:border-slate-800 rounded-2xl">
-              {" "}
-              <FileCheck className="w-10 h-10 text-slate-600 mx-auto mb-3" />{" "}
-              <p className="text-sm font-semibold text-slate-600 dark:text-slate-500 dark:text-slate-400">
-                Queue is clean!
-              </p>{" "}
-              <p className="text-xs text-slate-550 mt-1">
-                All user uploads have been reviewed.
-              </p>{" "}
+            <div>
+              <div className="flex justify-between text-xs font-semibold mb-1.5">
+                <span className="text-slate-500">Downloads Rate</span>
+                <div className="flex items-center space-x-2">
+                  <span className="text-emerald-500">{totalDownloads.toLocaleString()}</span>
+                  <span className="text-slate-400">({downloadsPercentage}%)</span>
+                </div>
+              </div>
+              <div className="w-full bg-slate-100 dark:bg-slate-900 rounded-full h-1.5 overflow-hidden border border-slate-200 dark:border-slate-800">
+                <div className="bg-emerald-500 h-1.5 rounded-full" style={{ width: `${downloadsPercentage}%` }}></div>
+              </div>
             </div>
+            <div>
+              <div className="flex justify-between text-xs font-semibold mb-1.5">
+                <span className="text-slate-500">Like Rate</span>
+                <div className="flex items-center space-x-2">
+                  <span className="text-rose-500">{totalLikes.toLocaleString()}</span>
+                  <span className="text-slate-400">({likesPercentage}%)</span>
+                </div>
+              </div>
+              <div className="w-full bg-slate-100 dark:bg-slate-900 rounded-full h-1.5 overflow-hidden border border-slate-200 dark:border-slate-800">
+                <div className="bg-rose-500 h-1.5 rounded-full" style={{ width: `${likesPercentage}%` }}></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Trending Searches Widget */}
+        <div className="glass p-6 rounded-3xl border border-slate-200 dark:border-slate-850 bg-white/80 dark:bg-slate-900/20 space-y-4">
+          <div className="flex items-center space-x-2">
+            <TrendingUp className="w-5 h-5 text-brand-500" />
+            <h2 className="text-sm font-extrabold uppercase tracking-wider text-slate-600 dark:text-slate-500 dark:text-slate-400">
+              Top Searched Queries
+            </h2>
+          </div>
+          {trendingLoading ? (
+            <div className="space-y-2">
+              {[...Array(5)].map((_, i) => (
+                <div key={i} className="h-8 rounded-lg bg-slate-100 dark:bg-slate-850 animate-pulse"></div>
+              ))}
+            </div>
+          ) : trendingSearches.length === 0 ? (
+            <p className="text-xs text-slate-500 text-center py-4">No search data available yet.</p>
           ) : (
-            <div className="overflow-hidden border border-slate-200 dark:border-slate-850 rounded-2xl divide-y divide-slate-850">
-              {" "}
-              {recentSubmissions.map((sub) => (
-                <div
-                  key={sub._id}
-                  className="flex items-center justify-between p-4 bg-white/80 dark:bg-slate-900/10 hover:bg-white/80 dark:bg-slate-900/40 transition-colors"
-                >
-                  {" "}
-                  <div className="flex items-center space-x-3.5">
-                    {" "}
-                    <div className="w-12 h-12 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 overflow-hidden bg-checkerboard bg-[size:6px_6px] flex items-center justify-center">
-                      {" "}
-                      <img
-                        src={sub.imageUrl}
-                        alt={sub.title}
-                        className="w-10 h-10 object-contain"
-                      />{" "}
-                    </div>{" "}
-                    <div>
-                      {" "}
-                      <h4 className="text-sm font-bold text-slate-900 dark:text-white">
-                        {sub.title}
-                      </h4>{" "}
-                      <p className="text-xs text-slate-600 dark:text-slate-450 truncate max-w-xs">
-                        {sub.tags?.join(", ") || "no tags"}
-                      </p>{" "}
-                    </div>{" "}
-                  </div>{" "}
-                  <div className="flex items-center space-x-2">
-                    {" "}
-                    <span className="text-[10px] bg-amber-500/10 border border-amber-500/20 text-amber-400 font-semibold px-2 py-0.5 rounded-full uppercase">
-                      {" "}
-                      Pending{" "}
-                    </span>{" "}
-                    <Link
-                      to="/admin/submissions"
-                      className="p-2 bg-slate-100 dark:bg-slate-850 hover:bg-slate-200 dark:bg-slate-800 rounded-xl text-slate-350 hover:text-white transition-colors"
-                      title="Review"
-                    >
-                      {" "}
-                      <Eye className="w-4 h-4" />{" "}
-                    </Link>{" "}
-                  </div>{" "}
+            <div className="flex flex-wrap gap-2">
+              {trendingSearches.map((query, idx) => (
+                <div key={idx} className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300">
+                  <span className="text-brand-500 mr-1.5">#{idx + 1}</span> {query}
                 </div>
-              ))}{" "}
+              ))}
             </div>
-          )}{" "}
-        </div>{" "}
-        {/* Quick Management Panel */}{" "}
-        <div className="space-y-6">
-          {" "}
-          <div className="glass p-6 rounded-3xl border border-slate-200 dark:border-slate-850 bg-white/80 dark:bg-slate-900/20 space-y-4">
-            {" "}
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white">
-              System Actions
-            </h2>{" "}
-            <div className="grid grid-cols-1 gap-3">
-              {" "}
-              <Link
-                to="/admin/upload"
-                className="flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 hover:border-brand-500/30 hover:bg-slate-100 dark:bg-slate-850 transition-all text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:text-white"
-              >
-                {" "}
-                <div className="flex items-center space-x-3">
-                  {" "}
-                  <div className="p-2.5 rounded-xl bg-brand-500/10 text-brand-400">
-                    {" "}
-                    <UploadCloud className="w-5 h-5" />{" "}
-                  </div>{" "}
-                  <div>
-                    {" "}
-                    <p className="text-sm font-bold">
-                      Direct Admin Upload
-                    </p>{" "}
-                    <p className="text-[11px] text-slate-600 dark:text-slate-450">
-                      Bypass queue directly to live catalog
-                    </p>{" "}
-                  </div>{" "}
-                </div>{" "}
-                <ArrowRight className="w-4 h-4 text-slate-600 dark:text-slate-500" />{" "}
-              </Link>{" "}
-              <Link
-                to="/admin/categories"
-                className="flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 hover:border-purple-500/30 hover:bg-slate-100 dark:bg-slate-850 transition-all text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:text-white"
-              >
-                {" "}
-                <div className="flex items-center space-x-3">
-                  {" "}
-                  <div className="p-2.5 rounded-xl bg-purple-500/10 text-purple-400">
-                    {" "}
-                    <FolderTree className="w-5 h-5" />{" "}
-                  </div>{" "}
-                  <div>
-                    {" "}
-                    <p className="text-sm font-bold">Category Builder</p>{" "}
-                    <p className="text-[11px] text-slate-600 dark:text-slate-450">
-                      Create & manage taxonomy structures
-                    </p>{" "}
-                  </div>{" "}
-                </div>{" "}
-                <ArrowRight className="w-4 h-4 text-slate-600 dark:text-slate-500" />{" "}
-              </Link>{" "}
-              <Link
-                to="/admin/pngs"
-                className="flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 hover:border-cyan-500/30 hover:bg-slate-100 dark:bg-slate-850 transition-all text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:text-white"
-              >
-                {" "}
-                <div className="flex items-center space-x-3">
-                  {" "}
-                  <div className="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-400">
-                    {" "}
-                    <Image className="w-5 h-5" />{" "}
-                  </div>{" "}
-                  <div>
-                    {" "}
-                    <p className="text-sm font-bold">Gallery Audit</p>{" "}
-                    <p className="text-[11px] text-slate-600 dark:text-slate-450">
-                      Update tags, feature, or delete assets
-                    </p>{" "}
-                  </div>{" "}
-                </div>{" "}
-                <ArrowRight className="w-4 h-4 text-slate-600 dark:text-slate-500" />{" "}
-              </Link>{" "}
-            </div>{" "}
-          </div>{" "}
-          {/* Quick Analytics Insight */}
-          <div className="glass p-6 rounded-3xl border border-slate-200 dark:border-slate-850 bg-white/80 dark:bg-slate-900/20 space-y-4">
-            <div className="flex items-center space-x-2">
-              <TrendingUp className="w-5 h-5 text-emerald-500" />
-              <h2 className="text-sm font-extrabold uppercase tracking-wider text-slate-600 dark:text-slate-500 dark:text-slate-400">
-                Engagement Status
-              </h2>
-            </div>
-            <div className="space-y-4">
-              <div>
-                <div className="flex justify-between text-xs font-semibold mb-1.5">
-                  <span className="text-slate-500">System Views</span>
-                  <span className="text-slate-800 dark:text-slate-200">{totalViews.toLocaleString()}</span>
-                </div>
-                <div className="w-full bg-slate-100 dark:bg-slate-900 rounded-full h-1.5 overflow-hidden border border-slate-200 dark:border-slate-800">
-                  <div className="bg-slate-500 dark:bg-slate-400 h-1.5 rounded-full" style={{ width: "100%" }}></div>
-                </div>
-              </div>
-              <div>
-                <div className="flex justify-between text-xs font-semibold mb-1.5">
-                  <span className="text-slate-500">Downloads Rate</span>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-emerald-500">{totalDownloads.toLocaleString()}</span>
-                    <span className="text-slate-400">({downloadsPercentage}%)</span>
-                  </div>
-                </div>
-                <div className="w-full bg-slate-100 dark:bg-slate-900 rounded-full h-1.5 overflow-hidden border border-slate-200 dark:border-slate-800">
-                  <div className="bg-emerald-500 h-1.5 rounded-full" style={{ width: `${downloadsPercentage}%` }}></div>
-                </div>
-              </div>
-              <div>
-                <div className="flex justify-between text-xs font-semibold mb-1.5">
-                  <span className="text-slate-500">Like Rate</span>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-rose-500">{totalLikes.toLocaleString()}</span>
-                    <span className="text-slate-400">({likesPercentage}%)</span>
-                  </div>
-                </div>
-                <div className="w-full bg-slate-100 dark:bg-slate-900 rounded-full h-1.5 overflow-hidden border border-slate-200 dark:border-slate-800">
-                  <div className="bg-rose-500 h-1.5 rounded-full" style={{ width: `${likesPercentage}%` }}></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          {/* Trending Searches Widget */}
-          <div className="glass p-6 rounded-3xl border border-slate-200 dark:border-slate-850 bg-white/80 dark:bg-slate-900/20 space-y-4">
-            <div className="flex items-center space-x-2">
-              <TrendingUp className="w-5 h-5 text-brand-500" />
-              <h2 className="text-sm font-extrabold uppercase tracking-wider text-slate-600 dark:text-slate-500 dark:text-slate-400">
-                Top Searched Queries
-              </h2>
-            </div>
-            {trendingLoading ? (
-              <div className="space-y-2">
-                {[...Array(5)].map((_, i) => (
-                  <div key={i} className="h-8 rounded-lg bg-slate-100 dark:bg-slate-850 animate-pulse"></div>
-                ))}
-              </div>
-            ) : trendingSearches.length === 0 ? (
-              <p className="text-xs text-slate-500 text-center py-4">No search data available yet.</p>
-            ) : (
-              <div className="flex flex-wrap gap-2">
-                {trendingSearches.map((query, idx) => (
-                  <div key={idx} className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300">
-                    <span className="text-brand-500 mr-1.5">#{idx + 1}</span> {query}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+          )}
         </div>
       </div>
       
