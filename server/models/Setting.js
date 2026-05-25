@@ -8,7 +8,8 @@ const settingSchema = new mongoose.Schema(
     logoUrl: { type: String, default: '/logo.png' },
     contactEmail: { type: String, default: 'support@pixelink.com' },
     contactPhone: { type: String, default: '+1 (555) 123-4567' },
-    contactAddress: { type: String, default: '100 Alpha Strip, San Francisco, CA' }
+    contactAddress: { type: String, default: '100 Alpha Strip, San Francisco, CA' },
+    adsenseEnabled: { type: Boolean, default: false }
   },
   { timestamps: true }
 );

@@ -18,7 +18,8 @@ import {
   Save,
   Mail,
   Phone,
-  MapPin
+  MapPin,
+  DollarSign
 } from "lucide-react";
 import AdminLayout from "../../components/layout/AdminLayout";
 import SEO from "../../components/common/SEO";
@@ -32,6 +33,7 @@ const AdminSettings = () => {
     contactEmail: currentSettings?.contactEmail || "support@pixelink.com",
     contactPhone: currentSettings?.contactPhone || "+1 (555) 123-4567",
     contactAddress: currentSettings?.contactAddress || "100 Alpha Strip, San Francisco, CA",
+    adsenseEnabled: currentSettings?.adsenseEnabled || false,
   });
   const [isSaving, setIsSaving] = useState(false);
 
@@ -41,12 +43,14 @@ const AdminSettings = () => {
         contactEmail: currentSettings.contactEmail || "support@pixelink.com",
         contactPhone: currentSettings.contactPhone || "+1 (555) 123-4567",
         contactAddress: currentSettings.contactAddress || "100 Alpha Strip, San Francisco, CA",
+        adsenseEnabled: currentSettings.adsenseEnabled || false,
       });
     }
   }, [currentSettings]);
 
   const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    setFormData({ ...formData, [e.target.name]: value });
   };
 
   const handleSaveContactInfo = async (e) => {
@@ -199,6 +203,54 @@ const AdminSettings = () => {
                   <>
                     <Save className="w-4 h-4 mr-2" />
                     Save Contact Info
+                  </>
+                )}
+              </button>
+            </form>
+          </div>
+
+          {/* Monetization Settings Form */}
+          <div className="glass p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-850 bg-white/80 dark:bg-slate-900/10 space-y-6">
+            <div>
+              <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center">
+                <DollarSign className="w-5 h-5 mr-2 text-emerald-500" /> Monetization Settings
+              </h2>
+              <p className="text-xs text-slate-600 dark:text-slate-500 mt-1">
+                Toggle global AdSense placeholders on or off. When disabled, empty ad spaces will collapse automatically.
+              </p>
+            </div>
+            
+            <form onSubmit={handleSaveContactInfo} className="space-y-5">
+              <div className="flex items-center justify-between p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50">
+                <div className="pr-4">
+                  <h4 className="text-sm font-bold text-slate-900 dark:text-white">Enable AdSense Ads</h4>
+                  <p className="text-xs text-slate-600 dark:text-slate-450 mt-1">
+                    Display Google AdSense ad units across the application.
+                  </p>
+                </div>
+                <label className="relative inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    name="adsenseEnabled"
+                    checked={formData.adsenseEnabled}
+                    onChange={handleInputChange}
+                    className="sr-only peer"
+                  />
+                  <div className="w-11 h-6 bg-slate-200 dark:bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-500"></div>
+                </label>
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSaving}
+                className="inline-flex items-center px-5 py-2.5 text-sm font-semibold bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 shadow-md"
+              >
+                {isSaving ? (
+                  <span className="animate-pulse">Saving...</span>
+                ) : (
+                  <>
+                    <Save className="w-4 h-4 mr-2" />
+                    Save Preferences
                   </>
                 )}
               </button>

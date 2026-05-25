@@ -24,7 +24,8 @@ export const SettingsProvider = ({ children }) => {
     logoUrl: '/logo.png',
     contactEmail: 'support@pixelink.com',
     contactPhone: '+1 (555) 123-4567',
-    contactAddress: '100 Alpha Strip, San Francisco, CA'
+    contactAddress: '100 Alpha Strip, San Francisco, CA',
+    adsenseEnabled: false
   };
 
   const safeSettings = {
