@@ -1,13 +1,27 @@
 import { removeBackground as imglyRemoveBackground } from '@imgly/background-removal-node';
 import axios from 'axios';
 import FormData from 'form-data';
+import sharp from 'sharp';
 
 /**
  * Removes background using Remove.bg API if configured, otherwise falls back to a local ONNX ML model.
+ * Automatically bypasses the process if the image is already transparent.
  * @param {Buffer} buffer - Original image buffer
  * @returns {Promise<Buffer>} - PNG buffer with background removed
  */
 export const removeBackground = async (buffer) => {
+  try {
+    // PRE-CHECK: Determine if image is already transparent to save API calls/CPU
+    console.log('[AI Service] Analyzing image transparency...');
+    const stats = await sharp(buffer).stats();
+    if (!stats.isOpaque) {
+      console.log('[AI Service] Image already contains transparency. Bypassing background removal.');
+      return buffer; // Return original buffer immediately
+    }
+  } catch (error) {
+    console.error('[AI Service] Failed to analyze image transparency. Proceeding with removal:', error.message);
+  }
+
   const apiKey = process.env.REMOVE_BG_API_KEY;
 
   if (apiKey) {
