@@ -132,22 +132,22 @@ const AdminLayout = ({ children, title }) => {
           {/* Quick theme toggler in sidebar */}{" "}
           <button
             onClick={toggleTheme}
-            className="flex items-center space-x-3 w-full px-4 py-3 rounded-xl text-sm font-semibold text-emerald-600 dark:text-emerald-450 hover:bg-emerald-500/10 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
+            className="flex items-center space-x-3 w-full px-4 py-3 rounded-xl text-sm font-semibold text-slate-900 dark:text-white hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors group"
           >
             {" "}
             {theme === "dark" ? (
-              <Sun className="w-5 h-5 flex-shrink-0" />
+              <Sun className="w-5 h-5 flex-shrink-0 text-emerald-500 dark:text-emerald-450 group-hover:text-emerald-600 dark:group-hover:text-emerald-400" />
             ) : (
-              <Moon className="w-5 h-5 flex-shrink-0" />
+              <Moon className="w-5 h-5 flex-shrink-0 text-emerald-500 dark:text-emerald-450 group-hover:text-emerald-600 dark:group-hover:text-emerald-400" />
             )}{" "}
             <span>Switch Theme</span>{" "}
           </button>{" "}
           <button
             onClick={handleLogout}
-            className="flex items-center space-x-3 w-full px-4 py-3 rounded-xl text-sm font-semibold text-rose-450 hover:bg-rose-500/10 hover:text-rose-400 transition-colors"
+            className="flex items-center space-x-3 w-full px-4 py-3 rounded-xl text-sm font-semibold text-slate-900 dark:text-white hover:bg-rose-500/10 hover:text-rose-600 dark:hover:text-rose-400 transition-colors group"
           >
             {" "}
-            <LogOut className="w-5 h-5 flex-shrink-0" />{" "}
+            <LogOut className="w-5 h-5 flex-shrink-0 text-rose-500 dark:text-rose-450 group-hover:text-rose-600 dark:group-hover:text-rose-400" />{" "}
             <span>Sign Out</span>{" "}
           </button>{" "}
         </div>{" "}
@@ -219,22 +219,22 @@ const AdminLayout = ({ children, title }) => {
               {" "}
               <button
                 onClick={toggleTheme}
-                className="flex items-center space-x-3 w-full px-4 py-3 rounded-xl text-sm font-semibold text-emerald-600 dark:text-emerald-450 hover:bg-emerald-500/10 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
+                className="flex items-center space-x-3 w-full px-4 py-3 rounded-xl text-sm font-semibold text-slate-900 dark:text-white hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors group"
               >
                 {" "}
                 {theme === "dark" ? (
-                  <Sun className="w-5 h-5 flex-shrink-0" />
+                  <Sun className="w-5 h-5 flex-shrink-0 text-emerald-500 dark:text-emerald-450 group-hover:text-emerald-600 dark:group-hover:text-emerald-400" />
                 ) : (
-                  <Moon className="w-5 h-5 flex-shrink-0" />
+                  <Moon className="w-5 h-5 flex-shrink-0 text-emerald-500 dark:text-emerald-450 group-hover:text-emerald-600 dark:group-hover:text-emerald-400" />
                 )}{" "}
                 <span>Switch Theme</span>{" "}
               </button>{" "}
               <button
                 onClick={handleLogout}
-                className="flex items-center space-x-3 w-full px-4 py-3 rounded-xl text-sm font-semibold text-rose-450 hover:bg-rose-500/10 hover:text-rose-400 transition-colors"
+                className="flex items-center space-x-3 w-full px-4 py-3 rounded-xl text-sm font-semibold text-slate-900 dark:text-white hover:bg-rose-500/10 hover:text-rose-600 dark:hover:text-rose-400 transition-colors group"
               >
                 {" "}
-                <LogOut className="w-5 h-5 flex-shrink-0" />{" "}
+                <LogOut className="w-5 h-5 flex-shrink-0 text-rose-500 dark:text-rose-450 group-hover:text-rose-600 dark:group-hover:text-rose-400" />{" "}
                 <span>Sign Out</span>{" "}
               </button>{" "}
             </div>{" "}
