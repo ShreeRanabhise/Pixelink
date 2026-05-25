@@ -33,8 +33,7 @@ const AdminLayout = ({ children, title }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const roleName = user?.role ? user.role.charAt(0).toUpperCase() + user.role.slice(1) : "Administrator";
-  const initialName = (user?.name && user.name !== "Team Member") ? user.name : roleName;
-  const [profileName, setProfileName] = useState(initialName);
+  const [profileName, setProfileName] = useState(user?.name || "");
   const [profileEmail, setProfileEmail] = useState(user?.email || "");
   const [profilePassword, setProfilePassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -254,7 +253,7 @@ const AdminLayout = ({ children, title }) => {
                 {profileName ? profileName[0] : roleName[0]}{" "}
               </div>{" "}
               <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-                {profileName}
+                {profileName || roleName}
               </span>{" "}
             </div>{" "}
           </div>{" "}
@@ -294,7 +293,7 @@ const AdminLayout = ({ children, title }) => {
             </div>
             <form onSubmit={handleUpdateProfile} className="space-y-4 text-left">
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Display Name</label>
+                <label className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Full Name</label>
                 <input 
                   type="text" 
                   value={profileName} 
