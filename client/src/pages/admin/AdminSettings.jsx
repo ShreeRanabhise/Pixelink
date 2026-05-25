@@ -11,7 +11,6 @@ import {
   Cloud,
   ShieldAlert,
   Cpu,
-  CheckCircle2,
   ArrowLeft,
   Terminal,
   AlertTriangle,
@@ -19,7 +18,9 @@ import {
   Mail,
   Phone,
   MapPin,
-  DollarSign
+  DollarSign,
+  CheckCircle2,
+  XCircle
 } from "lucide-react";
 import AdminLayout from "../../components/layout/AdminLayout";
 import SEO from "../../components/common/SEO";
@@ -58,7 +59,7 @@ const AdminSettings = () => {
     setIsSaving(true);
     try {
       await api.put('/settings', formData);
-      toast.success("Contact information updated successfully!");
+      toast.success("System settings updated successfully!");
       // Force reload to get fresh settings across the app
       setTimeout(() => window.location.reload(), 1000);
     } catch (error) {
@@ -84,151 +85,164 @@ const AdminSettings = () => {
     {
       name: "MongoDB Connection",
       status: "Connected",
+      isActive: true,
       type: "Database",
       icon: Database,
       details: "Read/Write operations active. Schema verification complete.",
-      color: "text-emerald-600 dark:text-emerald-450 border-emerald-500/30 dark:border-emerald-500/20 bg-emerald-500/10 dark:bg-emerald-500/5",
     },
     {
-      name: "Cloudinary Storage SDK",
-      status: isCloudinaryActive ? "Cloud Storage Active" : "Fallback Storage Active",
+      name: "Cloudinary SDK",
+      status: isCloudinaryActive ? "Active" : "Fallback Storage",
+      isActive: isCloudinaryActive,
       type: "Media Storage",
       icon: Cloud,
       details: isCloudinaryActive 
         ? "Connected and routing assets directly to Cloudinary cloud storage." 
-        : "Credentials absent in .env file. Storing files locally in `/server/uploads` folder. Serves statically via express.",
-      color: isCloudinaryActive ? "text-emerald-600 dark:text-emerald-450 border-emerald-500/30 dark:border-emerald-500/20 bg-emerald-500/10 dark:bg-emerald-500/5" : "text-amber-600 dark:text-amber-450 border-amber-500/30 dark:border-amber-500/20 bg-amber-500/10 dark:bg-amber-500/5",
+        : "Credentials absent. Storing files locally in /server/uploads.",
     },
     {
-      name: "Remove.bg API Pipeline",
-      status: isRemoveBgActive ? "API Pipeline Active" : "Local ML Fallback Active",
+      name: "Remove.bg Pipeline",
+      status: isRemoveBgActive ? "Active" : "Local ML Fallback",
+      isActive: isRemoveBgActive,
       type: "AI Background Png's",
       icon: Cpu,
       details: isRemoveBgActive
-        ? "Connected to Remove.bg API. Bypassing calls for already transparent images to save credits."
-        : "Credentials absent in .env file. Processing backgrounds using a free local ONNX ML model. Bypassing if already transparent.",
-      color: isRemoveBgActive ? "text-emerald-600 dark:text-emerald-450 border-emerald-500/30 dark:border-emerald-500/20 bg-emerald-500/10 dark:bg-emerald-500/5" : "text-brand-600 dark:text-brand-450 border-brand-500/30 dark:border-brand-500/20 bg-brand-500/10 dark:bg-brand-500/5",
+        ? "Connected to API. Bypassing calls for already transparent images."
+        : "Credentials absent. Processing backgrounds using a free local ONNX ML model.",
     },
     {
-      name: "OpenAI Tagging Integration",
-      status: "NLP Heuristics Active",
+      name: "OpenAI Tagging",
+      status: "Heuristics Active",
+      isActive: true,
       type: "AI Auto-Labeling",
       icon: Cpu,
       details:
         "Using token-matching and title regex parsing algorithms for category & keyword tags generation.",
-      color: "text-brand-600 dark:text-brand-450 border-brand-500/30 dark:border-brand-500/20 bg-brand-500/10 dark:bg-brand-500/5",
     },
   ];
 
   return (
     <AdminLayout title="System Configurations">
       <SEO title="System Settings" />
-      <div className="flex items-center space-x-3 mb-6">
+      
+      <div className="flex items-center space-x-3 mb-10 pl-2">
         <button
           onClick={() => navigate("/admin")}
-          className="p-2 bg-white dark:bg-slate-900 hover:bg-slate-850 border border-slate-300 dark:border-slate-800 text-slate-600 dark:text-slate-450 hover:text-white rounded-xl transition-colors"
+          className="p-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white rounded-xl transition-all hover:scale-105 hover:shadow-md"
         >
           <ArrowLeft className="w-4 h-4" />
         </button>
-        <span className="text-xs text-slate-600 dark:text-slate-450 font-bold uppercase tracking-wider">
-          Back to Control Center
-        </span>
+        <div>
+          <h1 className="text-2xl font-black text-slate-900 dark:text-white leading-none">
+            Platform Settings
+          </h1>
+          <span className="text-[11px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-widest mt-1 block">
+            Manage your site's global configuration
+          </span>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 space-y-6">
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-10">
+        
+        {/* Left Column (Forms) */}
+        <div className="xl:col-span-2 space-y-10">
           
-          {/* Contact Information Settings Form */}
-          <div className="glass p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-850 bg-white/80 dark:bg-slate-900/10 space-y-6">
-            <div>
-              <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center">
-                <Settings className="w-5 h-5 mr-2 text-brand-500" /> Site Settings
-              </h2>
-              <p className="text-xs text-slate-600 dark:text-slate-500 mt-1">
-                Update public contact information displayed on the website.
-              </p>
-            </div>
-            
-            <form onSubmit={handleSaveContactInfo} className="space-y-5">
-              <div className="space-y-2">
-                <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center">
-                  <Mail className="w-3.5 h-3.5 mr-1" /> Contact Email
-                </label>
-                <input
-                  type="email"
-                  name="contactEmail"
-                  value={formData.contactEmail}
-                  onChange={handleInputChange}
-                  className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 px-4 py-2.5 text-sm text-slate-800 dark:text-slate-100 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all"
-                  required
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center">
-                  <Phone className="w-3.5 h-3.5 mr-1" /> Contact Phone
-                </label>
-                <input
-                  type="text"
-                  name="contactPhone"
-                  value={formData.contactPhone}
-                  onChange={handleInputChange}
-                  className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 px-4 py-2.5 text-sm text-slate-800 dark:text-slate-100 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all"
-                  required
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center">
-                  <MapPin className="w-3.5 h-3.5 mr-1" /> Contact Address
-                </label>
-                <input
-                  type="text"
-                  name="contactAddress"
-                  value={formData.contactAddress}
-                  onChange={handleInputChange}
-                  className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 px-4 py-2.5 text-sm text-slate-800 dark:text-slate-100 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all"
-                  required
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={isSaving}
-                className="inline-flex items-center px-5 py-2.5 text-sm font-semibold bg-brand-600 hover:bg-brand-700 text-white rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 shadow-md"
-              >
-                {isSaving ? (
-                  <span className="animate-pulse">Saving...</span>
-                ) : (
-                  <>
-                    <Save className="w-4 h-4 mr-2" />
-                    Save Contact Info
-                  </>
-                )}
-              </button>
-            </form>
-          </div>
-
-          {/* Monetization Settings Form */}
-          <div className="glass p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-850 bg-white/80 dark:bg-slate-900/10 space-y-6">
-            <div>
-              <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center">
-                <DollarSign className="w-5 h-5 mr-2 text-emerald-500" /> Monetization Settings
-              </h2>
-              <p className="text-xs text-slate-600 dark:text-slate-500 mt-1">
-                Toggle global AdSense placeholders on or off. When disabled, empty ad spaces will collapse automatically.
-              </p>
-            </div>
-            
-            <form onSubmit={handleSaveContactInfo} className="space-y-5">
-              <div className="flex items-center justify-between p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50">
-                <div className="pr-4">
-                  <h4 className="text-sm font-bold text-slate-900 dark:text-white">Enable AdSense Ads</h4>
-                  <p className="text-xs text-slate-600 dark:text-slate-450 mt-1">
-                    Display Google AdSense ad units across the application.
+          <form onSubmit={handleSaveContactInfo} className="space-y-10">
+            {/* Contact Information Settings Form */}
+            <div className="glass p-8 rounded-[2rem] border border-slate-200/60 dark:border-slate-800/60 bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl shadow-sm">
+              <div className="flex items-center space-x-3 mb-8 pb-6 border-b border-slate-200 dark:border-slate-800">
+                <div className="p-3 bg-brand-500/10 text-brand-500 rounded-xl">
+                  <Settings className="w-6 h-6" />
+                </div>
+                <div>
+                  <h2 className="text-xl font-black text-slate-900 dark:text-white">
+                    Public Contact Information
+                  </h2>
+                  <p className="text-sm font-semibold text-slate-500 dark:text-slate-400 mt-1">
+                    Details displayed on the frontend website.
                   </p>
                 </div>
-                <label className="relative inline-flex items-center cursor-pointer">
+              </div>
+              
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2.5">
+                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider flex items-center">
+                      <Mail className="w-4 h-4 mr-2 text-slate-400" /> Support Email
+                    </label>
+                    <input
+                      type="email"
+                      name="contactEmail"
+                      value={formData.contactEmail}
+                      onChange={handleInputChange}
+                      className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900/50 px-5 py-3.5 text-sm font-medium text-slate-900 dark:text-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all shadow-sm"
+                      required
+                    />
+                  </div>
+
+                  <div className="space-y-2.5">
+                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider flex items-center">
+                      <Phone className="w-4 h-4 mr-2 text-slate-400" /> Phone Number
+                    </label>
+                    <input
+                      type="text"
+                      name="contactPhone"
+                      value={formData.contactPhone}
+                      onChange={handleInputChange}
+                      className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900/50 px-5 py-3.5 text-sm font-medium text-slate-900 dark:text-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all shadow-sm"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2.5">
+                  <label className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider flex items-center">
+                    <MapPin className="w-4 h-4 mr-2 text-slate-400" /> Office Address
+                  </label>
+                  <input
+                    type="text"
+                    name="contactAddress"
+                    value={formData.contactAddress}
+                    onChange={handleInputChange}
+                    className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900/50 px-5 py-3.5 text-sm font-medium text-slate-900 dark:text-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all shadow-sm"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Monetization Settings Form */}
+            <div className="glass p-8 rounded-[2rem] border border-slate-200/60 dark:border-slate-800/60 bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl shadow-sm">
+              <div className="flex items-center space-x-3 mb-8 pb-6 border-b border-slate-200 dark:border-slate-800">
+                <div className="p-3 bg-emerald-500/10 text-emerald-500 rounded-xl">
+                  <DollarSign className="w-6 h-6" />
+                </div>
+                <div>
+                  <h2 className="text-xl font-black text-slate-900 dark:text-white">
+                    Monetization
+                  </h2>
+                  <p className="text-sm font-semibold text-slate-500 dark:text-slate-400 mt-1">
+                    Control advertising and revenue streams globally.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-6 rounded-2xl border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/50">
+                <div className="mb-4 sm:mb-0 pr-4">
+                  <h4 className="text-lg font-black text-slate-900 dark:text-white flex items-center">
+                    Google AdSense Integration
+                    {formData.adsenseEnabled && (
+                      <span className="ml-3 px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-widest bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
+                        Live
+                      </span>
+                    )}
+                  </h4>
+                  <p className="text-sm font-medium text-slate-500 dark:text-slate-400 mt-1.5">
+                    Toggle ad units across the entire platform. Placeholders will automatically collapse when disabled.
+                  </p>
+                </div>
+                
+                <label className="relative inline-flex items-center cursor-pointer flex-shrink-0">
                   <input
                     type="checkbox"
                     name="adsenseEnabled"
@@ -236,116 +250,99 @@ const AdminSettings = () => {
                     onChange={handleInputChange}
                     className="sr-only peer"
                   />
-                  <div className="w-11 h-6 bg-slate-200 dark:bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-500"></div>
+                  <div className="w-14 h-8 bg-slate-300 dark:bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-brand-500 shadow-inner"></div>
                 </label>
               </div>
 
-              <button
-                type="submit"
-                disabled={isSaving}
-                className="inline-flex items-center px-5 py-2.5 text-sm font-semibold bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 shadow-md"
-              >
-                {isSaving ? (
-                  <span className="animate-pulse">Saving...</span>
-                ) : (
-                  <>
-                    <Save className="w-4 h-4 mr-2" />
-                    Save Preferences
-                  </>
-                )}
-              </button>
-            </form>
-          </div>
-
-          <div className="glass p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-850 bg-white/80 dark:bg-slate-900/10 space-y-6">
-            <div>
-              <h2 className="text-lg font-bold text-slate-900 dark:text-white">
-                Credentials & Integrations
-              </h2>
-              <p className="text-xs text-slate-600 dark:text-slate-500 mt-1">
-                Status of internal databases, cloud storage assets, and third-party AI services
-              </p>
+              {/* Floating Save Bar */}
+              <div className="mt-8 flex justify-end">
+                <button
+                  type="submit"
+                  disabled={isSaving}
+                  className="inline-flex items-center justify-center px-8 py-4 text-base font-bold bg-brand-600 hover:bg-brand-700 text-white rounded-2xl transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 shadow-lg shadow-brand-500/20 w-full sm:w-auto"
+                >
+                  {isSaving ? (
+                    <span className="animate-pulse flex items-center">
+                      <Save className="w-5 h-5 mr-2" /> Saving Configuration...
+                    </span>
+                  ) : (
+                    <>
+                      <Save className="w-5 h-5 mr-2" />
+                      Save All Changes
+                    </>
+                  )}
+                </button>
+              </div>
             </div>
+          </form>
+
+        </div>
+
+        {/* Right Column (System Status) */}
+        <div className="space-y-10">
+          
+          <div className="glass p-8 rounded-[2rem] border border-slate-200/60 dark:border-slate-800/60 bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl shadow-sm">
+            <h2 className="text-lg font-black text-slate-900 dark:text-white mb-6 flex items-center">
+              <ShieldAlert className="w-5 h-5 mr-2 text-slate-500" /> System Health
+            </h2>
+            
             <div className="space-y-4">
               {systemStatus.map((service, idx) => (
                 <div
                   key={idx}
-                  className={`flex flex-col sm:flex-row sm:items-center justify-between p-5 rounded-2xl border ${service.color} gap-4`}
+                  className="p-5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/50 hover:border-slate-300 dark:hover:border-slate-600 transition-colors"
                 >
-                  <div className="flex items-start space-x-4">
-                    <div className="p-3 bg-white/5 rounded-xl border border-white/10 flex-shrink-0 text-slate-900 dark:text-white">
-                      <service.icon className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <span className="text-[10px] text-slate-600 dark:text-slate-500 uppercase font-mono font-bold tracking-wider">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center space-x-2.5">
+                      <div className="p-2 bg-slate-100 dark:bg-slate-700 rounded-lg text-slate-600 dark:text-slate-300">
+                        <service.icon className="w-4 h-4" />
+                      </div>
+                      <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">
                         {service.type}
                       </span>
-                      <h4 className="text-sm font-bold text-slate-900 dark:text-white mt-0.5">
-                        {service.name}
-                      </h4>
-                      <p className="text-xs text-slate-600 dark:text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
-                        {service.details}
-                      </p>
                     </div>
+                    {service.isActive ? (
+                      <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+                    ) : (
+                      <AlertTriangle className="w-5 h-5 text-amber-500" />
+                    )}
                   </div>
-                  <div className="flex-shrink-0 sm:text-right">
-                    <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white bg-slate-200/50 dark:bg-white/5 uppercase tracking-wider">
-                      {service.status}
-                    </span>
+                  
+                  <h4 className="text-sm font-bold text-slate-900 dark:text-white mb-1">
+                    {service.name}
+                  </h4>
+                  <p className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 leading-relaxed mb-3">
+                    {service.details}
+                  </p>
+                  
+                  <div className={`inline-flex items-center px-2.5 py-1 rounded-md text-[10px] font-black uppercase tracking-widest ${
+                    service.isActive 
+                      ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' 
+                      : 'bg-amber-500/10 text-amber-600 dark:text-amber-400'
+                  }`}>
+                    {service.status}
                   </div>
                 </div>
               ))}
             </div>
           </div>
-        </div>
 
-        <div className="space-y-6">
-          <div className="glass p-6 rounded-3xl border border-slate-200 dark:border-slate-850 bg-white/80 dark:bg-slate-900/20 space-y-4">
-            <h2 className="text-base font-bold text-white flex items-center">
-              <ShieldAlert className="w-5 h-5 mr-2 text-brand-500" /> Active Admin Session
+          <div className="glass p-8 rounded-[2rem] border border-slate-200/60 dark:border-slate-800/60 bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl shadow-sm space-y-5">
+            <h2 className="text-base font-black text-slate-900 dark:text-white flex items-center">
+              <Terminal className="w-5 h-5 mr-2 text-indigo-500" /> Storage Architecture
             </h2>
-            <div className="space-y-3.5 text-xs text-slate-600 dark:text-slate-500 dark:text-slate-400">
-              <div className="flex justify-between border-b border-slate-200 dark:border-slate-900 pb-2">
-                <span>Account Name</span>
-                <span className="font-semibold text-slate-900 dark:text-white">
-                  {user?.name || "Administrator"}
-                </span>
-              </div>
-              <div className="flex justify-between border-b border-slate-200 dark:border-slate-900 pb-2">
-                <span>Email Identifier</span>
-                <span className="font-semibold text-slate-900 dark:text-white">
-                  {user?.email || "admin@pixelink.com"}
-                </span>
-              </div>
-              <div className="flex justify-between border-b border-slate-200 dark:border-slate-900 pb-2">
-                <span>Access Role</span>
-                <span className="font-semibold text-brand-450 uppercase font-mono text-[10px]">
-                  SYSTEM ADMIN
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div className="glass p-6 rounded-3xl border border-slate-200 dark:border-slate-850 bg-white/80 dark:bg-slate-900/20 space-y-4">
-            <h2 className="text-base font-bold text-white flex items-center">
-              <Terminal className="w-5 h-5 mr-2 text-indigo-500" /> Local Upload Path
-            </h2>
-            <p className="text-xs text-slate-600 dark:text-slate-500 dark:text-slate-400 leading-relaxed">
-              When storing assets locally, files are written directly into:
+            <p className="text-xs font-medium text-slate-600 dark:text-slate-400 leading-relaxed">
+              If Cloudinary is disabled or fails, image uploads will automatically fallback to local storage. Files are written securely to:
             </p>
-            <div className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-850 p-3 rounded-xl font-mono text-[10px] text-slate-400 break-all select-all">
-              /server/uploads/
-            </div>
-            <div className="p-3 bg-indigo-500/10 border border-indigo-500/20 rounded-xl flex items-start space-x-2 text-[10px] text-indigo-400">
-              <AlertTriangle className="w-4 h-4 flex-shrink-0" />
-              <span>
-                Ensure write permission is active on server directories for clean execution.
-              </span>
+            <div className="bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 p-4 rounded-xl font-mono text-[11px] font-bold text-slate-700 dark:text-slate-300 break-all select-all flex items-center">
+              <span className="text-brand-500 mr-2">~</span> /server/uploads/
             </div>
           </div>
+          
         </div>
       </div>
     </AdminLayout>
   );
 };
+
 export default AdminSettings;
