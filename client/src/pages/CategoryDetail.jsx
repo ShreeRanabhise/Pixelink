@@ -80,10 +80,6 @@ const CategoryDetail = () => {
         )}
       </div>
 
-      <div className="py-4">
-        <AdBanner adSlot="category_top" />
-      </div>
-
       {/* PNG Grid list */}
       {isLoading ? (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
