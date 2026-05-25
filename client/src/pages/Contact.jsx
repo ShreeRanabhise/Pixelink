@@ -8,6 +8,7 @@ const Contact = () => {
     name: '',
     email: '',
     subject: '',
+    type: 'Query',
     message: '',
   });
   const [submitting, setSubmitting] = useState(false);
@@ -33,6 +34,7 @@ const Contact = () => {
         name: '',
         email: '',
         subject: '',
+        type: 'Query',
         message: '',
       });
       setSubmitting(false);
@@ -152,18 +154,35 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="space-y-2">
-              <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                Subject
-              </label>
-              <input
-                type="text"
-                name="subject"
-                value={formData.subject}
-                onChange={handleChange}
-                placeholder="How can we help you?"
-                className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 px-4 py-3 text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all"
-              />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                  Message Type
+                </label>
+                <select
+                  name="type"
+                  value={formData.type}
+                  onChange={handleChange}
+                  className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 px-4 py-3 text-sm text-slate-800 dark:text-slate-100 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all appearance-none"
+                >
+                  <option value="Query">Query</option>
+                  <option value="Suggestion">Suggestion</option>
+                </select>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                  Subject
+                </label>
+                <input
+                  type="text"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  placeholder="How can we help you?"
+                  className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 px-4 py-3 text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all"
+                />
+              </div>
             </div>
 
             <div className="space-y-2">
