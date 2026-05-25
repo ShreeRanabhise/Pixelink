@@ -230,7 +230,7 @@ const PngDetail = () => {
             <div 
               className="absolute inset-0 z-10 pointer-events-none opacity-[0.35] dark:opacity-40"
               style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg width='240' height='240' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='50%25' y='50%25' font-size='28' fill='%23000' font-family='ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Arial' font-weight='900' text-anchor='middle' transform='rotate(-35 120 120)'%3EPixelink%3C/text%3E%3C/svg%3E")`,
+                backgroundImage: `url("data:image/svg+xml,%3Csvg width='120' height='120' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='50%25' y='50%25' font-size='22' fill='%23000' font-family='ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Arial' font-weight='900' text-anchor='middle' transform='rotate(-35 60 60)'%3EPixelink%3C/text%3E%3C/svg%3E")`,
                 backgroundRepeat: 'repeat',
                 backgroundPosition: 'center center'
               }}
