@@ -126,8 +126,10 @@ const Home = () => {
             <Sparkles className="w-3.5 h-3.5 mr-1.5" />
             No account needed submit your PNG in seconds
           </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
-            {settings.heroTitle}
+          <h1 className="text-4xl sm:text-5xl lg:text-[4.5rem] font-black tracking-tight leading-[1.1] text-slate-900 dark:text-white">
+            Download <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 via-fuchsia-500 to-orange-500">High-Quality Transparent</span>
+            <br className="hidden sm:block" />
+            {' '}PNG Images <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-rose-500">Free</span>
           </h1>
           <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto font-medium">
             {settings.heroSubtitle}
