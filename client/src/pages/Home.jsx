@@ -176,7 +176,7 @@ const Home = () => {
               </div>
               <button
                 type="submit"
-                className="bg-slate-900 hover:bg-slate-800 dark:bg-brand-600 dark:hover:bg-brand-700 text-white font-semibold px-8 py-3 rounded-full transition-all duration-200 flex items-center"
+                className="bg-slate-900 hover:bg-slate-800 dark:bg-gradient-to-r dark:from-brand-500 dark:via-purple-500 dark:to-pink-500 dark:hover:opacity-90 text-white font-semibold px-8 py-3 rounded-full transition-all duration-200 flex items-center shadow-lg"
               >
                 Search
               </button>

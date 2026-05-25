@@ -114,7 +114,7 @@ const Navbar = () => {
               <Search className="absolute left-3.5 top-2.5 w-4 h-4 text-slate-400" />
               <button
                 type="submit"
-                className="absolute right-1 top-1 bottom-1 px-4 bg-slate-900 hover:bg-slate-800 dark:bg-brand-600 dark:hover:bg-brand-700 text-white text-xs font-semibold rounded-full transition-colors flex items-center shadow-sm"
+                className="absolute right-1 top-1 bottom-1 px-4 bg-slate-900 hover:bg-slate-800 dark:bg-gradient-to-r dark:from-brand-500 dark:via-purple-500 dark:to-pink-500 dark:hover:opacity-90 text-white text-xs font-semibold rounded-full transition-all flex items-center shadow-sm"
               >
                 Search
               </button>
