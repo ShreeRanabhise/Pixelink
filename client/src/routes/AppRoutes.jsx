@@ -68,6 +68,10 @@ const ProtectedRoute = ({ children, allowedRoles = ['admin'] }) => {
   return children;
 };
 
+// Layouts and specific role dashboards
+const CreatorDashboard = lazy(() => import('../pages/admin/CreatorDashboard'));
+const InspectorDashboard = lazy(() => import('../pages/admin/InspectorDashboard'));
+
 const AppRoutes = () => {
   return (
     <Suspense fallback={<PageLoader />}>
@@ -87,29 +91,68 @@ const AppRoutes = () => {
         {/* Admin Login */}
         <Route path="/admin/login" element={<AdminLogin />} />
 
-        {/* Protected Admin Routes */}
+        {/* Creator Routes */}
+        <Route path="/creator" element={
+          <ProtectedRoute allowedRoles={['creator']}>
+            <CreatorDashboard />
+          </ProtectedRoute>
+        } />
+        <Route path="/creator/upload" element={
+          <ProtectedRoute allowedRoles={['creator']}>
+            <AdminUploadPng />
+          </ProtectedRoute>
+        } />
+        <Route path="/creator/pngs" element={
+          <ProtectedRoute allowedRoles={['creator']}>
+            <AdminManagePngs />
+          </ProtectedRoute>
+        } />
+        <Route path="/creator/categories" element={
+          <ProtectedRoute allowedRoles={['creator']}>
+            <AdminManageCategories />
+          </ProtectedRoute>
+        } />
+
+        {/* Inspector Routes */}
+        <Route path="/inspector" element={
+          <ProtectedRoute allowedRoles={['inspector']}>
+            <InspectorDashboard />
+          </ProtectedRoute>
+        } />
+        <Route path="/inspector/submissions" element={
+          <ProtectedRoute allowedRoles={['inspector']}>
+            <AdminPendingSubmissions />
+          </ProtectedRoute>
+        } />
+        <Route path="/inspector/messages" element={
+          <ProtectedRoute allowedRoles={['inspector']}>
+            <AdminMessages />
+          </ProtectedRoute>
+        } />
+
+        {/* Admin Routes */}
         <Route path="/admin" element={
-          <ProtectedRoute allowedRoles={['admin', 'creator', 'inspector']}>
-            <DashboardRouter />
+          <ProtectedRoute allowedRoles={['admin']}>
+            <AdminDashboard />
           </ProtectedRoute>
         } />
         <Route path="/admin/upload" element={
-          <ProtectedRoute allowedRoles={['admin', 'creator']}>
+          <ProtectedRoute allowedRoles={['admin']}>
             <AdminUploadPng />
           </ProtectedRoute>
         } />
         <Route path="/admin/pngs" element={
-          <ProtectedRoute allowedRoles={['admin', 'creator']}>
+          <ProtectedRoute allowedRoles={['admin']}>
             <AdminManagePngs />
           </ProtectedRoute>
         } />
         <Route path="/admin/categories" element={
-          <ProtectedRoute allowedRoles={['admin', 'creator']}>
+          <ProtectedRoute allowedRoles={['admin']}>
             <AdminManageCategories />
           </ProtectedRoute>
         } />
         <Route path="/admin/submissions" element={
-          <ProtectedRoute allowedRoles={['admin', 'inspector']}>
+          <ProtectedRoute allowedRoles={['admin']}>
             <AdminPendingSubmissions />
           </ProtectedRoute>
         } />
@@ -119,7 +162,7 @@ const AppRoutes = () => {
           </ProtectedRoute>
         } />
         <Route path="/admin/messages" element={
-          <ProtectedRoute allowedRoles={['admin', 'inspector']}>
+          <ProtectedRoute allowedRoles={['admin']}>
             <AdminMessages />
           </ProtectedRoute>
         } />

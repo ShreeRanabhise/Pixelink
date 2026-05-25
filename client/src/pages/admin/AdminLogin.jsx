@@ -15,7 +15,7 @@ const AdminLogin = () => {
   /* Redirect if already authenticated */
   useEffect(() => {
     if (isAuthenticated && user) {
-      navigate("/admin");
+      navigate(`/${user.role === 'admin' ? 'admin' : user.role}`);
     }
   }, [isAuthenticated, user, navigate]);
   const handleSubmit = async (e) => {
@@ -29,7 +29,7 @@ const AdminLogin = () => {
     const result = await login(email, password, role);
     if (result.success) {
       toast.success(`Successfully logged in as ${role}!`);
-      navigate("/admin");
+      navigate(`/${role === 'admin' ? 'admin' : role}`);
     } else {
       setError(result.message);
       toast.error(result.message);

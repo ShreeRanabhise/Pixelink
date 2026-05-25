@@ -107,7 +107,7 @@ const InspectorDashboard = () => {
             </div>
             {totalSubmissionsCount > 0 && (
               <Link
-                to="/admin/submissions"
+                to="/inspector/submissions"
                 className="text-xs font-semibold text-brand-400 hover:text-brand-300 flex items-center"
               >
                 <span>Review All</span>
@@ -165,7 +165,7 @@ const InspectorDashboard = () => {
                       Pending
                     </span>
                     <Link
-                      to="/admin/submissions"
+                      to="/inspector/submissions"
                       className="p-2 bg-slate-100 dark:bg-slate-850 hover:bg-slate-200 dark:bg-slate-800 rounded-xl text-slate-350 hover:text-white transition-colors"
                       title="Review"
                     >
@@ -186,7 +186,7 @@ const InspectorDashboard = () => {
             </h2>
             <div className="grid grid-cols-1 gap-3">
               <Link
-                to="/admin/submissions"
+                to="/inspector/submissions"
                 className="flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 hover:border-amber-500/30 hover:bg-slate-100 dark:bg-slate-850 transition-all text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:text-white"
               >
                 <div className="flex items-center space-x-3">
@@ -205,7 +205,7 @@ const InspectorDashboard = () => {
                 <ArrowRight className="w-4 h-4 text-slate-600 dark:text-slate-500" />
               </Link>
               <Link
-                to="/admin/messages"
+                to="/inspector/messages"
                 className="flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 hover:border-brand-500/30 hover:bg-slate-100 dark:bg-slate-850 transition-all text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:text-white"
               >
                 <div className="flex items-center space-x-3">

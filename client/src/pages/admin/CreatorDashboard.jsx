@@ -101,7 +101,7 @@ const CreatorDashboard = () => {
             </div>
             {totalUploadsCount > 0 && (
               <Link
-                to="/admin/pngs"
+                to="/creator/pngs"
                 className="text-xs font-semibold text-brand-400 hover:text-brand-300 flex items-center"
               >
                 <span>View All</span>
@@ -125,7 +125,7 @@ const CreatorDashboard = () => {
               <p className="text-sm font-semibold text-slate-600 dark:text-slate-500 dark:text-slate-400">
                 You haven't uploaded anything yet!
               </p>
-              <Link to="/admin/upload" className="mt-4 inline-flex text-sm font-bold text-brand-500 hover:text-brand-600">
+              <Link to="/creator/upload" className="mt-4 inline-flex text-sm font-bold text-brand-500 hover:text-brand-600">
                 Upload your first PNG
               </Link>
             </div>
@@ -173,7 +173,7 @@ const CreatorDashboard = () => {
             </h2>
             <div className="grid grid-cols-1 gap-3">
               <Link
-                to="/admin/upload"
+                to="/creator/upload"
                 className="flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 hover:border-brand-500/30 hover:bg-slate-100 dark:bg-slate-850 transition-all text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:text-white"
               >
                 <div className="flex items-center space-x-3">
@@ -192,7 +192,7 @@ const CreatorDashboard = () => {
                 <ArrowRight className="w-4 h-4 text-slate-600 dark:text-slate-500" />
               </Link>
               <Link
-                to="/admin/categories"
+                to="/creator/categories"
                 className="flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 hover:border-purple-500/30 hover:bg-slate-100 dark:bg-slate-850 transition-all text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:text-white"
               >
                 <div className="flex items-center space-x-3">
@@ -209,7 +209,7 @@ const CreatorDashboard = () => {
                 <ArrowRight className="w-4 h-4 text-slate-600 dark:text-slate-500" />
               </Link>
               <Link
-                to="/admin/pngs"
+                to="/creator/pngs"
                 className="flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 hover:border-cyan-500/30 hover:bg-slate-100 dark:bg-slate-850 transition-all text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:text-white"
               >
                 <div className="flex items-center space-x-3">

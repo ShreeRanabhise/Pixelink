@@ -34,16 +34,18 @@ const AdminLayout = ({ children, title }) => {
   const [profileEmail, setProfileEmail] = useState(user?.email || "");
   const [profilePassword, setProfilePassword] = useState("");
   const [isUpdating, setIsUpdating] = useState(false);
+  const basePath = `/${user?.role || 'admin'}`;
+  
   const navigationAll = [
-    { name: "Dashboard", href: "/admin", icon: LayoutDashboard, roles: ['admin', 'creator', 'inspector'] },
-    { name: "Manage Team", href: "/admin/team", icon: Users, roles: ['admin'] },
-    { name: "Pending Reviews", href: "/admin/submissions", icon: FileCheck, badge: "reviews", roles: ['admin', 'inspector'] },
-    { name: "Manage PNGs", href: "/admin/pngs", icon: Image, roles: ['admin', 'creator'] },
-    { name: "Manage Categories", href: "/admin/categories", icon: FolderTree, roles: ['admin', 'creator'] },
-    { name: "Direct Upload", href: "/admin/upload", icon: UploadCloud, roles: ['admin', 'creator'] },
-    { name: "Messages", href: "/admin/messages", icon: MessageSquare, roles: ['admin', 'inspector'] },
-    { name: "Analytics", href: "/admin/analytics", icon: BarChart3, roles: ['admin'] },
-    { name: "System Settings", href: "/admin/settings", icon: Settings, roles: ['admin'] },
+    { name: "Dashboard", href: basePath, icon: LayoutDashboard, roles: ['admin', 'creator', 'inspector'] },
+    { name: "Manage Team", href: `${basePath}/team`, icon: Users, roles: ['admin'] },
+    { name: "Pending Reviews", href: `${basePath}/submissions`, icon: FileCheck, badge: "reviews", roles: ['admin', 'inspector'] },
+    { name: "Manage PNGs", href: `${basePath}/pngs`, icon: Image, roles: ['admin', 'creator'] },
+    { name: "Manage Categories", href: `${basePath}/categories`, icon: FolderTree, roles: ['admin', 'creator'] },
+    { name: "Direct Upload", href: `${basePath}/upload`, icon: UploadCloud, roles: ['admin', 'creator'] },
+    { name: "Messages", href: `${basePath}/messages`, icon: MessageSquare, roles: ['admin', 'inspector'] },
+    { name: "Analytics", href: `${basePath}/analytics`, icon: BarChart3, roles: ['admin'] },
+    { name: "System Settings", href: `${basePath}/settings`, icon: Settings, roles: ['admin'] },
   ];
 
   const navigation = navigationAll.filter(item => item.roles.includes(user?.role || 'admin'));
@@ -52,8 +54,8 @@ const AdminLayout = ({ children, title }) => {
     navigate("/");
   };
   const isActive = (path) => {
-    if (path === "/admin") {
-      return location.pathname === "/admin";
+    if (path === basePath) {
+      return location.pathname === basePath || location.pathname === `${basePath}/`;
     }
     return location.pathname.startsWith(path);
   };
