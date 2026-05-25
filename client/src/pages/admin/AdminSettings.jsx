@@ -63,6 +63,17 @@ const AdminSettings = () => {
     }
   };
 
+  const { data: healthRes } = useQuery({
+    queryKey: ['systemHealth'],
+    queryFn: async () => {
+      const res = await api.get('/settings/health');
+      return res.data;
+    },
+    refetchInterval: 30000, // Fetch every 30 seconds just in case
+  });
+
+  const isCloudinaryActive = healthRes?.health?.cloudinary;
+
   const systemStatus = [
     {
       name: "MongoDB Connection",
@@ -74,12 +85,13 @@ const AdminSettings = () => {
     },
     {
       name: "Cloudinary Storage SDK",
-      status: "Fallback Storage Active",
+      status: isCloudinaryActive ? "Cloud Storage Active" : "Fallback Storage Active",
       type: "Media Storage",
       icon: Cloud,
-      details:
-        "Credentials absent in .env file. Storing files locally in `/server/uploads` folder. Serves statically via express.",
-      color: "text-amber-450 border-amber-500/20 bg-amber-500/5",
+      details: isCloudinaryActive 
+        ? "Connected and routing assets directly to Cloudinary cloud storage." 
+        : "Credentials absent in .env file. Storing files locally in `/server/uploads` folder. Serves statically via express.",
+      color: isCloudinaryActive ? "text-emerald-450 border-emerald-500/20 bg-emerald-500/5" : "text-amber-450 border-amber-500/20 bg-amber-500/5",
     },
     {
       name: "Remove.bg API Pipeline",

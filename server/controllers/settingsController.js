@@ -71,3 +71,22 @@ export const updateLogo = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getSystemHealth = async (req, res, next) => {
+  try {
+    const isCloudinaryConfigured = !!(
+      process.env.CLOUDINARY_CLOUD_NAME &&
+      process.env.CLOUDINARY_API_KEY &&
+      process.env.CLOUDINARY_API_SECRET
+    );
+
+    res.status(200).json({
+      success: true,
+      health: {
+        cloudinary: isCloudinaryConfigured,
+      }
+    });
+  } catch (error) {
+    next(error);
+  }
+};
