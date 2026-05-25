@@ -248,10 +248,10 @@ const AdminLayout = ({ children, title }) => {
               title="Edit Profile"
             >
               <div className="w-8 h-8 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-400 flex items-center justify-center font-bold text-xs uppercase shadow-sm">
-                {(profileName && profileName !== 'Team Member') ? profileName[0] : roleName[0]}
+                {roleName[0]}
               </div>
               <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-                {(profileName && profileName !== 'Team Member') ? profileName : roleName}
+                {roleName}
               </span>
             </div>
           </div>{" "}
