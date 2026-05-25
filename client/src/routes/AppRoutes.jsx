@@ -15,9 +15,7 @@ const AppLayout = ({ children }) => (
     <Navbar />
 
     <main className="flex-grow">{children}</main>
-    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 mt-12">
-      <AdBanner adSlot="global-bottom-footer" className="min-h-[90px]" />
-    </div>
+    <AdBanner adSlot="global-bottom-footer" className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 mt-12 min-h-[90px]" />
     <Footer />
   </div>
 );

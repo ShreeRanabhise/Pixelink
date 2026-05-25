@@ -325,9 +325,11 @@ const PngDetail = () => {
           </div>
 
           {/* Ad Container below Download */}
-          <div className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 border-dashed dark:border-slate-800 rounded-xl overflow-hidden flex items-center justify-center p-4 min-h-[120px]">
-            <AdBanner adSlot="pngdetail_below_download" format="rectangle" className="w-full" />
-          </div>
+          <AdBanner 
+            adSlot="pngdetail_below_download" 
+            format="rectangle" 
+            className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 border-dashed dark:border-slate-800 rounded-xl overflow-hidden flex items-center justify-center p-4 min-h-[120px]" 
+          />
 
           {/* Action Row */}
           <div className="grid grid-cols-3 gap-3">

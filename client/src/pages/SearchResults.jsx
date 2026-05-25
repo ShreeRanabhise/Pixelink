@@ -82,9 +82,7 @@ const SearchResults = () => {
         )}
       </div>
 
-      <div className="py-4">
-        <AdBanner adSlot="search_top" />
-      </div>
+      <AdBanner adSlot="search_top" className="py-4" />
 
       {isLoading ? (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
