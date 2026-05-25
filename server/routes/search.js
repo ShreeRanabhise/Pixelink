@@ -39,12 +39,21 @@ router.get('/', async (req, res, next) => {
       return res.status(200).json({ success: true, suggestions: [], data: [] });
     }
 
-    const regex = new RegExp(query.trim(), 'i');
+    // Advanced Typo-Tolerant Search Logic
+    // 1. Split query into words
+    const words = query.trim().split(/\s+/);
     
-    // Search titles or tags matching query
+    // 2. Create permissive regex for each word (allows out-of-order and partial matches)
+    const regexQueries = words.map(word => new RegExp(word, 'i'));
+    
+    // Search titles or tags matching any of the words
     const pngs = await Png.find({
       approved: true,
-      $or: [{ title: regex }, { tags: regex }]
+      $or: [
+        { title: { $in: regexQueries } },
+        { tags: { $in: regexQueries } },
+        { description: { $in: regexQueries } }
+      ]
     })
     .limit(10)
     .select('title tags slug imageUrl');

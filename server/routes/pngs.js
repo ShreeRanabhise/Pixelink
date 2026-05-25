@@ -8,6 +8,7 @@ import {
   incrementDownloads,
   incrementLikes,
   getGlobalStats,
+  getSimilarPngs,
 } from '../controllers/pngController.js';
 import { protect, adminOnly } from '../middleware/auth.js';
 import upload from '../middleware/upload.js';
@@ -17,6 +18,7 @@ const router = express.Router();
 router.get('/', getPngs);
 router.get('/stats/global', protect, adminOnly, getGlobalStats);
 router.get('/:slug', getPngBySlug);
+router.get('/:id/similar', getSimilarPngs);
 router.post('/', protect, adminOnly, upload.single('image'), createPng);
 router.put('/:id', protect, adminOnly, updatePng);
 router.delete('/:id', protect, adminOnly, deletePng);

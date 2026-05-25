@@ -12,13 +12,14 @@ const SearchResults = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get('q') || '';
   const [page, setPage] = useState(1);
+  const [sort, setSort] = useState('latest');
   const limit = 12;
 
   // Fetch search matches
   const { data: searchRes, isLoading, isFetching } = useQuery({
-    queryKey: ['searchResultPngs', query, page],
+    queryKey: ['searchResultPngs', query, page, sort],
     queryFn: async () => {
-      const res = await api.get(`/pngs?search=${encodeURIComponent(query)}&page=${page}&limit=${limit}`);
+      const res = await api.get(`/pngs?search=${encodeURIComponent(query)}&page=${page}&limit=${limit}&sort=${sort}`);
       return res.data;
     },
     enabled: !!query,
@@ -58,9 +59,26 @@ const SearchResults = () => {
           </h1>
         </div>
         {!isLoading && searchRes && (
-          <p className="text-sm text-slate-500 dark:text-slate-400">
-            Found <span className="font-semibold text-slate-700 dark:text-slate-200">{searchRes.totalCount}</span> matching transparent graphics
-          </p>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <p className="text-sm text-slate-500 dark:text-slate-400">
+              Found <span className="font-semibold text-slate-700 dark:text-slate-200">{searchRes.totalCount}</span> matching transparent graphics
+            </p>
+            <div className="flex items-center space-x-2">
+              <label htmlFor="sort" className="text-sm text-slate-500 dark:text-slate-400 font-medium">Sort by:</label>
+              <select
+                id="sort"
+                value={sort}
+                onChange={(e) => {
+                  setSort(e.target.value);
+                  setPage(1);
+                }}
+                className="text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 rounded-lg py-1.5 px-3 focus:outline-none focus:ring-2 focus:ring-brand-500/50"
+              >
+                <option value="latest">Latest</option>
+                <option value="popular">Popular</option>
+              </select>
+            </div>
+          </div>
         )}
       </div>
 

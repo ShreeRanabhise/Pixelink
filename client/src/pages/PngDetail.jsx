@@ -32,15 +32,14 @@ const PngDetail = () => {
 
   const png = pngRes?.data;
 
-  // 2. Fetch Related PNGs in the same category
+  // 2. Fetch Similar PNGs using the new recommendation algorithm
   const { data: relatedRes } = useQuery({
-    queryKey: ['relatedPngs', png?.category?._id],
+    queryKey: ['similarPngs', png?._id],
     queryFn: async () => {
-      const res = await api.get(`/pngs?category=${png.category.slug}&limit=5`);
-      const filtered = res.data?.data?.filter((p) => p._id !== png._id).slice(0, 4);
-      return { data: filtered };
+      const res = await api.get(`/pngs/${png._id}/similar?limit=5`);
+      return { data: res.data.data };
     },
-    enabled: !!png?.category?._id,
+    enabled: !!png?._id,
   });
 
   // Sync likes with DB on load

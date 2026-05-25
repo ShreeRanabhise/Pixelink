@@ -86,7 +86,14 @@ export const getPngs = async (req, res, next) => {
 
     // Search query
     if (req.query.search) {
-      query.$text = { $search: req.query.search };
+      const searchWords = req.query.search.trim().split(/\s+/);
+      const regexQueries = searchWords.map(word => new RegExp(word, 'i'));
+      
+      query.$or = [
+        { title: { $in: regexQueries } },
+        { tags: { $in: regexQueries } },
+        { description: { $in: regexQueries } }
+      ];
       
       // Log search analytics (only on first page to prevent duplicates)
       if (page === 1) {
@@ -383,6 +390,43 @@ export const incrementDownloads = async (req, res, next) => {
     logAnalyticsEvent(req, 'download', { pngId: png._id, category: png.category });
 
     res.status(200).json({ success: true, downloads: png.downloads });
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * @desc Get Similar PNGs
+ * @route GET /api/pngs/:id/similar
+ * @access Public
+ */
+export const getSimilarPngs = async (req, res, next) => {
+  try {
+    const png = await Png.findById(req.params.id);
+    
+    if (!png) {
+      return res.status(404).json({ success: false, message: 'PNG not found' });
+    }
+
+    const limit = parseInt(req.query.limit, 10) || 5;
+
+    // Build the query to find similar PNGs:
+    // 1. Same category OR shares any of the tags
+    // 2. Not the exact same PNG
+    // 3. Must be approved
+    const similarPngs = await Png.find({
+      _id: { $ne: png._id },
+      approved: true,
+      $or: [
+        { category: png.category },
+        { tags: { $in: png.tags } }
+      ]
+    })
+    .limit(limit)
+    .sort({ views: -1, downloads: -1 }) // sort by popularity among similar ones
+    .populate('category', 'name slug');
+
+    res.status(200).json({ success: true, data: similarPngs });
   } catch (error) {
     next(error);
   }
