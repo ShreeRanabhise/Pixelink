@@ -51,6 +51,7 @@ const AdminManageCategories = lazy(() => import('../pages/admin/AdminManageCateg
 const AdminPendingSubmissions = lazy(() => import('../pages/admin/AdminPendingSubmissions'));
 const AdminAnalytics = lazy(() => import('../pages/admin/AdminAnalytics'));
 const AdminSettings = lazy(() => import('../pages/admin/AdminSettings'));
+const AdminMessages = lazy(() => import('../pages/admin/AdminMessages'));
 
 // Protected Admin Route wrapper
 const ProtectedAdminRoute = ({ children }) => {
@@ -113,6 +114,11 @@ const AppRoutes = () => {
         <Route path="/admin/analytics" element={
           <ProtectedAdminRoute>
             <AdminAnalytics />
+          </ProtectedAdminRoute>
+        } />
+        <Route path="/admin/messages" element={
+          <ProtectedAdminRoute>
+            <AdminMessages />
           </ProtectedAdminRoute>
         } />
         <Route path="/admin/settings" element={

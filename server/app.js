@@ -20,6 +20,7 @@ import searchRoutes from './routes/search.js';
 import settingsRoutes from './routes/settings.js';
 import analyticsRoutes from './routes/analytics.js';
 import sitemapRoutes from './routes/sitemap.js';
+import contactMessageRoutes from './routes/contactMessages.js';
 
 const app = express();
 
@@ -89,6 +90,7 @@ app.use('/api/v1/submissions', submissionRoutes);
 app.use('/api/v1/search', searchRoutes);
 app.use('/api/v1/settings', settingsRoutes);
 app.use('/api/v1/analytics', analyticsRoutes);
+app.use('/api/v1/contact-messages', contactMessageRoutes);
 app.use('/', sitemapRoutes);
 
 // Serve frontend in production or local fallback

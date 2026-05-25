@@ -4,6 +4,8 @@ import toast from 'react-hot-toast';
 import SEO from '../components/common/SEO';
 import { useSettings } from '../context/SettingsContext';
 
+import api from '../api/axios';
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -20,7 +22,7 @@ const Contact = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) {
       toast.error('Please fill in all required fields.');
@@ -29,8 +31,8 @@ const Contact = () => {
 
     setSubmitting(true);
 
-    // Mock API call
-    setTimeout(() => {
+    try {
+      await api.post('/contact-messages', formData);
       toast.success('Your message has been sent successfully!');
       setFormData({
         name: '',
@@ -39,8 +41,11 @@ const Contact = () => {
         type: 'Query',
         message: '',
       });
+    } catch (error) {
+      toast.error(error.response?.data?.message || 'Failed to send message. Please try again.');
+    } finally {
       setSubmitting(false);
-    }, 1500);
+    }
   };
 
   return (

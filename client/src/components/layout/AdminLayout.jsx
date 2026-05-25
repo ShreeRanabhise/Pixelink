@@ -17,7 +17,8 @@ import {
   Sun,
   Moon,
   ShieldCheck,
-  Save
+  Save,
+  MessageSquare
 } from "lucide-react";
 import api from "../../api/axios";
 import toast from "react-hot-toast";
@@ -43,6 +44,7 @@ const AdminLayout = ({ children, title }) => {
     { name: "Manage PNGs", href: "/admin/pngs", icon: Image },
     { name: "Manage Categories", href: "/admin/categories", icon: FolderTree },
     { name: "Direct Upload", href: "/admin/upload", icon: UploadCloud },
+    { name: "Messages", href: "/admin/messages", icon: MessageSquare },
     { name: "Analytics", href: "/admin/analytics", icon: BarChart3 },
     { name: "System Settings", href: "/admin/settings", icon: Settings },
   ];
