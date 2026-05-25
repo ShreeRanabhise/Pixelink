@@ -20,13 +20,16 @@ export const getSettings = async (req, res, next) => {
 
 export const updateSettings = async (req, res, next) => {
   try {
-    const { siteName, heroTitle, heroSubtitle } = req.body;
+    const { siteName, heroTitle, heroSubtitle, contactEmail, contactPhone, contactAddress } = req.body;
     let settings = await Setting.findOne();
     if (!settings) settings = new Setting();
     
     if (siteName !== undefined) settings.siteName = siteName;
     if (heroTitle !== undefined) settings.heroTitle = heroTitle;
     if (heroSubtitle !== undefined) settings.heroSubtitle = heroSubtitle;
+    if (contactEmail !== undefined) settings.contactEmail = contactEmail;
+    if (contactPhone !== undefined) settings.contactPhone = contactPhone;
+    if (contactAddress !== undefined) settings.contactAddress = contactAddress;
 
     await settings.save();
     

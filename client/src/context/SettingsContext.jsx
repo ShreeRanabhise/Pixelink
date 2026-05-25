@@ -21,7 +21,10 @@ export const SettingsProvider = ({ children }) => {
     siteName: 'PixelInk',
     heroTitle: 'Download High-Quality Transparent PNG Images Free',
     heroSubtitle: 'Discover and share millions of free transparent PNGs across 0+ categories no sign up required.',
-    logoUrl: '/logo.png'
+    logoUrl: '/logo.png',
+    contactEmail: 'support@pixelink.com',
+    contactPhone: '+1 (555) 123-4567',
+    contactAddress: '100 Alpha Strip, San Francisco, CA'
   };
 
   const safeSettings = {

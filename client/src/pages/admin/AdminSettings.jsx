@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { useSettings } from "../../context/SettingsContext";
+import api from "../../api/axios";
+import toast from "react-hot-toast";
 import {
   Settings,
   Database,
@@ -10,7 +13,11 @@ import {
   CheckCircle2,
   ArrowLeft,
   Terminal,
-  AlertTriangle
+  AlertTriangle,
+  Save,
+  Mail,
+  Phone,
+  MapPin
 } from "lucide-react";
 import AdminLayout from "../../components/layout/AdminLayout";
 import SEO from "../../components/common/SEO";
@@ -18,6 +25,43 @@ import SEO from "../../components/common/SEO";
 const AdminSettings = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { settings: currentSettings } = useSettings();
+
+  const [formData, setFormData] = useState({
+    contactEmail: currentSettings?.contactEmail || "support@pixelink.com",
+    contactPhone: currentSettings?.contactPhone || "+1 (555) 123-4567",
+    contactAddress: currentSettings?.contactAddress || "100 Alpha Strip, San Francisco, CA",
+  });
+  const [isSaving, setIsSaving] = useState(false);
+
+  useEffect(() => {
+    if (currentSettings) {
+      setFormData({
+        contactEmail: currentSettings.contactEmail || "support@pixelink.com",
+        contactPhone: currentSettings.contactPhone || "+1 (555) 123-4567",
+        contactAddress: currentSettings.contactAddress || "100 Alpha Strip, San Francisco, CA",
+      });
+    }
+  }, [currentSettings]);
+
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSaveContactInfo = async (e) => {
+    e.preventDefault();
+    setIsSaving(true);
+    try {
+      await api.put('/settings', formData);
+      toast.success("Contact information updated successfully!");
+      // Force reload to get fresh settings across the app
+      setTimeout(() => window.location.reload(), 1000);
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Failed to update settings");
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   const systemStatus = [
     {
@@ -75,6 +119,77 @@ const AdminSettings = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-6">
           
+          {/* Contact Information Settings Form */}
+          <div className="glass p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-850 bg-white/80 dark:bg-slate-900/10 space-y-6">
+            <div>
+              <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center">
+                <Settings className="w-5 h-5 mr-2 text-brand-500" /> Site Settings
+              </h2>
+              <p className="text-xs text-slate-600 dark:text-slate-500 mt-1">
+                Update public contact information displayed on the website.
+              </p>
+            </div>
+            
+            <form onSubmit={handleSaveContactInfo} className="space-y-5">
+              <div className="space-y-2">
+                <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center">
+                  <Mail className="w-3.5 h-3.5 mr-1" /> Contact Email
+                </label>
+                <input
+                  type="email"
+                  name="contactEmail"
+                  value={formData.contactEmail}
+                  onChange={handleInputChange}
+                  className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 px-4 py-2.5 text-sm text-slate-800 dark:text-slate-100 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all"
+                  required
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center">
+                  <Phone className="w-3.5 h-3.5 mr-1" /> Contact Phone
+                </label>
+                <input
+                  type="text"
+                  name="contactPhone"
+                  value={formData.contactPhone}
+                  onChange={handleInputChange}
+                  className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 px-4 py-2.5 text-sm text-slate-800 dark:text-slate-100 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all"
+                  required
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center">
+                  <MapPin className="w-3.5 h-3.5 mr-1" /> Contact Address
+                </label>
+                <input
+                  type="text"
+                  name="contactAddress"
+                  value={formData.contactAddress}
+                  onChange={handleInputChange}
+                  className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 px-4 py-2.5 text-sm text-slate-800 dark:text-slate-100 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all"
+                  required
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSaving}
+                className="inline-flex items-center px-5 py-2.5 text-sm font-semibold bg-brand-600 hover:bg-brand-700 text-white rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 shadow-md"
+              >
+                {isSaving ? (
+                  <span className="animate-pulse">Saving...</span>
+                ) : (
+                  <>
+                    <Save className="w-4 h-4 mr-2" />
+                    Save Contact Info
+                  </>
+                )}
+              </button>
+            </form>
+          </div>
+
           <div className="glass p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-850 bg-white/80 dark:bg-slate-900/10 space-y-6">
             <div>
               <h2 className="text-lg font-bold text-slate-900 dark:text-white">

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, MessageSquare, ArrowRight } from 'lucide-react';
 import toast from 'react-hot-toast';
 import SEO from '../components/common/SEO';
+import { useSettings } from '../context/SettingsContext';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +13,7 @@ const Contact = () => {
     message: '',
   });
   const [submitting, setSubmitting] = useState(false);
+  const { settings } = useSettings();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -76,8 +78,8 @@ const Contact = () => {
                   </div>
                   <div>
                     <p className="text-xs text-slate-400">Email us</p>
-                    <a href="mailto:support@pixelink.com" className="text-sm font-semibold text-slate-800 dark:text-slate-200 hover:text-brand-500 dark:hover:text-brand-400 transition-colors">
-                      support@pixelink.com
+                    <a href={`mailto:${settings.contactEmail}`} className="text-sm font-semibold text-slate-800 dark:text-slate-200 hover:text-brand-500 dark:hover:text-brand-400 transition-colors">
+                      {settings.contactEmail}
                     </a>
                   </div>
                 </div>
@@ -89,7 +91,7 @@ const Contact = () => {
                   <div>
                     <p className="text-xs text-slate-400">Call us</p>
                     <p className="text-sm font-semibold text-slate-800 dark:text-slate-200">
-                      +1 (555) 123-4567
+                      {settings.contactPhone}
                     </p>
                   </div>
                 </div>
@@ -101,7 +103,7 @@ const Contact = () => {
                   <div>
                     <p className="text-xs text-slate-400">Visit us</p>
                     <p className="text-sm font-semibold text-slate-800 dark:text-slate-200">
-                      100 Alpha Strip, San Francisco, CA
+                      {settings.contactAddress}
                     </p>
                   </div>
                 </div>
