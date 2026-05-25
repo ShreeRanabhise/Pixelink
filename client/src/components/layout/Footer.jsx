@@ -105,7 +105,7 @@ const Footer = () => {
           </p>
           <div className="flex space-x-6 flex-shrink-0">
             <span className="text-sm text-slate-900 dark:text-slate-400 font-medium">
-              Made with ❤️ for designers worldwide.
+              &copy; {new Date().getFullYear()} Pixelink Inc. All rights reserved.
             </span>
           </div>
         </div>
