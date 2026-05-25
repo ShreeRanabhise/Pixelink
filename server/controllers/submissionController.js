@@ -172,3 +172,73 @@ export const updateSubmissionStatus = async (req, res, next) => {
     next(error);
   }
 };
+
+/**
+ * @desc Approve or Reject multiple submissions at once
+ * @route POST /api/submissions/bulk
+ * @access Private/Admin
+ */
+export const bulkUpdateSubmissions = async (req, res, next) => {
+  try {
+    const { ids, status } = req.body;
+
+    if (!Array.isArray(ids) || ids.length === 0) {
+      return res.status(400).json({ success: false, message: 'No submission IDs provided' });
+    }
+
+    if (!['approved', 'rejected'].includes(status)) {
+      return res.status(400).json({ success: false, message: 'Invalid status. Choose approved or rejected' });
+    }
+
+    const submissions = await Submission.find({ _id: { $in: ids }, status: 'pending' });
+
+    if (submissions.length === 0) {
+      return res.status(404).json({ success: false, message: 'No pending submissions found for the provided IDs' });
+    }
+
+    let processedCount = 0;
+
+    for (const submission of submissions) {
+      if (status === 'rejected') {
+        submission.status = 'rejected';
+        await submission.save();
+        if (submission.cloudinaryId) {
+          await deleteAsset(submission.cloudinaryId);
+        }
+        processedCount++;
+      } else if (status === 'approved') {
+        const categoryObj = await Category.findById(submission.category);
+        if (!categoryObj) continue; // Skip if category is invalid
+
+        let slug = slugify(submission.title);
+        const duplicate = await Png.findOne({ slug });
+        if (duplicate) {
+          slug = `${slug}-${Date.now().toString().slice(-4)}`;
+        }
+
+        await Png.create({
+          title: submission.title,
+          slug,
+          description: `User submitted PNG in category ${categoryObj.name}.`,
+          imageUrl: submission.imageUrl,
+          thumbnailUrl: submission.imageUrl,
+          cloudinaryId: submission.cloudinaryId,
+          category: submission.category,
+          tags: submission.tags,
+          approved: true,
+        });
+
+        submission.status = 'approved';
+        await submission.save();
+        processedCount++;
+      }
+    }
+
+    res.status(200).json({ 
+      success: true, 
+      message: `Bulk ${status} operation completed successfully. Processed ${processedCount} items.` 
+    });
+  } catch (error) {
+    next(error);
+  }
+};
