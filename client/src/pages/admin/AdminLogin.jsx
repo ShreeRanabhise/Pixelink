@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { Lock, Mail, ShieldAlert, Sparkles, ArrowLeft } from "lucide-react";
+import { Lock, Mail, ShieldAlert, Sparkles, ArrowLeft, Eye, EyeOff } from "lucide-react";
 import toast from "react-hot-toast";
 import SEO from "../../components/common/SEO";
 const AdminLogin = () => {
@@ -9,6 +9,7 @@ const AdminLogin = () => {
   const { login, isAuthenticated, user } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [role, setRole] = useState("admin");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -119,13 +120,20 @@ const AdminLogin = () => {
                   <Lock className="w-4 h-4" />{" "}
                 </div>{" "}
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full rounded-2xl border border-slate-300 dark:border-slate-800 bg-slate-950/50 pl-10 pr-4 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-650 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all"
+                  className="w-full rounded-2xl border border-slate-300 dark:border-slate-800 bg-slate-950/50 pl-10 pr-10 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-650 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all"
                   required
                 />{" "}
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700 dark:hover:text-slate-300"
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
               </div>{" "}
             </div>{" "}
             {/* Role field */}{" "}
