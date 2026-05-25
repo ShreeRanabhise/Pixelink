@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Link } from 'react-router-dom';
-import { LayoutGrid, Layers } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { LayoutGrid, Layers, Search } from 'lucide-react';
 import api from '../api/axios';
 import SEO from '../components/common/SEO';
 
@@ -13,6 +13,26 @@ const Categories = () => {
       return res.data;
     },
   });
+
+  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const categories = categoriesRes?.data || [];
+  const filteredCategories = categories.filter(c => c.name.toLowerCase().includes(searchTerm.toLowerCase()));
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 space-y-12">
@@ -28,6 +48,49 @@ const Categories = () => {
         <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400">
           Browse through our curated collections to find the perfect background-free Png's for your design layouts.
         </p>
+
+        {/* Search Bar & Dropdown */}
+        <div className="relative max-w-lg mt-8" ref={dropdownRef}>
+          <div className="relative">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+            <input
+              type="text"
+              placeholder="Search categories..."
+              value={searchTerm}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                setShowDropdown(true);
+              }}
+              onFocus={() => setShowDropdown(true)}
+              className="w-full pl-12 pr-4 py-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-brand-500 shadow-sm transition-all"
+            />
+          </div>
+          
+          {/* Dropdown Suggestions */}
+          {showDropdown && searchTerm && (
+            <div className="absolute z-50 w-full mt-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl max-h-60 overflow-y-auto overflow-x-hidden">
+              {filteredCategories.length > 0 ? (
+                <ul className="py-2">
+                  {filteredCategories.map((cat) => (
+                    <li key={cat._id}>
+                      <button
+                        onClick={() => navigate(`/category/${cat.slug}`)}
+                        className="w-full text-left px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 text-slate-700 dark:text-slate-200 transition-colors flex items-center space-x-3"
+                      >
+                        <Layers className="w-4 h-4 text-brand-500 flex-shrink-0" />
+                        <span className="font-medium">{cat.name}</span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <div className="p-4 text-center text-sm text-slate-500">
+                  No categories found matching "{searchTerm}"
+                </div>
+              )}
+            </div>
+          )}
+        </div>
       </div>
 
       {isLoading ? (
@@ -38,7 +101,7 @@ const Categories = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {categoriesRes?.data?.map((cat) => (
+          {filteredCategories.map((cat) => (
             <Link
               key={cat._id}
               to={`/category/${cat.slug}`}
