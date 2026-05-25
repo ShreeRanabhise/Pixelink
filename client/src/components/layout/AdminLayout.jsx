@@ -247,15 +247,13 @@ const AdminLayout = ({ children, title }) => {
               onClick={() => setShowProfileModal(true)}
               title="Edit Profile"
             >
-              {" "}
               <div className="w-8 h-8 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-400 flex items-center justify-center font-bold text-xs uppercase shadow-sm">
-                {" "}
-                {profileName ? profileName[0] : roleName[0]}{" "}
-              </div>{" "}
+                {(profileName && profileName !== 'Team Member') ? profileName[0] : roleName[0]}
+              </div>
               <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-                {profileName || roleName}
-              </span>{" "}
-            </div>{" "}
+                {(profileName && profileName !== 'Team Member') ? profileName : roleName}
+              </span>
+            </div>
           </div>{" "}
         </header>{" "}
         {/* Inner Content scroll */}{" "}
@@ -315,14 +313,14 @@ const AdminLayout = ({ children, title }) => {
                 />
               </div>
               <div className="space-y-1.5 pt-2">
-                <label className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">New Password {user?.role !== 'admin' ? '' : '(Optional)'}</label>
+                <label className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Password {user?.role !== 'admin' ? '' : '(Optional)'}</label>
                 <div className="relative">
                   <input 
                     type={showPassword ? "text" : "password"} 
                     value={profilePassword} 
                     onChange={(e) => setProfilePassword(e.target.value)}
                     className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 pl-4 pr-10 py-2.5 text-sm focus:border-brand-500 focus:outline-none dark:text-white"
-                    placeholder="Leave blank to keep current"
+                    placeholder="•••••••• (Hidden for security)"
                   />
                   <button 
                     type="button"
