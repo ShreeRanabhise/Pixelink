@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
 import { useSettings } from '../../context/SettingsContext';
 import { Menu, X, Sun, Moon, UploadCloud, LayoutDashboard, LogOut, LogIn, Search } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
+import api from '../../api/axios';
+import useDebounce from '../../hooks/useDebounce';
 
 const Navbar = () => {
   const { isAuthenticated, user, logout } = useAuth();
@@ -11,7 +14,30 @@ const Navbar = () => {
   const { settings } = useSettings();
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const suggestionRef = useRef(null);
+  const debouncedSearch = useDebounce(searchQuery, 300);
   const navigate = useNavigate();
+
+  const { data: suggestionsRes } = useQuery({
+    queryKey: ['navbarSuggestions', debouncedSearch],
+    queryFn: async () => {
+      if (!debouncedSearch) return { data: [] };
+      const res = await api.get(`/search?q=${debouncedSearch}`);
+      return res.data;
+    },
+    enabled: debouncedSearch.trim().length > 1,
+  });
+
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (suggestionRef.current && !suggestionRef.current.contains(e.target)) {
+        setShowSuggestions(false);
+      }
+    };
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => document.removeEventListener('mousedown', handleOutsideClick);
+  }, []);
 
   const handleLogout = () => {
     logout();
@@ -72,22 +98,52 @@ const Navbar = () => {
           </div>
 
           {/* Search Bar */}
-          <form onSubmit={handleSearch} className="hidden lg:flex flex-1 max-w-md mx-6 relative">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search PNGs..."
-              className="w-full pl-10 pr-24 py-2 rounded-full border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50 text-sm focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-slate-800 dark:text-slate-200 transition-all"
-            />
-            <Search className="absolute left-3.5 top-2.5 w-4 h-4 text-slate-400" />
-            <button
-              type="submit"
-              className="absolute right-1 top-1 bottom-1 px-4 bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold rounded-full transition-colors flex items-center shadow-sm"
-            >
-              Search
-            </button>
-          </form>
+          <div ref={suggestionRef} className="hidden lg:flex flex-1 max-w-md mx-6 relative">
+            <form onSubmit={handleSearch} className="w-full relative">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  setShowSuggestions(true);
+                }}
+                onFocus={() => setShowSuggestions(true)}
+                placeholder="Search PNGs..."
+                className="w-full pl-10 pr-24 py-2 rounded-full border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50 text-sm focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-slate-800 dark:text-slate-200 transition-all"
+              />
+              <Search className="absolute left-3.5 top-2.5 w-4 h-4 text-slate-400" />
+              <button
+                type="submit"
+                className="absolute right-1 top-1 bottom-1 px-4 bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold rounded-full transition-colors flex items-center shadow-sm"
+              >
+                Search
+              </button>
+            </form>
+
+            {showSuggestions && suggestionsRes?.data && suggestionsRes.data.length > 0 && (
+              <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl py-2 text-left overflow-hidden z-50">
+                <p className="text-[10px] text-slate-400 px-4 pb-1 pt-1 uppercase font-semibold tracking-wider border-b border-slate-100 dark:border-slate-800/65">
+                  Suggested PNGs
+                </p>
+                <div className="max-h-60 overflow-y-auto">
+                  {suggestionsRes.data.map((png) => (
+                    <button
+                      key={png._id}
+                      onClick={() => {
+                        navigate(`/png/${png.slug}`);
+                        setShowSuggestions(false);
+                        setSearchQuery('');
+                      }}
+                      className="w-full px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-800/50 text-left transition-colors flex items-center space-x-3"
+                    >
+                      <img src={png.imageUrl} alt={png.title} className="w-8 h-8 object-contain bg-slate-100 dark:bg-slate-800 rounded p-0.5 checkerboard-bg" />
+                      <span className="font-medium text-xs text-slate-700 dark:text-slate-200 truncate">{png.title}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
 
           {/* Action Buttons */}
           <div className="hidden md:flex items-center space-x-4">
