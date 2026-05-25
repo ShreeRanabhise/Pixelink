@@ -14,6 +14,10 @@ const submissionSchema = new mongoose.Schema(
       required: [true, 'Please provide a title'],
       trim: true,
     },
+    description: {
+      type: String,
+      trim: true,
+    },
     tags: {
       type: [String],
       default: [],

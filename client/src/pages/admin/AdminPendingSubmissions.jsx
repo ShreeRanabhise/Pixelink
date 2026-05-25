@@ -24,6 +24,7 @@ const AdminPendingSubmissions = () => {
   const [selectedSub, setSelectedSub] =
     useState(null); /* Edit / Override fields  */
   const [revTitle, setRevTitle] = useState("");
+  const [revDescription, setRevDescription] = useState("");
   const [revCategoryId, setRevCategoryId] = useState("");
   const [revTags, setRevTags] = useState("");
   const [processing, setProcessing] =
@@ -46,6 +47,7 @@ const AdminPendingSubmissions = () => {
   const handleSelectSubmission = (sub) => {
     setSelectedSub(sub);
     setRevTitle(sub.title);
+    setRevDescription(sub.description || "");
     setRevCategoryId(sub.category?._id || sub.category || "");
     setRevTags(sub.tags?.join(", ") || "");
   };
@@ -62,6 +64,7 @@ const AdminPendingSubmissions = () => {
       const payload = {
         status,
         title: revTitle.trim(),
+        description: revDescription.trim(),
         categoryId: revCategoryId,
         tags: revTags,
       };
@@ -324,6 +327,18 @@ const AdminPendingSubmissions = () => {
                       />{" "}
                     </div>{" "}
                   </div>{" "}
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-semibold text-slate-600 dark:text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                      Refined Description
+                    </label>
+                    <textarea
+                      value={revDescription}
+                      onChange={(e) => setRevDescription(e.target.value)}
+                      placeholder="e.g. Describe the Png's, context, or usage..."
+                      rows="2"
+                      className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-950/40 px-4 py-2.5 text-xs text-slate-900 dark:text-slate-100 placeholder-slate-650 focus:border-brand-500 focus:outline-none resize-none"
+                    />
+                  </div>
                 </div>{" "}
               </div>{" "}
               {/* Submitter Info and Action Buttons */}{" "}

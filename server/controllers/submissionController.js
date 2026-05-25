@@ -20,7 +20,7 @@ const slugify = (text) => {
  */
 export const createSubmission = async (req, res, next) => {
   try {
-    const { title, categoryId, tags } = req.body;
+    const { title, categoryId, tags, description } = req.body;
 
     if (!title || !categoryId) {
       return res.status(400).json({ success: false, message: 'Title and Category are required' });
@@ -53,6 +53,7 @@ export const createSubmission = async (req, res, next) => {
       cloudinaryId: uploadResult.public_id,
       category: categoryId,
       tags: parsedTags,
+      description: description || "",
       status: 'pending',
       submitterIP: req.ip || req.headers['x-forwarded-for'] || 'unknown',
     });
@@ -148,7 +149,7 @@ export const updateSubmissionStatus = async (req, res, next) => {
     const newPng = await Png.create({
       title: finalTitle,
       slug,
-      description: "",
+      description: submission.description || "",
       imageUrl: submission.imageUrl,
       thumbnailUrl: submission.imageUrl,
       cloudinaryId: submission.cloudinaryId,
@@ -222,7 +223,7 @@ export const bulkUpdateSubmissions = async (req, res, next) => {
         await Png.create({
           title: submission.title,
           slug,
-          description: "",
+          description: submission.description || "",
           imageUrl: submission.imageUrl,
           thumbnailUrl: submission.imageUrl,
           cloudinaryId: submission.cloudinaryId,
