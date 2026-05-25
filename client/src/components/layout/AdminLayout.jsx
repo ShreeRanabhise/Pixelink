@@ -33,7 +33,8 @@ const AdminLayout = ({ children, title }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const roleName = user?.role ? user.role.charAt(0).toUpperCase() + user.role.slice(1) : "Administrator";
-  const [profileName, setProfileName] = useState(user?.name || "Team Member");
+  const initialName = (user?.name && user.name !== "Team Member") ? user.name : roleName;
+  const [profileName, setProfileName] = useState(initialName);
   const [profileEmail, setProfileEmail] = useState(user?.email || "");
   const [profilePassword, setProfilePassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -250,7 +251,7 @@ const AdminLayout = ({ children, title }) => {
               {" "}
               <div className="w-8 h-8 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-400 flex items-center justify-center font-bold text-xs uppercase shadow-sm">
                 {" "}
-                {profileName ? profileName[0] : "T"}{" "}
+                {profileName ? profileName[0] : roleName[0]}{" "}
               </div>{" "}
               <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                 {profileName}
