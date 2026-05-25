@@ -82,7 +82,7 @@ const AdminSettings = () => {
       type: "Database",
       icon: Database,
       details: "Read/Write operations active. Schema verification complete.",
-      color: "text-emerald-450 border-emerald-500/20 bg-emerald-500/5",
+      color: "text-emerald-700 dark:text-emerald-450 border-slate-300 dark:border-emerald-500/20 bg-slate-50 dark:bg-emerald-500/5",
     },
     {
       name: "Cloudinary Storage SDK",
@@ -92,7 +92,7 @@ const AdminSettings = () => {
       details: isCloudinaryActive 
         ? "Connected and routing assets directly to Cloudinary cloud storage." 
         : "Credentials absent in .env file. Storing files locally in `/server/uploads` folder. Serves statically via express.",
-      color: isCloudinaryActive ? "text-emerald-450 border-emerald-500/20 bg-emerald-500/5" : "text-amber-450 border-amber-500/20 bg-amber-500/5",
+      color: isCloudinaryActive ? "text-emerald-700 dark:text-emerald-450 border-slate-300 dark:border-emerald-500/20 bg-slate-50 dark:bg-emerald-500/5" : "text-amber-700 dark:text-amber-450 border-slate-300 dark:border-amber-500/20 bg-slate-50 dark:bg-amber-500/5",
     },
     {
       name: "Remove.bg API Pipeline",
@@ -101,7 +101,7 @@ const AdminSettings = () => {
       icon: Cpu,
       details:
         "Bypassing active image Png's calls. Saving original transparent uploads directly.",
-      color: "text-brand-450 border-brand-500/20 bg-brand-500/5",
+      color: "text-brand-700 dark:text-brand-450 border-slate-300 dark:border-brand-500/20 bg-slate-50 dark:bg-brand-500/5",
     },
     {
       name: "OpenAI Tagging Integration",
@@ -235,7 +235,7 @@ const AdminSettings = () => {
                     </div>
                   </div>
                   <div className="flex-shrink-0 sm:text-right">
-                    <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold border bg-white/5 border-white/10 text-white uppercase tracking-wider">
+                    <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white bg-slate-200/50 dark:bg-white/5 uppercase tracking-wider">
                       {service.status}
                     </span>
                   </div>
