@@ -95,13 +95,15 @@ const Navbar = () => {
             </button>
 
             {/* Public Submit Button */}
-            <Link
-              to="/submit"
-              className="inline-flex items-center px-4 py-2 text-sm font-semibold rounded-lg text-white bg-brand-600 hover:bg-brand-700 shadow-md shadow-brand-500/20 transition-all hover:scale-105 active:scale-95"
-            >
-              <UploadCloud className="w-4 h-4 mr-2" />
-              Upload PNG
-            </Link>
+            {!isAdmin && (
+              <Link
+                to="/submit"
+                className="inline-flex items-center px-4 py-2 text-sm font-semibold rounded-lg text-white bg-brand-600 hover:bg-brand-700 shadow-md shadow-brand-500/20 transition-all hover:scale-105 active:scale-95"
+              >
+                <UploadCloud className="w-4 h-4 mr-2" />
+                Upload PNG
+              </Link>
+            )}
 
             {/* Auth Buttons */}
             {isAuthenticated && isAdmin && (
@@ -160,13 +162,15 @@ const Navbar = () => {
                 {link.label}
               </NavLink>
             ))}
-            <Link
-              to="/submit"
-              onClick={handleLinkClick}
-              className="block px-3 py-2 rounded-md text-base font-semibold bg-brand-600 text-white hover:bg-brand-700 mt-2"
-            >
-              Upload PNG
-            </Link>
+            {!isAdmin && (
+              <Link
+                to="/submit"
+                onClick={handleLinkClick}
+                className="block px-3 py-2 rounded-md text-base font-semibold bg-brand-600 text-white hover:bg-brand-700 mt-2"
+              >
+                Upload PNG
+              </Link>
+            )}
             
             {isAuthenticated && isAdmin && (
               <Link
