@@ -24,9 +24,9 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  const login = async (email, password) => {
+  const login = async (email, password, role) => {
     try {
-      const response = await api.post('/auth/login', { email, password });
+      const response = await api.post('/auth/login', { email, password, role });
       const { token: jwtToken, user: userProfile } = response.data;
       
       localStorage.setItem('pixelink_token', jwtToken);
@@ -54,6 +54,8 @@ export const AuthProvider = ({ children }) => {
     token,
     isAuthenticated: !!token,
     isAdmin: user?.role === 'admin',
+    isCreator: user?.role === 'creator',
+    isInspector: user?.role === 'inspector',
     loading,
     login,
     logout,

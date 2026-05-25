@@ -6,17 +6,18 @@ import toast from "react-hot-toast";
 import SEO from "../../components/common/SEO";
 const AdminLogin = () => {
   const navigate = useNavigate();
-  const { login, isAuthenticated, isAdmin } = useAuth();
+  const { login, isAuthenticated, user } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("admin");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  /* Redirect if already authenticated and admin */
+  /* Redirect if already authenticated */
   useEffect(() => {
-    if (isAuthenticated && isAdmin) {
+    if (isAuthenticated && user) {
       navigate("/admin");
     }
-  }, [isAuthenticated, isAdmin, navigate]);
+  }, [isAuthenticated, user, navigate]);
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
@@ -25,9 +26,9 @@ const AdminLogin = () => {
     }
     setLoading(true);
     setError(null);
-    const result = await login(email, password);
+    const result = await login(email, password, role);
     if (result.success) {
-      toast.success("Successfully logged in as Admin!");
+      toast.success(`Successfully logged in as ${role}!`);
       navigate("/admin");
     } else {
       setError(result.message);
@@ -58,10 +59,10 @@ const AdminLogin = () => {
             <Lock className="w-6 h-6 animate-pulse" />{" "}
           </div>{" "}
           <h1 className="text-3xl font-extrabold tracking-tight">
-            Pixelink Admin
+            Community Access
           </h1>{" "}
           <p className="text-sm text-slate-600 dark:text-slate-500 dark:text-slate-455">
-            Enter your credentials to access the management portal
+            Select your role and enter credentials to access your portal
           </p>{" "}
         </div>{" "}
         <form
@@ -69,6 +70,11 @@ const AdminLogin = () => {
           className="glass p-8 rounded-3xl border border-slate-300 dark:border-slate-800 space-y-6 shadow-2xl bg-slate-900/80"
         >
           {" "}
+          <div className="p-4 bg-brand-500/10 border border-brand-500/20 rounded-2xl flex items-start space-x-3 text-brand-600 dark:text-brand-400 text-xs font-semibold">
+            <ShieldAlert className="w-5 h-5 flex-shrink-0" />
+            <span>Warning to Public Users: This access portal is restricted to authorized community personnel. Unauthorized access attempts are logged.</span>
+          </div>
+          
           {error && (
             <div className="p-4 bg-rose-500/10 border border-rose-500/20 rounded-2xl flex items-start space-x-3 text-rose-400 text-xs font-semibold">
               {" "}
@@ -122,6 +128,27 @@ const AdminLogin = () => {
                 />{" "}
               </div>{" "}
             </div>{" "}
+            {/* Role field */}{" "}
+            <div className="space-y-2">
+              <label className="text-xs font-semibold text-slate-600 dark:text-slate-450 uppercase tracking-wider">
+                Select Role
+              </label>
+              <div className="relative">
+                <select
+                  value={role}
+                  onChange={(e) => setRole(e.target.value)}
+                  className="w-full rounded-2xl border border-slate-300 dark:border-slate-800 bg-slate-950/50 px-4 py-3 text-sm text-slate-900 dark:text-slate-100 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all appearance-none"
+                  required
+                >
+                  <option value="admin">Admin</option>
+                  <option value="creator">Creator</option>
+                  <option value="inspector">Inspector</option>
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-600 dark:text-slate-500">
+                  <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                </div>
+              </div>
+            </div>
           </div>{" "}
           <button
             type="submit"

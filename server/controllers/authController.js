@@ -7,19 +7,19 @@ import jwt from 'jsonwebtoken';
  * @access Public
  */
 export const login = async (req, res, next) => {
-  const { email, password } = req.body;
+  const { email, password, role } = req.body;
 
   try {
     // Validation
-    if (!email || !password) {
-      return res.status(400).json({ success: false, message: 'Please provide email and password' });
+    if (!email || !password || !role) {
+      return res.status(400).json({ success: false, message: 'Please provide email, password, and select a role' });
     }
 
     // Check user
     const user = await User.findOne({ email }).select('+password'); // Explicitly select password if schema select is false (but we didn't specify select: false, so it's fine)
     
-    if (!user) {
-      return res.status(401).json({ success: false, message: 'Invalid credentials' });
+    if (!user || user.role !== role) {
+      return res.status(401).json({ success: false, message: 'Invalid credentials or role' });
     }
 
     // Match password

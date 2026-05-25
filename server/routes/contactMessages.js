@@ -7,7 +7,7 @@ import {
   bulkUpdateMessages,
   bulkDeleteMessages
 } from '../controllers/contactMessageController.js';
-import { protect, adminOnly } from '../middleware/auth.js';
+import { protect, authorizeRoles } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -16,7 +16,7 @@ router.post('/', createMessage);
 
 // Protected Admin routes
 router.use(protect);
-router.use(adminOnly);
+router.use(authorizeRoles('admin', 'inspector'));
 
 router.route('/')
   .get(getMessages);

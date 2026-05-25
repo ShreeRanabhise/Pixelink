@@ -10,18 +10,18 @@ import {
   getGlobalStats,
   getSimilarPngs,
 } from '../controllers/pngController.js';
-import { protect, adminOnly } from '../middleware/auth.js';
+import { protect, authorizeRoles } from '../middleware/auth.js';
 import upload from '../middleware/upload.js';
 
 const router = express.Router();
 
 router.get('/', getPngs);
-router.get('/stats/global', protect, adminOnly, getGlobalStats);
+router.get('/stats/global', protect, authorizeRoles('admin'), getGlobalStats);
 router.get('/:slug', getPngBySlug);
 router.get('/:id/similar', getSimilarPngs);
-router.post('/', protect, adminOnly, upload.single('image'), createPng);
-router.put('/:id', protect, adminOnly, updatePng);
-router.delete('/:id', protect, adminOnly, deletePng);
+router.post('/', protect, authorizeRoles('admin', 'creator'), upload.single('image'), createPng);
+router.put('/:id', protect, authorizeRoles('admin', 'creator'), updatePng);
+router.delete('/:id', protect, authorizeRoles('admin', 'creator'), deletePng);
 router.post('/:id/download', incrementDownloads);
 router.post('/:id/like', incrementLikes);
 

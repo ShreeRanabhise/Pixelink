@@ -53,13 +53,13 @@ const AdminAnalytics = lazy(() => import('../pages/admin/AdminAnalytics'));
 const AdminSettings = lazy(() => import('../pages/admin/AdminSettings'));
 const AdminMessages = lazy(() => import('../pages/admin/AdminMessages'));
 
-// Protected Admin Route wrapper
-const ProtectedAdminRoute = ({ children }) => {
-  const { isAuthenticated, isAdmin, loading } = useAuth();
+// Protected Route wrapper with RBAC
+const ProtectedRoute = ({ children, allowedRoles = ['admin'] }) => {
+  const { isAuthenticated, user, loading } = useAuth();
 
   if (loading) return <PageLoader />;
 
-  if (!isAuthenticated || !isAdmin) {
+  if (!isAuthenticated || !user || !allowedRoles.includes(user.role)) {
     return <Navigate to="/admin/login" replace />;
   }
 
@@ -87,44 +87,44 @@ const AppRoutes = () => {
 
         {/* Protected Admin Routes */}
         <Route path="/admin" element={
-          <ProtectedAdminRoute>
+          <ProtectedRoute allowedRoles={['admin', 'creator', 'inspector']}>
             <AdminDashboard />
-          </ProtectedAdminRoute>
+          </ProtectedRoute>
         } />
         <Route path="/admin/upload" element={
-          <ProtectedAdminRoute>
+          <ProtectedRoute allowedRoles={['admin', 'creator']}>
             <AdminUploadPng />
-          </ProtectedAdminRoute>
+          </ProtectedRoute>
         } />
         <Route path="/admin/pngs" element={
-          <ProtectedAdminRoute>
+          <ProtectedRoute allowedRoles={['admin', 'creator']}>
             <AdminManagePngs />
-          </ProtectedAdminRoute>
+          </ProtectedRoute>
         } />
         <Route path="/admin/categories" element={
-          <ProtectedAdminRoute>
+          <ProtectedRoute allowedRoles={['admin', 'creator']}>
             <AdminManageCategories />
-          </ProtectedAdminRoute>
+          </ProtectedRoute>
         } />
         <Route path="/admin/submissions" element={
-          <ProtectedAdminRoute>
+          <ProtectedRoute allowedRoles={['admin', 'inspector']}>
             <AdminPendingSubmissions />
-          </ProtectedAdminRoute>
+          </ProtectedRoute>
         } />
         <Route path="/admin/analytics" element={
-          <ProtectedAdminRoute>
+          <ProtectedRoute allowedRoles={['admin']}>
             <AdminAnalytics />
-          </ProtectedAdminRoute>
+          </ProtectedRoute>
         } />
         <Route path="/admin/messages" element={
-          <ProtectedAdminRoute>
+          <ProtectedRoute allowedRoles={['admin', 'inspector']}>
             <AdminMessages />
-          </ProtectedAdminRoute>
+          </ProtectedRoute>
         } />
         <Route path="/admin/settings" element={
-          <ProtectedAdminRoute>
+          <ProtectedRoute allowedRoles={['admin']}>
             <AdminSettings />
-          </ProtectedAdminRoute>
+          </ProtectedRoute>
         } />
 
         {/* 404 Catch All */}

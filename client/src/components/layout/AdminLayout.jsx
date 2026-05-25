@@ -33,21 +33,18 @@ const AdminLayout = ({ children, title }) => {
   const [profileEmail, setProfileEmail] = useState(user?.email || "");
   const [profilePassword, setProfilePassword] = useState("");
   const [isUpdating, setIsUpdating] = useState(false);
-  const navigation = [
-    { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
-    {
-      name: "Pending Reviews",
-      href: "/admin/submissions",
-      icon: FileCheck,
-      badge: "reviews",
-    },
-    { name: "Manage PNGs", href: "/admin/pngs", icon: Image },
-    { name: "Manage Categories", href: "/admin/categories", icon: FolderTree },
-    { name: "Direct Upload", href: "/admin/upload", icon: UploadCloud },
-    { name: "Messages", href: "/admin/messages", icon: MessageSquare },
-    { name: "Analytics", href: "/admin/analytics", icon: BarChart3 },
-    { name: "System Settings", href: "/admin/settings", icon: Settings },
+  const navigationAll = [
+    { name: "Dashboard", href: "/admin", icon: LayoutDashboard, roles: ['admin', 'creator', 'inspector'] },
+    { name: "Pending Reviews", href: "/admin/submissions", icon: FileCheck, badge: "reviews", roles: ['admin', 'inspector'] },
+    { name: "Manage PNGs", href: "/admin/pngs", icon: Image, roles: ['admin', 'creator'] },
+    { name: "Manage Categories", href: "/admin/categories", icon: FolderTree, roles: ['admin', 'creator'] },
+    { name: "Direct Upload", href: "/admin/upload", icon: UploadCloud, roles: ['admin', 'creator'] },
+    { name: "Messages", href: "/admin/messages", icon: MessageSquare, roles: ['admin', 'inspector'] },
+    { name: "Analytics", href: "/admin/analytics", icon: BarChart3, roles: ['admin'] },
+    { name: "System Settings", href: "/admin/settings", icon: Settings, roles: ['admin'] },
   ];
+
+  const navigation = navigationAll.filter(item => item.roles.includes(user?.role || 'admin'));
   const handleLogout = () => {
     logout();
     navigate("/");

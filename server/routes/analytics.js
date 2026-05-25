@@ -1,10 +1,10 @@
 import express from 'express';
 const router = express.Router();
 import { getOverview, getTopSearches, getTopCountries, getTopSources, getCategoryPerformance } from '../controllers/analyticsController.js';
-import { protect, adminOnly } from '../middleware/auth.js';
+import { protect, authorizeRoles } from '../middleware/auth.js';
 
 router.use(protect);
-router.use(adminOnly);
+router.use(authorizeRoles('admin'));
 
 router.get('/overview', getOverview);
 router.get('/searches', getTopSearches);
