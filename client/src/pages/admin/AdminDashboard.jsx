@@ -48,6 +48,24 @@ const AdminDashboard = () => {
     },
   });
 
+  /* Fetch Top PNGs */
+  const { data: topPngsRes, isLoading: topPngsLoading } = useQuery({
+    queryKey: ["adminTopPngs"],
+    queryFn: async () => {
+      const res = await api.get("/pngs?sort=-downloads&limit=5");
+      return res.data;
+    },
+  });
+
+  /* Fetch Trending Searches */
+  const { data: trendingRes, isLoading: trendingLoading } = useQuery({
+    queryKey: ["adminTrendingSearches"],
+    queryFn: async () => {
+      const res = await api.get("/search/trending");
+      return res.data;
+    },
+  });
+
   /* Get recent 4 pending reviews  */
   const recentSubmissions = pendingRes?.data?.slice(0, 4) || [];
   const totalSubmissionsCount =
@@ -60,6 +78,14 @@ const AdminDashboard = () => {
   const totalDownloads = statsRes?.data?.totalDownloads || 0; 
   const totalViews = statsRes?.data?.totalViews || 0;
   const totalLikes = statsRes?.data?.totalLikes || 0;
+  
+  // Calculate dynamic engagement rates (baseline is views)
+  const likesPercentage = totalViews > 0 ? Math.min(Math.round((totalLikes / totalViews) * 100), 100) : 0;
+  const downloadsPercentage = totalViews > 0 ? Math.min(Math.round((totalDownloads / totalViews) * 100), 100) : 0;
+  
+  const topPngs = topPngsRes?.data || [];
+  const trendingSearches = trendingRes?.trending || [];
+
   const stats = [
     {
       name: "Active Gallery Size",
@@ -303,56 +329,128 @@ const AdminDashboard = () => {
               </Link>{" "}
             </div>{" "}
           </div>{" "}
-          {/* Quick Analytics Insight */}{" "}
+          {/* Quick Analytics Insight */}
           <div className="glass p-6 rounded-3xl border border-slate-200 dark:border-slate-850 bg-white/80 dark:bg-slate-900/20 space-y-4">
-            {" "}
             <div className="flex items-center space-x-2">
-              {" "}
-              <TrendingUp className="w-5 h-5 text-emerald-500" />{" "}
+              <TrendingUp className="w-5 h-5 text-emerald-500" />
               <h2 className="text-sm font-extrabold uppercase tracking-wider text-slate-600 dark:text-slate-500 dark:text-slate-400">
-                Popularity Status
-              </h2>{" "}
-            </div>{" "}
-            <div className="space-y-3.5">
-              {" "}
+                Engagement Status
+              </h2>
+            </div>
+            <div className="space-y-4">
               <div>
-                {" "}
                 <div className="flex justify-between text-xs font-semibold mb-1.5">
-                  {" "}
-                  <span className="text-slate-500">
-                    Total System Views
-                  </span>{" "}
-                  <span className="text-emerald-500">{totalViews}</span>{" "}
-                </div>{" "}
-                <div className="w-full bg-white dark:bg-slate-900 rounded-full h-1.5 overflow-hidden border border-slate-300 dark:border-slate-800">
-                  {" "}
-                  <div
-                    className="bg-emerald-500 h-1.5 rounded-full"
-                    style={{ width: "75%" }}
-                  ></div>{" "}
-                </div>{" "}
-              </div>{" "}
+                  <span className="text-slate-500">System Views</span>
+                  <span className="text-slate-800 dark:text-slate-200">{totalViews.toLocaleString()}</span>
+                </div>
+                <div className="w-full bg-slate-100 dark:bg-slate-900 rounded-full h-1.5 overflow-hidden border border-slate-200 dark:border-slate-800">
+                  <div className="bg-slate-500 dark:bg-slate-400 h-1.5 rounded-full" style={{ width: "100%" }}></div>
+                </div>
+              </div>
               <div>
-                {" "}
                 <div className="flex justify-between text-xs font-semibold mb-1.5">
-                  {" "}
-                  <span className="text-slate-500">
-                    Community Likes
-                  </span>{" "}
-                  <span className="text-rose-500">{totalLikes}</span>{" "}
-                </div>{" "}
-                <div className="w-full bg-white dark:bg-slate-900 rounded-full h-1.5 overflow-hidden border border-slate-300 dark:border-slate-800">
-                  {" "}
-                  <div
-                    className="bg-rose-500 h-1.5 rounded-full"
-                    style={{ width: "45%" }}
-                  ></div>{" "}
-                </div>{" "}
-              </div>{" "}
-            </div>{" "}
-          </div>{" "}
-        </div>{" "}
-      </div>{" "}
+                  <span className="text-slate-500">Downloads Rate</span>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-emerald-500">{totalDownloads.toLocaleString()}</span>
+                    <span className="text-slate-400">({downloadsPercentage}%)</span>
+                  </div>
+                </div>
+                <div className="w-full bg-slate-100 dark:bg-slate-900 rounded-full h-1.5 overflow-hidden border border-slate-200 dark:border-slate-800">
+                  <div className="bg-emerald-500 h-1.5 rounded-full" style={{ width: `${downloadsPercentage}%` }}></div>
+                </div>
+              </div>
+              <div>
+                <div className="flex justify-between text-xs font-semibold mb-1.5">
+                  <span className="text-slate-500">Like Rate</span>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-rose-500">{totalLikes.toLocaleString()}</span>
+                    <span className="text-slate-400">({likesPercentage}%)</span>
+                  </div>
+                </div>
+                <div className="w-full bg-slate-100 dark:bg-slate-900 rounded-full h-1.5 overflow-hidden border border-slate-200 dark:border-slate-800">
+                  <div className="bg-rose-500 h-1.5 rounded-full" style={{ width: `${likesPercentage}%` }}></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Trending Searches Widget */}
+          <div className="glass p-6 rounded-3xl border border-slate-200 dark:border-slate-850 bg-white/80 dark:bg-slate-900/20 space-y-4">
+            <div className="flex items-center space-x-2">
+              <TrendingUp className="w-5 h-5 text-brand-500" />
+              <h2 className="text-sm font-extrabold uppercase tracking-wider text-slate-600 dark:text-slate-500 dark:text-slate-400">
+                Top Searched Queries
+              </h2>
+            </div>
+            {trendingLoading ? (
+              <div className="space-y-2">
+                {[...Array(5)].map((_, i) => (
+                  <div key={i} className="h-8 rounded-lg bg-slate-100 dark:bg-slate-850 animate-pulse"></div>
+                ))}
+              </div>
+            ) : trendingSearches.length === 0 ? (
+              <p className="text-xs text-slate-500 text-center py-4">No search data available yet.</p>
+            ) : (
+              <div className="flex flex-wrap gap-2">
+                {trendingSearches.map((query, idx) => (
+                  <div key={idx} className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300">
+                    <span className="text-brand-500 mr-1.5">#{idx + 1}</span> {query}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+      
+      {/* Top Performing PNGs Leaderboard */}
+      <div className="mt-8 glass p-6 rounded-3xl border border-slate-200 dark:border-slate-850 bg-white/80 dark:bg-slate-900/20">
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h2 className="text-lg font-bold text-slate-900 dark:text-white">Top Performing Assets</h2>
+            <p className="text-xs text-slate-600 dark:text-slate-500 dark:text-slate-400 mt-0.5">
+              The highest downloaded PNGs in your catalog
+            </p>
+          </div>
+          <Link to="/admin/pngs" className="text-xs font-semibold text-brand-400 hover:text-brand-300 flex items-center">
+            <span>Manage All</span>
+            <ArrowRight className="w-3.5 h-3.5 ml-1" />
+          </Link>
+        </div>
+        
+        {topPngsLoading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
+            {[...Array(5)].map((_, i) => (
+              <div key={i} className="aspect-square rounded-2xl bg-slate-100 dark:bg-slate-850 animate-pulse"></div>
+            ))}
+          </div>
+        ) : topPngs.length === 0 ? (
+          <div className="text-center py-12 border border-dashed border-slate-300 dark:border-slate-800 rounded-2xl">
+            <Image className="w-10 h-10 text-slate-600 mx-auto mb-3" />
+            <p className="text-sm font-semibold text-slate-600 dark:text-slate-500 dark:text-slate-400">No assets available</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            {topPngs.map((png, idx) => (
+              <div key={png._id} className="relative group rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden hover:border-brand-500/50 transition-colors">
+                <div className="absolute top-2 left-2 z-10 w-6 h-6 rounded-full bg-slate-900/80 backdrop-blur text-white flex items-center justify-center text-xs font-bold border border-white/10">
+                  {idx + 1}
+                </div>
+                <div className="aspect-square bg-checkerboard bg-[size:10px_10px] p-4 flex items-center justify-center">
+                  <img src={png.imageUrl} alt={png.title} className="w-full h-full object-contain filter drop-shadow-lg group-hover:scale-105 transition-transform duration-300" />
+                </div>
+                <div className="p-3 border-t border-slate-100 dark:border-slate-850">
+                  <h4 className="text-xs font-bold text-slate-900 dark:text-white truncate">{png.title}</h4>
+                  <div className="flex items-center justify-between mt-2 text-[10px] font-semibold text-slate-500">
+                    <span className="flex items-center"><Download className="w-3 h-3 mr-1 text-emerald-500" /> {png.downloads}</span>
+                    <span className="flex items-center"><Eye className="w-3 h-3 mr-1 text-slate-400" /> {png.views}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </AdminLayout>
   );
 };
