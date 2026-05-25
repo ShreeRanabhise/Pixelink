@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useTheme } from "../../context/ThemeContext";
@@ -57,6 +57,13 @@ const AdminLayout = ({ children, title }) => {
     logout();
     navigate("/");
   };
+  useEffect(() => {
+    if (user) {
+      setProfileName(user.name || "");
+      setProfileEmail(user.email || "");
+    }
+  }, [user, showProfileModal]);
+
   const isActive = (path) => {
     if (path === basePath) {
       return location.pathname === basePath || location.pathname === `${basePath}/`;
