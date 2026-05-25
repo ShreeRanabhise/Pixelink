@@ -48,7 +48,7 @@ const AdminLayout = ({ children, title }) => {
   ];
   const handleLogout = () => {
     logout();
-    navigate("/admin/login");
+    navigate("/");
   };
   const isActive = (path) => {
     if (path === "/admin") {
