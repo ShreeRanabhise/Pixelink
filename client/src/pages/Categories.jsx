@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { LayoutGrid, Layers, Search } from 'lucide-react';
 import api from '../api/axios';
 import SEO from '../components/common/SEO';
+import AdBanner from '../components/common/AdBanner';
 
 const Categories = () => {
   const { data: categoriesRes, isLoading } = useQuery({
@@ -138,6 +139,11 @@ const Categories = () => {
           ))}
         </div>
       )}
+
+      {/* Bottom AdSense Banner */}
+      <div className="py-8">
+        <AdBanner adSlot="categories_bottom" />
+      </div>
     </div>
   );
 };

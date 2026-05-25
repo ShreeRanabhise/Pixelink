@@ -133,6 +133,11 @@ const CategoryDetail = () => {
           )}
         </div>
       )}
+
+      {/* Bottom AdSense Banner */}
+      <div className="py-8">
+        <AdBanner adSlot="category_bottom" />
+      </div>
     </div>
   );
 };
