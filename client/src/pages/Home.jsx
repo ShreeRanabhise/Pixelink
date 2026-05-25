@@ -127,7 +127,17 @@ const Home = () => {
             No account needed submit your PNG in seconds
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-[4.5rem] font-black tracking-tight leading-[1.1] text-slate-900 dark:text-white">
-            Download <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 via-fuchsia-500 to-orange-500">High-Quality Transparent</span>
+            Download <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 via-fuchsia-500 to-orange-500">High-Quality</span>
+            {' '}
+            <span 
+              className="text-transparent bg-clip-text bg-gradient-to-b from-cyan-200/90 via-white/40 to-blue-300/30 dark:from-cyan-100/80 dark:via-white/20 dark:to-blue-200/10"
+              style={{ 
+                WebkitTextStroke: '1.5px rgba(125, 211, 252, 0.7)', 
+                filter: 'drop-shadow(0px 10px 15px rgba(14, 165, 233, 0.2))' 
+              }}
+            >
+              Transparent
+            </span>
             <br className="hidden sm:block" />
             {' '}PNG Images <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-rose-500">Free</span>
           </h1>
