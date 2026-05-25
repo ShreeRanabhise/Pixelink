@@ -74,6 +74,7 @@ const AdminSettings = () => {
   });
 
   const isCloudinaryActive = healthRes?.health?.cloudinary;
+  const isRemoveBgActive = healthRes?.health?.removeBg;
 
   const systemStatus = [
     {
@@ -96,12 +97,13 @@ const AdminSettings = () => {
     },
     {
       name: "Remove.bg API Pipeline",
-      status: "NLP Fallback Active",
+      status: isRemoveBgActive ? "API Pipeline Active" : "Local ML Fallback Active",
       type: "AI Background Png's",
       icon: Cpu,
-      details:
-        "Bypassing active image Png's calls. Saving original transparent uploads directly.",
-      color: "text-brand-600 dark:text-brand-450 border-brand-500/30 dark:border-brand-500/20 bg-brand-500/10 dark:bg-brand-500/5",
+      details: isRemoveBgActive
+        ? "Connected to Remove.bg API. Bypassing calls for already transparent images to save credits."
+        : "Credentials absent in .env file. Processing backgrounds using a free local ONNX ML model. Bypassing if already transparent.",
+      color: isRemoveBgActive ? "text-emerald-600 dark:text-emerald-450 border-emerald-500/30 dark:border-emerald-500/20 bg-emerald-500/10 dark:bg-emerald-500/5" : "text-brand-600 dark:text-brand-450 border-brand-500/30 dark:border-brand-500/20 bg-brand-500/10 dark:bg-brand-500/5",
     },
     {
       name: "OpenAI Tagging Integration",

@@ -79,11 +79,13 @@ export const getSystemHealth = async (req, res, next) => {
       process.env.CLOUDINARY_API_KEY &&
       process.env.CLOUDINARY_API_SECRET
     );
+    const isRemoveBgConfigured = !!process.env.REMOVE_BG_API_KEY;
 
     res.status(200).json({
       success: true,
       health: {
         cloudinary: isCloudinaryConfigured,
+        removeBg: isRemoveBgConfigured,
       }
     });
   } catch (error) {
