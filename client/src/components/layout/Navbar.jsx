@@ -98,7 +98,7 @@ const Navbar = () => {
             {!isAdmin && (
               <Link
                 to="/submit"
-                className="inline-flex items-center px-4 py-2 text-sm font-semibold rounded-lg text-white bg-brand-600 hover:bg-brand-700 shadow-md shadow-brand-500/20 transition-all hover:scale-105 active:scale-95"
+                className="inline-flex items-center px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-sm font-medium"
               >
                 <UploadCloud className="w-4 h-4 mr-2" />
                 Upload PNG
@@ -166,7 +166,7 @@ const Navbar = () => {
               <Link
                 to="/submit"
                 onClick={handleLinkClick}
-                className="block px-3 py-2 rounded-md text-base font-semibold bg-brand-600 text-white hover:bg-brand-700 mt-2"
+                className="block px-3 py-2 rounded-md text-base font-medium border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 mt-2"
               >
                 Upload PNG
               </Link>
