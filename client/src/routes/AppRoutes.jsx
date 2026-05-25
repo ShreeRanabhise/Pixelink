@@ -53,6 +53,7 @@ const AdminAnalytics = lazy(() => import('../pages/admin/AdminAnalytics'));
 const AdminSettings = lazy(() => import('../pages/admin/AdminSettings'));
 const AdminMessages = lazy(() => import('../pages/admin/AdminMessages'));
 const AdminManageTeam = lazy(() => import('../pages/admin/AdminManageTeam'));
+import DashboardRouter from './DashboardRouter';
 
 // Protected Route wrapper with RBAC
 const ProtectedRoute = ({ children, allowedRoles = ['admin'] }) => {
@@ -89,7 +90,7 @@ const AppRoutes = () => {
         {/* Protected Admin Routes */}
         <Route path="/admin" element={
           <ProtectedRoute allowedRoles={['admin', 'creator', 'inspector']}>
-            <AdminDashboard />
+            <DashboardRouter />
           </ProtectedRoute>
         } />
         <Route path="/admin/upload" element={

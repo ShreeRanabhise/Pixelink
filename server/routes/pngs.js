@@ -1,6 +1,7 @@
 import express from 'express';
 import {
   getPngs,
+  getMyUploads,
   getPngBySlug,
   createPng,
   updatePng,
@@ -17,6 +18,7 @@ const router = express.Router();
 
 router.get('/', getPngs);
 router.get('/stats/global', protect, authorizeRoles('admin'), getGlobalStats);
+router.get('/my-uploads', protect, authorizeRoles('admin', 'creator'), getMyUploads);
 router.get('/:slug', getPngBySlug);
 router.get('/:id/similar', getSimilarPngs);
 router.post('/', protect, authorizeRoles('admin', 'creator'), upload.single('image'), createPng);

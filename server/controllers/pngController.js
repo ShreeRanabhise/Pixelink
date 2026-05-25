@@ -132,6 +132,27 @@ export const getPngs = async (req, res, next) => {
 };
 
 /**
+ * @desc Get logged in user's uploaded PNGs
+ * @route GET /api/pngs/my-uploads
+ * @access Private (Admin, Creator)
+ */
+export const getMyUploads = async (req, res, next) => {
+  try {
+    const pngs = await Png.find({ uploadedBy: req.user._id })
+      .populate('category', 'name slug')
+      .sort({ createdAt: -1 });
+    
+    res.status(200).json({
+      success: true,
+      count: pngs.length,
+      data: pngs
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
  * @desc Get single PNG by slug
  * @route GET /api/pngs/:slug
  * @access Public
