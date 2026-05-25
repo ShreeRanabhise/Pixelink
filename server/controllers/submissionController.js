@@ -109,6 +109,7 @@ export const updateSubmissionStatus = async (req, res, next) => {
 
     if (status === 'rejected') {
       submission.status = 'rejected';
+      submission.reviewedBy = req.user._id;
       await submission.save();
 
       // Delete image asset to save storage space
@@ -158,6 +159,7 @@ export const updateSubmissionStatus = async (req, res, next) => {
 
     // 4. Mark submission as approved
     submission.status = 'approved';
+    submission.reviewedBy = req.user._id;
     await submission.save();
 
     res.status(200).json({
@@ -201,6 +203,7 @@ export const bulkUpdateSubmissions = async (req, res, next) => {
     for (const submission of submissions) {
       if (status === 'rejected') {
         submission.status = 'rejected';
+        submission.reviewedBy = req.user._id;
         await submission.save();
         if (submission.cloudinaryId) {
           await deleteAsset(submission.cloudinaryId);
@@ -229,6 +232,7 @@ export const bulkUpdateSubmissions = async (req, res, next) => {
         });
 
         submission.status = 'approved';
+        submission.reviewedBy = req.user._id;
         await submission.save();
         processedCount++;
       }

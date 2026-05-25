@@ -31,6 +31,10 @@ const submissionSchema = new mongoose.Schema(
     submitterIP: {
       type: String,
     },
+    reviewedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    },
   },
   {
     timestamps: true,

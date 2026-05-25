@@ -18,6 +18,7 @@ import {
   Moon,
   ShieldCheck,
   Save,
+  Users,
   MessageSquare
 } from "lucide-react";
 import api from "../../api/axios";
@@ -35,6 +36,7 @@ const AdminLayout = ({ children, title }) => {
   const [isUpdating, setIsUpdating] = useState(false);
   const navigationAll = [
     { name: "Dashboard", href: "/admin", icon: LayoutDashboard, roles: ['admin', 'creator', 'inspector'] },
+    { name: "Manage Team", href: "/admin/team", icon: Users, roles: ['admin'] },
     { name: "Pending Reviews", href: "/admin/submissions", icon: FileCheck, badge: "reviews", roles: ['admin', 'inspector'] },
     { name: "Manage PNGs", href: "/admin/pngs", icon: Image, roles: ['admin', 'creator'] },
     { name: "Manage Categories", href: "/admin/categories", icon: FolderTree, roles: ['admin', 'creator'] },
