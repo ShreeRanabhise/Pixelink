@@ -42,6 +42,16 @@ const Home = () => {
     enabled: debouncedSearch.trim().length > 1,
   });
 
+  // Fetch Trending Searches
+  const { data: trendingRes } = useQuery({
+    queryKey: ['trendingSearches'],
+    queryFn: async () => {
+      const res = await api.get('/search/trending');
+      return res.data;
+    },
+    staleTime: 60000, // cache for 1 min
+  });
+
   // Infinite query for All PNGs
   const {
     data: allPngsRes,
@@ -109,7 +119,10 @@ const Home = () => {
     setShowSuggestions(false);
   };
 
-  const popularSearches = ['iPhone', 'Cheeseburger', 'Monstera', 'Sakura'];
+  const defaultTrending = ['diwali diya', 'rangoli', 'ganpati bappa', 'modak', 'rakhi', 'festival lights', 'lakshmi'];
+  const displayTrending = (trendingRes?.trending && trendingRes.trending.length >= 4) 
+    ? trendingRes.trending 
+    : defaultTrending;
 
   return (
     <div className="pb-20">
@@ -187,7 +200,7 @@ const Home = () => {
             <span className="font-medium text-slate-500 dark:text-slate-400 flex items-center mr-1">
               <TrendingUp className="w-4 h-4 mr-1.5" /> Trending:
             </span>
-            {['diwali diya', 'rangoli', 'ganpati bappa', 'modak', 'rakhi', 'festival lights', 'lakshmi'].map((keyword) => (
+            {displayTrending.map((keyword) => (
               <button
                 key={keyword}
                 onClick={() => {

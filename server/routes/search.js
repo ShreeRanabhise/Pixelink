@@ -1,7 +1,31 @@
 import express from 'express';
 import Png from '../models/Png.js';
+import AnalyticsEvent from '../models/AnalyticsEvent.js';
 
 const router = express.Router();
+
+/**
+ * @desc Get trending searches
+ * @route GET /api/search/trending
+ * @access Public
+ */
+router.get('/trending', async (req, res, next) => {
+  try {
+    const trending = await AnalyticsEvent.aggregate([
+      { $match: { eventType: 'search', searchQuery: { $ne: '' } } },
+      { $group: { _id: { $toLower: "$searchQuery" }, count: { $sum: 1 } } },
+      { $sort: { count: -1 } },
+      { $limit: 7 }
+    ]);
+    
+    // Extract just the search queries
+    const keywords = trending.map(item => item._id);
+    
+    res.status(200).json({ success: true, trending: keywords });
+  } catch (error) {
+    next(error);
+  }
+});
 
 /**
  * @desc Get search suggestions and matching items
