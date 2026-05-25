@@ -6,7 +6,7 @@ import { useSettings } from '../../context/SettingsContext';
 import { Menu, X, Sun, Moon, UploadCloud, LayoutDashboard, LogOut, LogIn, Search } from 'lucide-react';
 
 const Navbar = () => {
-  const { isAuthenticated, isAdmin, logout } = useAuth();
+  const { isAuthenticated, user, logout } = useAuth();
   const { isDark, toggleTheme } = useTheme();
   const { settings } = useSettings();
   const [isOpen, setIsOpen] = useState(false);
@@ -101,7 +101,7 @@ const Navbar = () => {
             </button>
 
             {/* Public Submit Button */}
-            {!isAdmin && (
+            {!isAuthenticated && (
               <Link
                 to="/submit"
                 className="inline-flex items-center px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-sm font-medium"
@@ -112,12 +112,12 @@ const Navbar = () => {
             )}
 
             {/* Auth Buttons */}
-            {isAuthenticated && isAdmin && (
+            {isAuthenticated && user && (
               <div className="flex items-center space-x-3">
                 <Link
-                  to="/admin"
+                  to={`/${user.role}`}
                   className="inline-flex items-center p-2 rounded-lg border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-sm font-medium"
-                  title="Admin Dashboard"
+                  title="Dashboard"
                 >
                   <LayoutDashboard className="w-5 h-5 mr-1" />
                   <span className="hidden lg:inline">Dashboard</span>
@@ -168,7 +168,7 @@ const Navbar = () => {
                 {link.label}
               </NavLink>
             ))}
-            {!isAdmin && (
+            {!isAuthenticated && (
               <Link
                 to="/submit"
                 onClick={handleLinkClick}
@@ -178,13 +178,13 @@ const Navbar = () => {
               </Link>
             )}
             
-            {isAuthenticated && isAdmin && (
+            {isAuthenticated && user && (
               <Link
-                to="/admin"
+                to={`/${user.role}`}
                 onClick={handleLinkClick}
                 className="block px-3 py-2 rounded-md text-base font-medium border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 mt-1"
               >
-                Admin Dashboard
+                Dashboard
               </Link>
             )}
           </div>
