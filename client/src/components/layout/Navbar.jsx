@@ -110,7 +110,7 @@ const Navbar = () => {
               <div className="flex items-center space-x-3">
                 <Link
                   to="/admin"
-                  className="inline-flex items-center p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-sm font-medium"
+                  className="inline-flex items-center p-2 rounded-lg border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-sm font-medium"
                   title="Admin Dashboard"
                 >
                   <LayoutDashboard className="w-5 h-5 mr-1" />
@@ -176,7 +176,7 @@ const Navbar = () => {
               <Link
                 to="/admin"
                 onClick={handleLinkClick}
-                className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 mt-1"
+                className="block px-3 py-2 rounded-md text-base font-medium border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 mt-1"
               >
                 Admin Dashboard
               </Link>
