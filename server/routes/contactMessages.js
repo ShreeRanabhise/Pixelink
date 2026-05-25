@@ -5,7 +5,7 @@ import {
   updateMessageStatus,
   deleteMessage
 } from '../controllers/contactMessageController.js';
-import { protect, admin } from '../middleware/auth.js';
+import { protect, adminOnly } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -14,7 +14,7 @@ router.post('/', createMessage);
 
 // Protected Admin routes
 router.use(protect);
-router.use(admin);
+router.use(adminOnly);
 
 router.route('/')
   .get(getMessages);
