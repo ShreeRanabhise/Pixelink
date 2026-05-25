@@ -92,3 +92,52 @@ export const deleteMessage = async (req, res, next) => {
     next(error);
   }
 };
+
+// @desc    Update multiple messages status
+// @route   PUT /api/v1/contact-messages/bulk-status
+// @access  Private/Admin
+export const bulkUpdateMessages = async (req, res, next) => {
+  try {
+    const { messageIds, status } = req.body;
+    
+    if (!messageIds || !Array.isArray(messageIds) || messageIds.length === 0) {
+      return res.status(400).json({ success: false, message: 'Please provide an array of message IDs' });
+    }
+
+    await ContactMessage.updateMany(
+      { _id: { $in: messageIds } },
+      { $set: { status } }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: `${messageIds.length} messages updated to ${status}`
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// @desc    Delete multiple messages
+// @route   POST /api/v1/contact-messages/bulk-delete
+// @access  Private/Admin
+export const bulkDeleteMessages = async (req, res, next) => {
+  try {
+    const { messageIds } = req.body;
+    
+    if (!messageIds || !Array.isArray(messageIds) || messageIds.length === 0) {
+      return res.status(400).json({ success: false, message: 'Please provide an array of message IDs' });
+    }
+
+    await ContactMessage.deleteMany(
+      { _id: { $in: messageIds } }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: `${messageIds.length} messages deleted successfully`
+    });
+  } catch (error) {
+    next(error);
+  }
+};
