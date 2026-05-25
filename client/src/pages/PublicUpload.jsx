@@ -140,7 +140,7 @@ const PublicUpload = () => {
       </div>
 
       {uploadSuccess ? (
-        <div className="glass rounded-3xl p-8 sm:p-12 text-center space-y-6 border-emerald-500/20 dark:border-emerald-500/10">
+        <div className="glass bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl border border-emerald-500/30 dark:border-emerald-500/30 rounded-[2rem] p-10 sm:p-16 text-center space-y-6 shadow-2xl max-w-xl mx-auto">
           <div className="inline-flex items-center justify-center p-3 rounded-full bg-emerald-500/10 text-emerald-500">
             <CheckCircle2 className="w-12 h-12" />
           </div>
@@ -157,9 +157,10 @@ const PublicUpload = () => {
             Upload Another PNG
           </button>
         </div>
-      ) : (
-        <form onSubmit={handleSubmit} className="space-y-8 bg-white dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800/40 p-6 sm:p-10 rounded-3xl shadow-xl">
+        <form onSubmit={handleSubmit} className="space-y-8 glass bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800/60 p-6 sm:p-12 rounded-[2.5rem] shadow-2xl relative overflow-hidden">
           
+          {/* Subtle background glow */}
+          <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-brand-500/10 blur-[80px] pointer-events-none"></div>
           {/* File Upload Zone */}
           <div className="space-y-2">
             <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">
@@ -167,7 +168,7 @@ const PublicUpload = () => {
             </label>
             
             {previewUrl ? (
-              <div className="relative border-2 border-dashed border-brand-500/50 dark:border-brand-500/40 rounded-2xl p-4 flex flex-col items-center justify-center checkerboard-bg h-64 overflow-hidden">
+              <div className="relative border-2 border-dashed border-brand-500/50 dark:border-brand-500/40 rounded-3xl p-4 flex flex-col items-center justify-center checkerboard-bg h-72 overflow-hidden shadow-inner">
                 <img
                   src={previewUrl}
                   alt="Preview"
@@ -185,7 +186,7 @@ const PublicUpload = () => {
               <div
                 onDragOver={handleDragOver}
                 onDrop={handleDrop}
-                className="border-2 border-dashed border-slate-300 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-brand-500 dark:hover:border-brand-500 cursor-pointer transition-all bg-slate-50/50 dark:bg-slate-950/20 h-64 flex flex-col items-center justify-center"
+                className="border-2 border-dashed border-brand-500/30 dark:border-brand-500/30 rounded-3xl p-8 text-center hover:border-brand-500 hover:bg-brand-500/5 dark:hover:border-brand-500 dark:hover:bg-brand-500/10 cursor-pointer transition-all glass bg-white/40 dark:bg-slate-900/30 backdrop-blur-md h-72 flex flex-col items-center justify-center group shadow-sm"
               >
                 <input
                   type="file"
@@ -223,7 +224,7 @@ const PublicUpload = () => {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
-              className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-colors text-sm"
+              className="w-full px-5 py-4 rounded-2xl glass bg-white/50 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200/60 dark:border-slate-700/50 text-slate-900 dark:text-white placeholder-slate-400 focus:border-brand-500/50 focus:ring-4 focus:ring-brand-500/20 focus:outline-none transition-all text-sm font-medium shadow-sm"
             />
           </div>
 
@@ -238,7 +239,7 @@ const PublicUpload = () => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows="3"
-              className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-colors text-sm resize-none"
+              className="w-full px-5 py-4 rounded-2xl glass bg-white/50 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200/60 dark:border-slate-700/50 text-slate-900 dark:text-white placeholder-slate-400 focus:border-brand-500/50 focus:ring-4 focus:ring-brand-500/20 focus:outline-none transition-all text-sm font-medium shadow-sm resize-none"
             />
           </div>
 
@@ -254,7 +255,7 @@ const PublicUpload = () => {
                 value={categoryId}
                 onChange={(e) => setCategoryId(e.target.value)}
                 required
-                className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-colors text-sm"
+                className="w-full px-5 py-4 rounded-2xl glass bg-white/50 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200/60 dark:border-slate-700/50 text-slate-900 dark:text-white focus:border-brand-500/50 focus:ring-4 focus:ring-brand-500/20 focus:outline-none transition-all text-sm font-medium shadow-sm"
               >
                 <option value="">Choose category...</option>
                 {categoriesRes?.data?.map((cat) => (
@@ -276,7 +277,7 @@ const PublicUpload = () => {
                 placeholder="e.g. flower, rose, nature, plant, Png's"
                 value={tags}
                 onChange={(e) => setTags(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-colors text-sm"
+                className="w-full px-5 py-4 rounded-2xl glass bg-white/50 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200/60 dark:border-slate-700/50 text-slate-900 dark:text-white placeholder-slate-400 focus:border-brand-500/50 focus:ring-4 focus:ring-brand-500/20 focus:outline-none transition-all text-sm font-medium shadow-sm"
               />
             </div>
           </div>
@@ -293,8 +294,8 @@ const PublicUpload = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className={`w-full inline-flex items-center justify-center px-6 py-3.5 text-base font-bold text-white bg-brand-600 hover:bg-brand-700 rounded-xl shadow-lg shadow-brand-500/20 transition-all ${
-              isSubmitting ? 'opacity-70 cursor-not-allowed' : 'active:scale-95 hover:scale-[1.01]'
+            className={`w-full inline-flex items-center justify-center px-8 py-5 text-lg font-black text-white bg-gradient-brand hover:opacity-90 rounded-2xl shadow-xl shadow-brand-500/25 transition-all ${
+              isSubmitting ? 'opacity-70 cursor-not-allowed' : 'active:scale-95 hover:scale-[1.02]'
             }`}
           >
             {isSubmitting ? 'Uploading Submission...' : 'Submit PNG'}

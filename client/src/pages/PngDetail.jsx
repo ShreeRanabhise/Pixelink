@@ -198,28 +198,28 @@ const PngDetail = () => {
       />
 
       {/* Breadcrumb Navigation */}
-      <nav className="flex items-center text-xs sm:text-sm font-medium text-slate-500 dark:text-slate-400 whitespace-nowrap overflow-hidden text-ellipsis">
+      <nav className="flex items-center text-xs sm:text-sm font-bold text-slate-500 dark:text-slate-400 whitespace-nowrap overflow-hidden text-ellipsis glass px-5 py-3 rounded-2xl bg-white/60 dark:bg-slate-900/40 backdrop-blur-md border border-slate-200/60 dark:border-slate-800/60 w-fit shadow-sm">
         <Link to="/" className="hover:text-brand-500 transition-colors shrink-0">
           Home
         </Link>
-        <ChevronRight className="w-3.5 h-3.5 mx-2 shrink-0 text-slate-300 dark:text-slate-600" />
+        <ChevronRight className="w-3.5 h-3.5 mx-2 shrink-0 text-slate-400 dark:text-slate-500" />
         {png.category && (
           <>
             <Link to={`/category/${png.category.slug}`} className="hover:text-brand-500 transition-colors shrink-0">
               {png.category.name}
             </Link>
-            <ChevronRight className="w-3.5 h-3.5 mx-2 shrink-0 text-slate-300 dark:text-slate-600" />
+            <ChevronRight className="w-3.5 h-3.5 mx-2 shrink-0 text-slate-400 dark:text-slate-500" />
           </>
         )}
-        <span className="text-slate-800 dark:text-slate-200 font-semibold truncate">
+        <span className="text-slate-800 dark:text-slate-200 font-extrabold truncate">
           {png.title}
         </span>
       </nav>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         {/* Left Column: Interactive Image Viewer & Tags */}
-        <div className="lg:col-span-8 flex flex-col space-y-6">
-          <div className={`relative w-full aspect-[4/3] rounded-3xl ${getBgClass()} flex items-center justify-center p-8 border border-slate-200/50 dark:border-slate-800/40 shadow-sm select-none transition-all duration-300`}>
+        <div className="lg:col-span-8 flex flex-col space-y-8">
+          <div className={`relative w-full aspect-[4/3] rounded-[2rem] ${getBgClass()} flex items-center justify-center p-8 border border-slate-200/60 dark:border-slate-800/60 shadow-inner select-none transition-all duration-300 overflow-hidden`}>
             <img
               src={png.imageUrl}
               alt={png.title}
@@ -237,7 +237,7 @@ const PngDetail = () => {
             ></div>
 
             {/* Checkerboard controls */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/80 dark:bg-slate-950/60 backdrop-blur-md p-1 rounded-xl flex space-x-1 border border-slate-200/50 dark:border-white/10 shadow-lg">
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 glass bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl p-1.5 rounded-2xl flex space-x-1.5 border border-slate-200/60 dark:border-white/10 shadow-2xl">
               <button
                 onClick={() => setBgPreview('checkerboard')}
                 className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-colors ${
@@ -274,7 +274,7 @@ const PngDetail = () => {
                   <Link
                     key={tag}
                     to={`/search?q=${encodeURIComponent(tag)}`}
-                    className="text-xs px-4 py-2 bg-white border border-slate-200 hover:border-brand-500 hover:text-brand-600 dark:bg-slate-900 dark:border-slate-800 dark:hover:border-brand-500 text-slate-600 dark:text-slate-300 rounded-full transition-colors font-medium shadow-sm"
+                    className="text-xs px-5 py-2.5 glass bg-white/60 dark:bg-slate-800/40 backdrop-blur-md border border-slate-200/60 dark:border-slate-700/50 hover:border-brand-500/30 hover:text-brand-600 dark:hover:text-brand-400 text-slate-700 dark:text-slate-300 rounded-full transition-all font-bold shadow-sm hover:scale-105"
                   >
                     {tag}
                   </Link>
@@ -287,9 +287,9 @@ const PngDetail = () => {
         </div>
 
         {/* Right Column: Metadata & Actions */}
-        <div className="lg:col-span-4 flex flex-col space-y-6">
+        <div className="lg:col-span-4 flex flex-col space-y-8 glass p-6 sm:p-8 rounded-[2.5rem] bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800/60 shadow-sm h-fit">
           
-          <div className="space-y-3">
+          <div className="space-y-4">
             <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100 leading-snug">
               {png.title}
             </h1>
@@ -308,19 +308,19 @@ const PngDetail = () => {
             </div>
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-3">
             <button
               onClick={handleDownload}
               disabled={isDownloading}
-              className={`w-full inline-flex items-center justify-center px-6 py-4 text-lg font-bold text-white bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 rounded-xl shadow-lg shadow-rose-500/25 transition-all ${
+              className={`w-full inline-flex items-center justify-center px-6 py-4 text-lg font-extrabold text-white bg-gradient-brand hover:opacity-90 rounded-2xl shadow-xl shadow-brand-500/20 transition-all ${
                 isDownloading ? 'opacity-70 cursor-not-allowed' : 'active:scale-95 hover:scale-[1.02]'
               }`}
             >
               <Download className={`w-5 h-5 mr-2 ${isDownloading ? 'animate-bounce' : ''}`} />
               {isDownloading ? 'Downloading...' : 'Download PNG for free'}
             </button>
-            <p className="text-xs text-center text-slate-500 dark:text-slate-400">
-              Transparent background HD quality 100% free
+            <p className="text-[11px] font-bold text-center text-slate-500 dark:text-slate-450 uppercase tracking-widest">
+              Transparent background • HD quality • 100% free
             </p>
           </div>
 
@@ -333,16 +333,16 @@ const PngDetail = () => {
 
           {/* Action Row */}
           <div className="grid grid-cols-3 gap-3">
-            <button onClick={handleLike} className="flex flex-col items-center justify-center px-3 py-2.5 border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
-              <Heart className={`w-4 h-4 mb-1 ${hasLiked ? 'fill-rose-500 text-rose-500' : ''}`} />
+            <button onClick={handleLike} className="flex flex-col items-center justify-center px-3 py-3.5 glass bg-white/50 dark:bg-slate-800/30 backdrop-blur-md border border-slate-200/60 dark:border-slate-700/50 hover:border-brand-500/30 dark:hover:border-brand-500/30 rounded-2xl text-xs font-bold text-slate-700 dark:text-slate-300 transition-all hover:-translate-y-1 hover:shadow-lg">
+              <Heart className={`w-5 h-5 mb-1.5 ${hasLiked ? 'fill-rose-500 text-rose-500' : ''}`} />
               Like
             </button>
-            <button onClick={handleShare} className="flex flex-col items-center justify-center px-3 py-2.5 border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
-              <Share2 className="w-4 h-4 mb-1" />
+            <button onClick={handleShare} className="flex flex-col items-center justify-center px-3 py-3.5 glass bg-white/50 dark:bg-slate-800/30 backdrop-blur-md border border-slate-200/60 dark:border-slate-700/50 hover:border-brand-500/30 dark:hover:border-brand-500/30 rounded-2xl text-xs font-bold text-slate-700 dark:text-slate-300 transition-all hover:-translate-y-1 hover:shadow-lg">
+              <Share2 className="w-5 h-5 mb-1.5" />
               Share
             </button>
-            <button onClick={handleReport} className="flex flex-col items-center justify-center px-3 py-2.5 border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
-              <Flag className="w-4 h-4 mb-1" />
+            <button onClick={handleReport} className="flex flex-col items-center justify-center px-3 py-3.5 glass bg-white/50 dark:bg-slate-800/30 backdrop-blur-md border border-slate-200/60 dark:border-slate-700/50 hover:border-brand-500/30 dark:hover:border-brand-500/30 rounded-2xl text-xs font-bold text-slate-700 dark:text-slate-300 transition-all hover:-translate-y-1 hover:shadow-lg">
+              <Flag className="w-5 h-5 mb-1.5" />
               Report
             </button>
           </div>

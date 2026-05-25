@@ -59,25 +59,41 @@ const CategoryDetail = () => {
       )}
 
       {/* Header / Breadcrumb */}
-      <div className="space-y-4">
-        <Link
-          to="/categories"
-          className="inline-flex items-center text-xs font-semibold text-slate-500 hover:text-brand-500 transition-colors uppercase tracking-wider"
-        >
-          <ChevronLeft className="w-4 h-4 mr-1" />
-          Back to categories
-        </Link>
-        <div className="flex items-center space-x-3">
-          <Folder className="w-7 h-7 text-brand-500" />
-          <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
-            {category ? category.name : 'Category Details'}
-          </h1>
-        </div>
-        {category?.description && (
-          <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400 max-w-2xl leading-relaxed">
-            {category.description}
-          </p>
+      {/* Dynamic Sticky Glass Header */}
+      <div className="space-y-4 glass bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800/60 p-6 sm:p-8 rounded-[2rem] shadow-sm relative overflow-hidden">
+        
+        {/* Banner image background if category has an image */}
+        {category?.image && (
+          <>
+            <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] z-0 pointer-events-none">
+               <img src={category.image} className="w-full h-full object-cover" alt="" />
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent dark:from-slate-900 dark:via-slate-900/80 z-0 pointer-events-none"></div>
+          </>
         )}
+
+        <div className="relative z-10 space-y-5">
+          <Link
+            to="/categories"
+            className="inline-flex items-center text-[10px] font-bold text-slate-500 dark:text-slate-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors uppercase tracking-widest bg-white/50 dark:bg-slate-800/50 px-3 py-1.5 rounded-lg border border-slate-200/60 dark:border-slate-700/50"
+          >
+            <ChevronLeft className="w-3.5 h-3.5 mr-1" />
+            Back to categories
+          </Link>
+          <div className="flex items-center space-x-4">
+            <div className="p-3 bg-brand-500/10 text-brand-600 dark:text-brand-400 rounded-2xl shadow-inner hidden sm:block">
+              <Folder className="w-6 h-6" />
+            </div>
+            <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100">
+              {category ? <>{category.name} <span className="text-transparent bg-clip-text bg-gradient-brand">Assets</span></> : 'Category Details'}
+            </h1>
+          </div>
+          {category?.description && (
+            <p className="text-sm sm:text-base font-medium text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed pt-2 border-t border-slate-200/60 dark:border-slate-800/60">
+              {category.description}
+            </p>
+          )}
+        </div>
       </div>
 
       {/* PNG Grid list */}
@@ -107,21 +123,21 @@ const CategoryDetail = () => {
 
           {/* Pagination */}
           {pngsRes.totalPages > 1 && (
-            <div className="flex justify-center items-center space-x-4 pt-6">
+            <div className="flex justify-center items-center space-x-6 pt-10">
               <button
                 onClick={handlePrevPage}
                 disabled={page === 1 || isFetching}
-                className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="p-3.5 glass bg-white/60 dark:bg-slate-800/40 backdrop-blur-md rounded-2xl border border-slate-200/60 dark:border-slate-700/50 text-slate-700 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 hover:border-brand-500/30 transition-all shadow-sm active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:border-slate-200/60"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
-              <span className="text-sm font-semibold text-slate-500 dark:text-slate-400">
+              <span className="text-sm font-bold text-slate-600 dark:text-slate-300 bg-white/40 dark:bg-slate-800/30 px-5 py-2.5 rounded-xl border border-slate-200/40 dark:border-slate-700/40">
                 Page {page} of {pngsRes.totalPages}
               </span>
               <button
                 onClick={handleNextPage}
                 disabled={page === pngsRes.totalPages || isFetching}
-                className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="p-3.5 glass bg-white/60 dark:bg-slate-800/40 backdrop-blur-md rounded-2xl border border-slate-200/60 dark:border-slate-700/50 text-slate-700 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 hover:border-brand-500/30 transition-all shadow-sm active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:border-slate-200/60"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>

@@ -40,10 +40,12 @@ const Categories = () => {
       <SEO title="Categories" description="Browse free transparent PNG Png's by topic: animals, tech, nature, food, and more." />
 
       <div className="space-y-3">
-        <div className="flex items-center space-x-2">
-          <LayoutGrid className="w-6 h-6 text-brand-500" />
-          <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
-            Explore Categories
+        <div className="flex items-center space-x-3">
+          <div className="p-3 bg-brand-500/10 text-brand-600 dark:text-brand-400 rounded-2xl shadow-inner">
+            <LayoutGrid className="w-7 h-7" />
+          </div>
+          <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100">
+            Explore <span className="text-transparent bg-clip-text bg-gradient-brand">Categories</span>
           </h1>
         </div>
         <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400">
@@ -52,8 +54,8 @@ const Categories = () => {
 
         {/* Search Bar & Dropdown */}
         <div className="relative max-w-lg mt-8" ref={dropdownRef}>
-          <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+          <div className="relative group">
+            <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-6 h-6 text-slate-400 group-focus-within:text-brand-500 transition-colors" />
             <input
               type="text"
               placeholder="Search categories..."
@@ -63,29 +65,31 @@ const Categories = () => {
                 setShowDropdown(true);
               }}
               onFocus={() => setShowDropdown(true)}
-              className="w-full pl-12 pr-4 py-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-brand-500 shadow-sm transition-all"
+              className="w-full pl-14 pr-6 py-4 glass bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl rounded-[1.5rem] border border-slate-200/60 dark:border-slate-700/50 text-slate-900 dark:text-white focus:outline-none focus:ring-4 focus:ring-brand-500/20 focus:border-brand-500/50 shadow-lg transition-all text-lg font-medium placeholder-slate-400"
             />
           </div>
           
           {/* Dropdown Suggestions */}
           {showDropdown && searchTerm && (
-            <div className="absolute z-50 w-full mt-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl max-h-60 overflow-y-auto overflow-x-hidden">
+            <div className="absolute z-50 w-full mt-3 glass bg-white/80 dark:bg-slate-900/80 backdrop-blur-2xl border border-slate-200/60 dark:border-slate-700/60 rounded-3xl shadow-2xl max-h-72 overflow-y-auto overflow-x-hidden p-2">
               {filteredCategories.length > 0 ? (
-                <ul className="py-2">
+                <ul className="space-y-1">
                   {filteredCategories.map((cat) => (
                     <li key={cat._id}>
                       <button
                         onClick={() => navigate(`/category/${cat.slug}`)}
-                        className="w-full text-left px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 text-slate-700 dark:text-slate-200 transition-colors flex items-center space-x-3"
+                        className="w-full text-left px-5 py-3.5 hover:bg-slate-100/50 dark:hover:bg-slate-800/50 rounded-2xl text-slate-800 dark:text-slate-200 transition-all flex items-center space-x-4"
                       >
-                        <Layers className="w-4 h-4 text-brand-500 flex-shrink-0" />
-                        <span className="font-medium">{cat.name}</span>
+                        <div className="w-10 h-10 rounded-xl overflow-hidden shrink-0">
+                           <img src={cat.image} className="w-full h-full object-cover" alt={cat.name} />
+                        </div>
+                        <span className="font-bold text-base">{cat.name}</span>
                       </button>
                     </li>
                   ))}
                 </ul>
               ) : (
-                <div className="p-4 text-center text-sm text-slate-500">
+                <div className="p-6 text-center text-sm font-semibold text-slate-500">
                   No categories found matching "{searchTerm}"
                 </div>
               )}
@@ -106,7 +110,7 @@ const Categories = () => {
             <Link
               key={cat._id}
               to={`/category/${cat.slug}`}
-              className="group relative block h-48 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl dark:hover:shadow-brand-500/10 transition-all duration-300"
+              className="group relative block h-[220px] rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-1.5 border border-slate-200/50 dark:border-slate-700/50"
             >
               {/* Image box */}
               <img
@@ -116,9 +120,9 @@ const Categories = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/95 via-slate-900/50 to-transparent transition-opacity duration-300"></div>
               
-              <div className="absolute top-3 right-3 bg-white/20 backdrop-blur-md text-white text-[10px] px-2.5 py-1 rounded-full font-semibold flex items-center space-x-1 border border-white/20">
+              <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-md text-white text-[10px] px-3 py-1.5 rounded-full font-bold flex items-center space-x-1.5 border border-white/20 shadow-lg">
                 <Layers className="w-3 h-3" />
-                <span>Topic</span>
+                <span className="uppercase tracking-widest">Topic</span>
               </div>
 
               {/* Text info overlaid on thumbnail */}

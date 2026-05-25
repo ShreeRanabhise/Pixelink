@@ -139,11 +139,11 @@ const Home = () => {
       <SEO title="Home" />
 
       {/* 1. Hero / Search Banner */}
-      <section className="relative z-20 bg-gradient-to-br from-[#fac9d9] via-[#fcf1e8] to-[#fce1c2] text-slate-900 dark:bg-none dark:bg-[#090d16] dark:text-white py-8 sm:py-10 flex flex-col justify-center items-center transition-colors duration-500">
+      <section className="relative z-20 bg-slate-50 dark:bg-[#090d16] text-slate-900 dark:text-white py-16 sm:py-24 flex flex-col justify-center items-center overflow-hidden">
         {/* Glow Spheres */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-rose-400/10 dark:bg-brand-500/20 blur-[100px] animate-pulse-slow"></div>
-          <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-80 h-80 rounded-full bg-orange-400/20 dark:bg-purple-500/15 blur-[120px]"></div>
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-rose-400/20 dark:bg-brand-500/15 blur-[120px] animate-pulse-slow"></div>
+          <div className="absolute bottom-0 right-1/4 translate-x-1/2 translate-y-1/4 w-[600px] h-[600px] rounded-full bg-orange-400/20 dark:bg-purple-500/15 blur-[150px]"></div>
         </div>
 
         <div className="relative max-w-4xl mx-auto px-4 text-center z-10 space-y-4">
@@ -158,10 +158,10 @@ const Home = () => {
           </p>
 
           {/* Search Box Wrapper */}
-          <div ref={suggestionRef} className="max-w-2xl mx-auto relative mt-8">
-            <form onSubmit={handleSearchSubmit} className="flex shadow-xl rounded-full overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800/80 p-1.5 transition-all focus-within:ring-4 focus-within:ring-brand-500/20">
-              <div className="flex-grow flex items-center px-4 text-slate-400">
-                <Search className="w-5 h-5 mr-2" />
+          <div ref={suggestionRef} className="max-w-3xl mx-auto relative mt-10">
+            <form onSubmit={handleSearchSubmit} className="flex glass rounded-full overflow-hidden bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl border border-white/60 dark:border-slate-700/50 p-2.5 shadow-2xl transition-all focus-within:ring-4 focus-within:ring-brand-500/20 focus-within:border-brand-500/50">
+              <div className="flex-grow flex items-center px-5 text-slate-400">
+                <Search className="w-6 h-6 mr-3 text-brand-500" />
                 <input
                   type="text"
                   placeholder="Try diwali diya, ganpati bappa, rakhi..."
@@ -171,12 +171,12 @@ const Home = () => {
                     setShowSuggestions(true);
                   }}
                   onFocus={() => setShowSuggestions(true)}
-                  className="w-full bg-transparent border-0 text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:ring-0 focus:outline-none py-3 text-base"
+                  className="w-full bg-transparent border-0 text-slate-900 dark:text-slate-100 placeholder-slate-400 font-medium focus:ring-0 focus:outline-none py-3 text-lg"
                 />
               </div>
               <button
                 type="submit"
-                className="bg-slate-900 hover:bg-slate-800 dark:bg-gradient-to-r dark:from-brand-500 dark:via-purple-500 dark:to-pink-500 dark:hover:opacity-90 text-white font-semibold px-8 py-3 rounded-full transition-all duration-200 flex items-center shadow-lg"
+                className="bg-gradient-brand hover:opacity-90 text-white font-bold px-10 py-4 rounded-full transition-all duration-300 flex items-center shadow-lg hover:shadow-brand-500/25 hover:scale-105 active:scale-95 text-lg"
               >
                 Search
               </button>
@@ -216,7 +216,7 @@ const Home = () => {
                   setSearchVal(keyword);
                   navigate(`/search?q=${encodeURIComponent(keyword)}`);
                 }}
-                className="px-4 py-1.5 rounded-full bg-white/80 dark:bg-slate-800/50 hover:bg-white dark:hover:bg-slate-800 border border-slate-200/80 dark:border-slate-700/60 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all shadow-sm text-xs font-semibold"
+                className="px-5 py-2 rounded-full glass bg-white/60 dark:bg-slate-800/40 backdrop-blur-md border border-white/60 dark:border-slate-700/50 text-slate-700 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 hover:border-brand-500/30 transition-all shadow-sm text-xs font-bold hover:scale-105"
               >
                 {keyword}
               </button>
@@ -298,7 +298,7 @@ const Home = () => {
 
           <Link
             to="/submit"
-            className="flex-shrink-0 inline-flex items-center px-6 py-3.5 text-base font-bold bg-white text-brand-700 hover:bg-slate-50 shadow-lg rounded-2xl transition-all hover:scale-105 active:scale-95 z-10"
+            className="flex-shrink-0 inline-flex items-center px-8 py-4 text-base font-bold bg-white text-brand-700 hover:bg-slate-50 shadow-2xl rounded-2xl transition-all hover:scale-105 active:scale-95 z-10"
           >
             <Upload className="w-5 h-5 mr-2" />
             Upload Transparent PNG

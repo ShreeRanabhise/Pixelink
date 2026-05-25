@@ -44,27 +44,30 @@ const SearchResults = () => {
     <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 space-y-12">
       <SEO title={`Search: "${query}"`} />
 
-      <div className="space-y-4">
+      {/* Dynamic Sticky Glass Header */}
+      <div className="space-y-6 glass bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800/60 p-6 sm:p-8 rounded-[2rem] shadow-sm">
         <Link
           to="/"
-          className="inline-flex items-center text-xs font-semibold text-slate-500 hover:text-brand-500 transition-colors uppercase tracking-wider"
+          className="inline-flex items-center text-[10px] font-bold text-slate-500 dark:text-slate-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors uppercase tracking-widest bg-white/50 dark:bg-slate-800/50 px-3 py-1.5 rounded-lg border border-slate-200/60 dark:border-slate-700/50"
         >
-          <ChevronLeft className="w-4 h-4 mr-1" />
+          <ChevronLeft className="w-3.5 h-3.5 mr-1" />
           Back to gallery
         </Link>
-        <div className="flex items-center space-x-3">
-          <Search className="w-7 h-7 text-brand-500" />
-          <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
-            Search Results for <span className="text-brand-500">"{query}"</span>
+        <div className="flex items-center space-x-4">
+          <div className="p-3 bg-brand-500/10 text-brand-600 dark:text-brand-400 rounded-2xl shadow-inner hidden sm:block">
+            <Search className="w-6 h-6" />
+          </div>
+          <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100">
+            Search Results for <span className="text-transparent bg-clip-text bg-gradient-brand">"{query}"</span>
           </h1>
         </div>
         {!isLoading && searchRes && (
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <p className="text-sm text-slate-500 dark:text-slate-400">
-              Found <span className="font-semibold text-slate-700 dark:text-slate-200">{searchRes.totalCount}</span> matching transparent graphics
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+            <p className="text-sm font-semibold text-slate-500 dark:text-slate-400">
+              Found <span className="text-slate-900 dark:text-white font-extrabold">{searchRes.totalCount}</span> matching assets
             </p>
-            <div className="flex items-center space-x-2">
-              <label htmlFor="sort" className="text-sm text-slate-500 dark:text-slate-400 font-medium">Sort by:</label>
+            <div className="flex items-center space-x-3">
+              <label htmlFor="sort" className="text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">Sort by:</label>
               <select
                 id="sort"
                 value={sort}
@@ -72,7 +75,7 @@ const SearchResults = () => {
                   setSort(e.target.value);
                   setPage(1);
                 }}
-                className="text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 rounded-lg py-1.5 px-3 focus:outline-none focus:ring-2 focus:ring-brand-500/50"
+                className="text-sm font-bold bg-white/80 dark:bg-slate-800/80 backdrop-blur-md border border-slate-200/60 dark:border-slate-700/60 text-slate-900 dark:text-white rounded-xl py-2 px-4 focus:outline-none focus:ring-2 focus:ring-brand-500/50 shadow-sm"
               >
                 <option value="latest">Latest</option>
                 <option value="popular">Popular</option>
@@ -124,21 +127,21 @@ const SearchResults = () => {
 
           {/* Pagination */}
           {searchRes.totalPages > 1 && (
-            <div className="flex justify-center items-center space-x-4 pt-6">
+            <div className="flex justify-center items-center space-x-6 pt-10">
               <button
                 onClick={handlePrevPage}
                 disabled={page === 1 || isFetching}
-                className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="p-3.5 glass bg-white/60 dark:bg-slate-800/40 backdrop-blur-md rounded-2xl border border-slate-200/60 dark:border-slate-700/50 text-slate-700 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 hover:border-brand-500/30 transition-all shadow-sm active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:border-slate-200/60"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
-              <span className="text-sm font-semibold text-slate-500 dark:text-slate-400">
+              <span className="text-sm font-bold text-slate-600 dark:text-slate-300 bg-white/40 dark:bg-slate-800/30 px-5 py-2.5 rounded-xl border border-slate-200/40 dark:border-slate-700/40">
                 Page {page} of {searchRes.totalPages}
               </span>
               <button
                 onClick={handleNextPage}
                 disabled={page === searchRes.totalPages || isFetching}
-                className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="p-3.5 glass bg-white/60 dark:bg-slate-800/40 backdrop-blur-md rounded-2xl border border-slate-200/60 dark:border-slate-700/50 text-slate-700 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 hover:border-brand-500/30 transition-all shadow-sm active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:border-slate-200/60"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>

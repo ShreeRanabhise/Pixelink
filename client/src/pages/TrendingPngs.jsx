@@ -37,14 +37,17 @@ const TrendingPngs = () => {
     <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 space-y-12">
       <SEO title="Trending PNGs" description="Browse most popular transparent PNG downloads on Pixelink." />
 
-      <div className="space-y-3">
-        <div className="flex items-center space-x-2">
-          <TrendingUp className="w-6 h-6 text-brand-500" />
-          <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
-            Trending PNGs
+      {/* Dynamic Sticky Glass Header */}
+      <div className="space-y-4 glass bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800/60 p-6 sm:p-8 rounded-[2rem] shadow-sm">
+        <div className="flex items-center space-x-4">
+          <div className="p-3 bg-brand-500/10 text-brand-600 dark:text-brand-400 rounded-2xl shadow-inner hidden sm:block">
+            <TrendingUp className="w-6 h-6" />
+          </div>
+          <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100">
+            Trending <span className="text-transparent bg-clip-text bg-gradient-brand">PNGs</span>
           </h1>
         </div>
-        <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400">
+        <p className="text-sm sm:text-base font-medium text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed pt-2 border-t border-slate-200/60 dark:border-slate-800/60">
           The most popular transparent Png's, vectors, and graphic clipart assets downloaded by our designer community.
         </p>
       </div>
@@ -63,21 +66,21 @@ const TrendingPngs = () => {
 
           {/* Pagination */}
           {trendingRes?.totalPages > 1 && (
-            <div className="flex justify-center items-center space-x-4 pt-6">
+            <div className="flex justify-center items-center space-x-6 pt-10">
               <button
                 onClick={handlePrevPage}
                 disabled={page === 1 || isFetching}
-                className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="p-3.5 glass bg-white/60 dark:bg-slate-800/40 backdrop-blur-md rounded-2xl border border-slate-200/60 dark:border-slate-700/50 text-slate-700 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 hover:border-brand-500/30 transition-all shadow-sm active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:border-slate-200/60"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
-              <span className="text-sm font-semibold text-slate-500 dark:text-slate-400">
+              <span className="text-sm font-bold text-slate-600 dark:text-slate-300 bg-white/40 dark:bg-slate-800/30 px-5 py-2.5 rounded-xl border border-slate-200/40 dark:border-slate-700/40">
                 Page {page} of {trendingRes.totalPages}
               </span>
               <button
                 onClick={handleNextPage}
                 disabled={page === trendingRes.totalPages || isFetching}
-                className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="p-3.5 glass bg-white/60 dark:bg-slate-800/40 backdrop-blur-md rounded-2xl border border-slate-200/60 dark:border-slate-700/50 text-slate-700 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 hover:border-brand-500/30 transition-all shadow-sm active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:border-slate-200/60"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
