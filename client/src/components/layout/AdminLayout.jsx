@@ -33,7 +33,7 @@ const AdminLayout = ({ children, title }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const roleName = user?.role ? user.role.charAt(0).toUpperCase() + user.role.slice(1) : "Administrator";
-  const [profileName, setProfileName] = useState(user?.name || roleName);
+  const [profileName, setProfileName] = useState(user?.name || "Team Member");
   const [profileEmail, setProfileEmail] = useState(user?.email || "");
   const [profilePassword, setProfilePassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -250,7 +250,7 @@ const AdminLayout = ({ children, title }) => {
               {" "}
               <div className="w-8 h-8 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-400 flex items-center justify-center font-bold text-xs uppercase shadow-sm">
                 {" "}
-                {profileName ? profileName[0] : roleName[0]}{" "}
+                {profileName ? profileName[0] : "T"}{" "}
               </div>{" "}
               <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                 {profileName}
@@ -300,7 +300,7 @@ const AdminLayout = ({ children, title }) => {
                   onChange={(e) => setProfileName(e.target.value)}
                   readOnly={user?.role !== 'admin'}
                   className={`w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none dark:text-white ${user?.role !== 'admin' ? 'opacity-70 cursor-not-allowed' : ''}`}
-                  placeholder={roleName}
+                  placeholder="Your Name"
                 />
               </div>
               <div className="space-y-1.5">
