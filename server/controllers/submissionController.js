@@ -148,7 +148,7 @@ export const updateSubmissionStatus = async (req, res, next) => {
     const newPng = await Png.create({
       title: finalTitle,
       slug,
-      description: `User submitted PNG in category ${categoryObj.name}.`,
+      description: "",
       imageUrl: submission.imageUrl,
       thumbnailUrl: submission.imageUrl,
       cloudinaryId: submission.cloudinaryId,
@@ -222,7 +222,7 @@ export const bulkUpdateSubmissions = async (req, res, next) => {
         await Png.create({
           title: submission.title,
           slug,
-          description: `User submitted PNG in category ${categoryObj.name}.`,
+          description: "",
           imageUrl: submission.imageUrl,
           thumbnailUrl: submission.imageUrl,
           cloudinaryId: submission.cloudinaryId,
