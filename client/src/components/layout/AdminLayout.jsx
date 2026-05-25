@@ -406,6 +406,17 @@ const AdminLayout = ({ children, title }) => {
               >
                 {isUpdating ? 'Saving Changes...' : <><Save className="w-4 h-4 mr-2"/> Save Profile</>}
               </button>
+              
+              <div className="pt-2">
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  className="w-full flex justify-center items-center py-3.5 px-4 bg-slate-900 text-white hover:bg-black dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 font-bold rounded-xl shadow-lg transition-all border border-slate-900 dark:border-white"
+                >
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Sign Out Securely
+                </button>
+              </div>
             </form>
           </div>
         </div>
