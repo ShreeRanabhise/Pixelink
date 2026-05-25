@@ -139,10 +139,12 @@ const Home = () => {
       <SEO title="Home" />
 
       {/* 1. Hero / Search Banner */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#fac9d9] via-[#fcf1e8] to-[#fce1c2] text-slate-900 dark:bg-none dark:bg-[#090d16] dark:text-white py-8 sm:py-10 flex flex-col justify-center items-center transition-colors duration-500">
+      <section className="relative z-20 bg-gradient-to-br from-[#fac9d9] via-[#fcf1e8] to-[#fce1c2] text-slate-900 dark:bg-none dark:bg-[#090d16] dark:text-white py-8 sm:py-10 flex flex-col justify-center items-center transition-colors duration-500">
         {/* Glow Spheres */}
-        <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-rose-400/10 dark:bg-brand-500/20 blur-[100px] animate-pulse-slow"></div>
-        <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-80 h-80 rounded-full bg-orange-400/20 dark:bg-purple-500/15 blur-[120px]"></div>
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-rose-400/10 dark:bg-brand-500/20 blur-[100px] animate-pulse-slow"></div>
+          <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-80 h-80 rounded-full bg-orange-400/20 dark:bg-purple-500/15 blur-[120px]"></div>
+        </div>
 
         <div className="relative max-w-4xl mx-auto px-4 text-center z-10 space-y-4">
 
