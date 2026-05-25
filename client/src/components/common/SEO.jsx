@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useSettings } from '../../context/SettingsContext';
 
 /**
@@ -12,59 +12,33 @@ const SEO = ({
 }) => {
   const { settings } = useSettings();
 
-  useEffect(() => {
-    const siteName = settings.siteName || 'PixelInk';
-    const image = settings.logoUrl || '/logo.png';
+  const siteName = settings?.siteName || 'PixelInk';
+  const image = settings?.logoUrl || '/logo.png';
+  const formattedTitle = title ? `${title} | ${siteName}` : `${siteName} - High-Quality Transparent PNG Marketplace`;
 
-    // 1. Title
-    const formattedTitle = title ? `${title} | ${siteName}` : `${siteName} - High-Quality Transparent PNG Marketplace`;
-    document.title = formattedTitle;
+  return (
+    <Helmet>
+      <title>{formattedTitle}</title>
+      <meta name="description" content={description} />
+      <meta name="keywords" content={keywords} />
 
-    // Helper to update or create meta tags
-    const updateMetaTag = (name, content, isProperty = false) => {
-      const attribute = isProperty ? 'property' : 'name';
-      let tag = document.querySelector(`meta[${attribute}="${name}"]`);
-      if (tag) {
-        tag.setAttribute('content', content);
-      } else {
-        tag = document.createElement('meta');
-        tag.setAttribute(attribute, name);
-        tag.setAttribute('content', content);
-        document.head.appendChild(tag);
-      }
-    };
+      {/* Open Graph Tags */}
+      <meta property="og:title" content={formattedTitle} />
+      <meta property="og:description" content={description} />
+      <meta property="og:image" content={image} />
+      <meta property="og:url" content={url} />
+      <meta property="og:type" content="website" />
 
-    // 2. Meta description
-    updateMetaTag('description', description);
+      {/* Twitter Card Tags */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={formattedTitle} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={image} />
 
-    // 3. Meta keywords
-    updateMetaTag('keywords', keywords);
-
-    // 4. Open Graph Tags
-    updateMetaTag('og:title', formattedTitle, true);
-    updateMetaTag('og:description', description, true);
-    updateMetaTag('og:image', image, true);
-    updateMetaTag('og:url', url, true);
-    updateMetaTag('og:type', 'website', true);
-
-    // 5. Twitter Card Tags
-    updateMetaTag('twitter:card', 'summary_large_image');
-    updateMetaTag('twitter:title', formattedTitle);
-    updateMetaTag('twitter:description', description);
-    updateMetaTag('twitter:image', image);
-
-    // 6. Favicon
-    let link = document.querySelector("link[rel~='icon']");
-    if (!link) {
-      link = document.createElement('link');
-      link.rel = 'icon';
-      document.head.appendChild(link);
-    }
-    link.href = image;
-
-  }, [title, description, keywords, url, settings]);
-
-  return null; // Side-effect only component
+      {/* Favicon Sync */}
+      <link rel="icon" href={image} />
+    </Helmet>
+  );
 };
 
 export default SEO;

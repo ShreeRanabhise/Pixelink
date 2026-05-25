@@ -9,6 +9,8 @@ import { ThemeProvider } from './context/ThemeContext';
 import { SettingsProvider } from './context/SettingsContext';
 import './index.css';
 
+import { HelmetProvider } from 'react-helmet-async';
+
 // Create a client for react-query
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -21,23 +23,25 @@ const queryClient = new QueryClient({
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <ThemeProvider>
-          <SettingsProvider>
-            <AuthProvider>
-              <AppRoutes />
-              <Toaster
-                position="top-right"
-                toastOptions={{
-                  className: 'dark:bg-slate-900 dark:text-white dark:border dark:border-slate-800',
-                  duration: 4000,
-                }}
-              />
-            </AuthProvider>
-          </SettingsProvider>
-        </ThemeProvider>
-      </BrowserRouter>
-    </QueryClientProvider>
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <ThemeProvider>
+            <SettingsProvider>
+              <AuthProvider>
+                <AppRoutes />
+                <Toaster
+                  position="top-right"
+                  toastOptions={{
+                    className: 'dark:bg-slate-900 dark:text-white dark:border dark:border-slate-800',
+                    duration: 4000,
+                  }}
+                />
+              </AuthProvider>
+            </SettingsProvider>
+          </ThemeProvider>
+        </BrowserRouter>
+      </QueryClientProvider>
+    </HelmetProvider>
   </React.StrictMode>
 );
