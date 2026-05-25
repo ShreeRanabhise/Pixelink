@@ -99,12 +99,12 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-slate-200 dark:border-slate-800/60 flex flex-col sm:flex-row justify-between items-center">
-          <p className="text-xs text-slate-400 dark:text-slate-500">
-            &copy; {new Date().getFullYear()} Pixelink Inc. All rights reserved.
+        <div className="mt-8 pt-8 border-t border-slate-200 dark:border-slate-800/60 flex flex-col sm:flex-row justify-between items-center text-center sm:text-left gap-4">
+          <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl">
+            &copy; {new Date().getFullYear()} Pixelink Inc. All rights reserved. Unauthorized duplication, distribution, or exhibition of this site's material is strictly prohibited. All trademarks and registered trademarks are the property of their respective owners.
           </p>
-          <div className="flex space-x-6 mt-4 sm:mt-0">
-            <span className="text-xs text-slate-400 dark:text-slate-500">
+          <div className="flex space-x-6 flex-shrink-0">
+            <span className="text-sm text-slate-600 dark:text-slate-400 font-medium">
               Made with ❤️ for designers worldwide.
             </span>
           </div>
