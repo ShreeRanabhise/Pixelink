@@ -24,21 +24,26 @@ export const SettingsProvider = ({ children }) => {
     logoUrl: '/logo.png'
   };
 
+  const safeSettings = {
+    ...settings,
+    logoUrl: settings?.logoUrl || '/logo.png'
+  };
+
   // Sync the browser favicon to the new logo
   React.useEffect(() => {
-    if (settings && settings.logoUrl) {
+    if (safeSettings.logoUrl) {
       let link = document.querySelector("link[rel~='icon']");
       if (!link) {
         link = document.createElement('link');
         link.rel = 'icon';
         document.head.appendChild(link);
       }
-      link.href = settings.logoUrl;
+      link.href = safeSettings.logoUrl;
     }
-  }, [settings?.logoUrl]);
+  }, [safeSettings.logoUrl]);
 
   return (
-    <SettingsContext.Provider value={{ settings, isLoading }}>
+    <SettingsContext.Provider value={{ settings: safeSettings, isLoading }}>
       {children}
     </SettingsContext.Provider>
   );
