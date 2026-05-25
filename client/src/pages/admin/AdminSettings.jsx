@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "../../context/AuthContext";
-import api from "../../api/axios";
-import toast from "react-hot-toast";
 import {
   Settings,
   Database,
@@ -13,8 +10,7 @@ import {
   CheckCircle2,
   ArrowLeft,
   Terminal,
-  AlertTriangle,
-  LayoutTemplate
+  AlertTriangle
 } from "lucide-react";
 import AdminLayout from "../../components/layout/AdminLayout";
 import SEO from "../../components/common/SEO";
@@ -22,74 +18,6 @@ import SEO from "../../components/common/SEO";
 const AdminSettings = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const queryClient = useQueryClient();
-
-  const { data: settingsData } = useQuery({
-    queryKey: ['siteSettings'],
-    queryFn: async () => {
-      const res = await api.get('/settings');
-      return res.data.data;
-    }
-  });
-
-  const [siteName, setSiteName] = useState("");
-  const [heroTitle, setHeroTitle] = useState("");
-  const [heroSubtitle, setHeroSubtitle] = useState("");
-  const [logoFile, setLogoFile] = useState(null);
-
-  useEffect(() => {
-    if (settingsData) {
-      setSiteName(settingsData.siteName || "");
-      setHeroTitle(settingsData.heroTitle || "");
-      setHeroSubtitle(settingsData.heroSubtitle || "");
-    }
-  }, [settingsData]);
-
-  const updateSettingsMutation = useMutation({
-    mutationFn: async (payload) => {
-      const res = await api.put("/settings", payload);
-      return res.data;
-    },
-    onSuccess: () => {
-      toast.success("Site settings updated!");
-      queryClient.invalidateQueries(['siteSettings']);
-    },
-    onError: (err) => {
-      toast.error("Failed to update settings");
-    }
-  });
-
-  const uploadLogoMutation = useMutation({
-    mutationFn: async (file) => {
-      const formData = new FormData();
-      formData.append("logo", file);
-      
-      const res = await api.post("/settings/logo", formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
-      return res.data;
-    },
-    onSuccess: () => {
-      toast.success("Logo updated successfully!");
-      setLogoFile(null);
-      // Reset the file input visually
-      document.getElementById('logo-upload').value = '';
-      queryClient.invalidateQueries(['siteSettings']);
-    },
-    onError: (err) => {
-      toast.error("Failed to upload logo");
-    }
-  });
-
-  const handleSaveSettings = (e) => {
-    e.preventDefault();
-    updateSettingsMutation.mutate({ siteName, heroTitle, heroSubtitle });
-    if (logoFile) {
-      uploadLogoMutation.mutate(logoFile);
-    }
-  };
 
   const systemStatus = [
     {
@@ -147,47 +75,6 @@ const AdminSettings = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-6">
           
-          {/* Global Site Customization Form */}
-          <div className="glass p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-850 bg-white/80 dark:bg-slate-900/10 space-y-6">
-            <div>
-              <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center">
-                <LayoutTemplate className="w-5 h-5 mr-2 text-brand-500" />
-                Global Site Customization
-              </h2>
-              <p className="text-xs text-slate-600 dark:text-slate-500 mt-1">
-                Configure the frontend presentation details. Changes apply globally immediately.
-              </p>
-            </div>
-            
-            <form onSubmit={handleSaveSettings} className="space-y-5 border-t border-slate-200 dark:border-slate-800/60 pt-5">
-              <div className="space-y-2">
-                <label className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Website Logo</label>
-                <div className="flex items-center space-x-4">
-                  {settingsData?.logoUrl && (
-                    <img src={settingsData.logoUrl.startsWith('/uploads') ? `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${settingsData.logoUrl}` : settingsData.logoUrl} alt="Current Logo" className="h-10 w-10 object-contain rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 p-1" />
-                  )}
-                  <input id="logo-upload" type="file" accept="image/*" onChange={e => setLogoFile(e.target.files[0])} className="w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-brand-50 file:text-brand-600 hover:file:bg-brand-100 dark:file:bg-slate-800 dark:file:text-slate-300 dark:hover:file:bg-slate-700 transition-colors" />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <label className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Site Name / Brand</label>
-                <input type="text" value={siteName} onChange={e => setSiteName(e.target.value)} placeholder="e.g. PixelInk" className="w-full rounded-2xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-950/40 px-4 py-3 text-sm text-slate-900 dark:text-white focus:border-brand-500 focus:outline-none transition-colors" required />
-              </div>
-              <div className="space-y-2">
-                <label className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Hero Section Title</label>
-                <input type="text" value={heroTitle} onChange={e => setHeroTitle(e.target.value)} placeholder="e.g. Download High-Quality Transparent PNGs..." className="w-full rounded-2xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-950/40 px-4 py-3 text-sm text-slate-900 dark:text-white focus:border-brand-500 focus:outline-none transition-colors" required />
-              </div>
-              <div className="space-y-2">
-                <label className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Hero Section Subtitle</label>
-                <textarea value={heroSubtitle} onChange={e => setHeroSubtitle(e.target.value)} placeholder="e.g. Discover millions of free transparent images..." rows="3" className="w-full rounded-2xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-950/40 px-4 py-3 text-sm text-slate-900 dark:text-white focus:border-brand-500 focus:outline-none transition-colors resize-none" required />
-              </div>
-              
-              <button type="submit" disabled={updateSettingsMutation.isPending || uploadLogoMutation.isPending} className="w-full inline-flex justify-center items-center px-6 py-3.5 text-sm font-bold bg-brand-600 hover:bg-brand-700 text-white rounded-2xl shadow-lg transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed">
-                {(updateSettingsMutation.isPending || uploadLogoMutation.isPending) ? 'Applying Changes...' : 'Save Site Customizations'}
-              </button>
-            </form>
-          </div>
-
           <div className="glass p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-850 bg-white/80 dark:bg-slate-900/10 space-y-6">
             <div>
               <h2 className="text-lg font-bold text-slate-900 dark:text-white">

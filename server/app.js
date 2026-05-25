@@ -89,6 +89,12 @@ app.use('/api/v1/search', searchRoutes);
 app.use('/api/v1/settings', settingsRoutes);
 app.use('/api/v1/analytics', analyticsRoutes);
 
+// Serve frontend in production or local fallback
+app.use(express.static(path.join(__dirname, '../client/dist')));
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client/dist', 'index.html'));
+});
+
 // Error handler middleware
 app.use(errorHandler);
 
