@@ -135,10 +135,7 @@ const Home = () => {
         <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-80 h-80 rounded-full bg-orange-400/20 dark:bg-purple-500/15 blur-[120px]"></div>
 
         <div className="relative max-w-4xl mx-auto px-4 text-center z-10 space-y-4">
-          <span className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold bg-white/60 dark:bg-brand-500/10 border border-brand-200 dark:border-brand-500/30 text-brand-600 dark:text-brand-400 backdrop-blur-sm shadow-sm">
-            <Sparkles className="w-3.5 h-3.5 mr-1.5" />
-            No account needed submit your PNG in seconds
-          </span>
+
           <h1 className="text-4xl sm:text-5xl lg:text-[4.5rem] font-black tracking-tight leading-[1.1] text-slate-900 dark:text-white">
             Download <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 via-fuchsia-500 to-orange-500">High-Quality Transparent</span>
             <br className="hidden sm:block" />
