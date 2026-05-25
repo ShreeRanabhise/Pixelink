@@ -13,8 +13,13 @@ export const AuthProvider = ({ children }) => {
     const savedUser = localStorage.getItem('pixelink_user');
     
     if (savedToken && savedUser) {
-      setToken(savedToken);
-      setUser(JSON.parse(savedUser));
+      try {
+        setToken(savedToken);
+        setUser(JSON.parse(savedUser));
+      } catch (err) {
+        localStorage.removeItem('pixelink_token');
+        localStorage.removeItem('pixelink_user');
+      }
     }
     setLoading(false);
   }, []);
