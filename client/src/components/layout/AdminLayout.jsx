@@ -132,15 +132,15 @@ const AdminLayout = ({ children, title }) => {
           {/* Quick theme toggler in sidebar */}{" "}
           <button
             onClick={toggleTheme}
-            className="flex items-center justify-between w-full px-4 py-2.5 rounded-xl text-xs text-slate-600 dark:text-slate-450 hover:bg-slate-100 dark:bg-slate-850 hover:text-white transition-colors"
+            className="flex items-center space-x-3 w-full px-4 py-3 rounded-xl text-sm font-semibold text-emerald-600 dark:text-emerald-450 hover:bg-emerald-500/10 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
           >
             {" "}
-            <span className="font-semibold">Switch Theme</span>{" "}
             {theme === "dark" ? (
-              <Sun className="w-4 h-4 text-amber-400" />
+              <Sun className="w-5 h-5 flex-shrink-0" />
             ) : (
-              <Moon className="w-4 h-4 text-brand-500" />
+              <Moon className="w-5 h-5 flex-shrink-0" />
             )}{" "}
+            <span>Switch Theme</span>{" "}
           </button>{" "}
           <button
             onClick={handleLogout}
@@ -217,6 +217,18 @@ const AdminLayout = ({ children, title }) => {
             </nav>{" "}
             <div className="border-t border-slate-200 dark:border-slate-850 pt-4 space-y-2">
               {" "}
+              <button
+                onClick={toggleTheme}
+                className="flex items-center space-x-3 w-full px-4 py-3 rounded-xl text-sm font-semibold text-emerald-600 dark:text-emerald-450 hover:bg-emerald-500/10 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
+              >
+                {" "}
+                {theme === "dark" ? (
+                  <Sun className="w-5 h-5 flex-shrink-0" />
+                ) : (
+                  <Moon className="w-5 h-5 flex-shrink-0" />
+                )}{" "}
+                <span>Switch Theme</span>{" "}
+              </button>{" "}
               <button
                 onClick={handleLogout}
                 className="flex items-center space-x-3 w-full px-4 py-3 rounded-xl text-sm font-semibold text-rose-450 hover:bg-rose-500/10 hover:text-rose-400 transition-colors"
