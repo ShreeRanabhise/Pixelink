@@ -24,10 +24,21 @@ export const SettingsProvider = ({ children }) => {
     logoUrl: '/logo.png'
   };
 
-  let logoUrl = '/logo.png';
+  // Sync the browser favicon to the new logo
+  React.useEffect(() => {
+    if (settings && settings.logoUrl) {
+      let link = document.querySelector("link[rel~='icon']");
+      if (!link) {
+        link = document.createElement('link');
+        link.rel = 'icon';
+        document.head.appendChild(link);
+      }
+      link.href = settings.logoUrl;
+    }
+  }, [settings?.logoUrl]);
 
   return (
-    <SettingsContext.Provider value={{ settings: { ...settings, logoUrl }, isLoading }}>
+    <SettingsContext.Provider value={{ settings, isLoading }}>
       {children}
     </SettingsContext.Provider>
   );
