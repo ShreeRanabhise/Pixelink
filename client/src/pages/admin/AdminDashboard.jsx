@@ -155,69 +155,7 @@ const AdminDashboard = () => {
           </div>
         ))}{" "}
       </div>{" "}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* System Actions */}
-        <div className="glass p-6 rounded-3xl border border-slate-200 dark:border-slate-850 bg-white/80 dark:bg-slate-900/20 space-y-4">
-          <h2 className="text-lg font-bold text-slate-900 dark:text-white">
-            System Actions
-          </h2>
-          <div className="grid grid-cols-1 gap-3">
-            <Link
-              to="/admin/upload"
-              className="flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 hover:border-brand-500/30 hover:bg-slate-100 dark:bg-slate-850 transition-all text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:text-white"
-            >
-              <div className="flex items-center space-x-3">
-                <div className="p-2.5 rounded-xl bg-brand-500/10 text-brand-400">
-                  <UploadCloud className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-sm font-bold">
-                    Direct Admin Upload
-                  </p>
-                  <p className="text-[11px] text-slate-600 dark:text-slate-450">
-                    Bypass queue directly to live catalog
-                  </p>
-                </div>
-              </div>
-              <ArrowRight className="w-4 h-4 text-slate-600 dark:text-slate-500" />
-            </Link>
-            <Link
-              to="/admin/categories"
-              className="flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 hover:border-purple-500/30 hover:bg-slate-100 dark:bg-slate-850 transition-all text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:text-white"
-            >
-              <div className="flex items-center space-x-3">
-                <div className="p-2.5 rounded-xl bg-purple-500/10 text-purple-400">
-                  <FolderTree className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-sm font-bold">Category Builder</p>
-                  <p className="text-[11px] text-slate-600 dark:text-slate-450">
-                    Create & manage taxonomy structures
-                  </p>
-                </div>
-              </div>
-              <ArrowRight className="w-4 h-4 text-slate-600 dark:text-slate-500" />
-            </Link>
-            <Link
-              to="/admin/pngs"
-              className="flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 hover:border-cyan-500/30 hover:bg-slate-100 dark:bg-slate-850 transition-all text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:text-white"
-            >
-              <div className="flex items-center space-x-3">
-                <div className="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-400">
-                  <Image className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-sm font-bold">Gallery Audit</p>
-                  <p className="text-[11px] text-slate-600 dark:text-slate-450">
-                    Update tags, feature, or delete assets
-                  </p>
-                </div>
-              </div>
-              <ArrowRight className="w-4 h-4 text-slate-600 dark:text-slate-500" />
-            </Link>
-          </div>
-        </div>
-        
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Quick Analytics Insight */}
         <div className="glass p-6 rounded-3xl border border-slate-200 dark:border-slate-850 bg-white/80 dark:bg-slate-900/20 space-y-4">
           <div className="flex items-center space-x-2">
