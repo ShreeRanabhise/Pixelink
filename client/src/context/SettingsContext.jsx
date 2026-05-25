@@ -26,7 +26,7 @@ export const SettingsProvider = ({ children }) => {
 
   const safeSettings = {
     ...settings,
-    logoUrl: settings?.logoUrl || '/logo.png'
+    logoUrl: '/logo.png' // Always use the local file from public/logo.png
   };
 
   // Sync the browser favicon to the new logo
