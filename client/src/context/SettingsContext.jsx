@@ -24,10 +24,7 @@ export const SettingsProvider = ({ children }) => {
     logoUrl: '/logo.png'
   };
 
-  let logoUrl = settings.logoUrl || '/logo.png';
-  if (logoUrl.startsWith('/uploads')) {
-    logoUrl = `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${logoUrl}`;
-  }
+  let logoUrl = '/logo.png';
 
   return (
     <SettingsContext.Provider value={{ settings: { ...settings, logoUrl }, isLoading }}>
