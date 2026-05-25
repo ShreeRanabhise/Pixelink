@@ -19,6 +19,16 @@ const Home = () => {
   const suggestionRef = useRef(null);
   const observerTarget = useRef(null);
 
+  // Fetch Categories for dynamic count
+  const { data: categoriesRes } = useQuery({
+    queryKey: ['categories'],
+    queryFn: async () => {
+      const res = await api.get('/categories');
+      return res.data;
+    },
+    staleTime: 600000, // 10 minutes
+  });
+
   // Close suggestions on outside click
   useEffect(() => {
     const handleOutsideClick = (e) => {
@@ -142,7 +152,7 @@ const Home = () => {
             {' '}PNG Images <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-rose-500">Free</span>
           </h1>
           <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto font-medium">
-            {settings.heroSubtitle}
+            {settings.heroSubtitle?.replace("0+", `${categoriesRes?.data?.length || 0}+`)}
           </p>
 
           {/* Search Box Wrapper */}
