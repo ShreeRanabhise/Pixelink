@@ -19,7 +19,9 @@ import {
   ShieldCheck,
   Save,
   Users,
-  MessageSquare
+  MessageSquare,
+  Eye,
+  EyeOff
 } from "lucide-react";
 import api from "../../api/axios";
 import toast from "react-hot-toast";
@@ -30,9 +32,11 @@ const AdminLayout = ({ children, title }) => {
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
-  const [profileName, setProfileName] = useState(user?.name || "Administrator");
+  const roleName = user?.role ? user.role.charAt(0).toUpperCase() + user.role.slice(1) : "Administrator";
+  const [profileName, setProfileName] = useState(user?.name || roleName);
   const [profileEmail, setProfileEmail] = useState(user?.email || "");
   const [profilePassword, setProfilePassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
   const basePath = `/${user?.role || 'admin'}`;
   
@@ -92,7 +96,7 @@ const AdminLayout = ({ children, title }) => {
           <div>
             {" "}
             <span className="text-base font-extrabold tracking-tight bg-gradient-to-r from-slate-900 dark:from-white to-slate-600 dark:to-slate-400 bg-clip-text text-transparent">
-              Pixelink Admin
+              Pixelink {roleName}
             </span>{" "}
             <p className="text-[10px] text-brand-400 font-semibold tracking-wider uppercase">
               Control Panel
@@ -148,7 +152,7 @@ const AdminLayout = ({ children, title }) => {
           {" "}
           <ShieldCheck className="w-5 h-5 text-brand-500" />{" "}
           <span className="font-extrabold text-sm text-slate-900 dark:text-white">
-            Pixelink Admin
+            Pixelink {roleName}
           </span>{" "}
         </div>{" "}
         <button
@@ -246,7 +250,7 @@ const AdminLayout = ({ children, title }) => {
               {" "}
               <div className="w-8 h-8 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-400 flex items-center justify-center font-bold text-xs uppercase shadow-sm">
                 {" "}
-                {profileName ? profileName[0] : "A"}{" "}
+                {profileName ? profileName[0] : roleName[0]}{" "}
               </div>{" "}
               <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                 {profileName}
@@ -282,7 +286,7 @@ const AdminLayout = ({ children, title }) => {
           <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onClick={() => setShowProfileModal(false)}></div>
           <div className="relative bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 w-full max-w-md shadow-2xl glass">
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-extrabold text-slate-900 dark:text-white">Admin Profile</h3>
+              <h3 className="text-xl font-extrabold text-slate-900 dark:text-white">{roleName} Profile</h3>
               <button onClick={() => setShowProfileModal(false)} className="p-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 rounded-xl text-slate-500 transition-colors">
                 <X className="w-5 h-5" />
               </button>
@@ -294,8 +298,9 @@ const AdminLayout = ({ children, title }) => {
                   type="text" 
                   value={profileName} 
                   onChange={(e) => setProfileName(e.target.value)}
-                  className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none dark:text-white"
-                  placeholder="Administrator"
+                  readOnly={user?.role !== 'admin'}
+                  className={`w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none dark:text-white ${user?.role !== 'admin' ? 'opacity-70 cursor-not-allowed' : ''}`}
+                  placeholder={roleName}
                 />
               </div>
               <div className="space-y-1.5">
@@ -304,19 +309,29 @@ const AdminLayout = ({ children, title }) => {
                   type="email" 
                   value={profileEmail} 
                   onChange={(e) => setProfileEmail(e.target.value)}
-                  className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none dark:text-white"
+                  readOnly={user?.role !== 'admin'}
+                  className={`w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none dark:text-white ${user?.role !== 'admin' ? 'opacity-70 cursor-not-allowed' : ''}`}
                   required
                 />
               </div>
               <div className="space-y-1.5 pt-2">
-                <label className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">New Password (Optional)</label>
-                <input 
-                  type="password" 
-                  value={profilePassword} 
-                  onChange={(e) => setProfilePassword(e.target.value)}
-                  className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none dark:text-white"
-                  placeholder="Leave blank to keep current"
-                />
+                <label className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">New Password {user?.role !== 'admin' ? '' : '(Optional)'}</label>
+                <div className="relative">
+                  <input 
+                    type={showPassword ? "text" : "password"} 
+                    value={profilePassword} 
+                    onChange={(e) => setProfilePassword(e.target.value)}
+                    className="w-full rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 pl-4 pr-10 py-2.5 text-sm focus:border-brand-500 focus:outline-none dark:text-white"
+                    placeholder="Leave blank to keep current"
+                  />
+                  <button 
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
               </div>
               <button 
                 type="submit" 
