@@ -4,7 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 import { Lock, Mail, ShieldAlert, Sparkles, ArrowLeft, Eye, EyeOff } from "lucide-react";
 import toast from "react-hot-toast";
 import SEO from "../../components/common/SEO";
-const AdminLogin = () => {
+const CommunityAccess = () => {
   const navigate = useNavigate();
   const { login, isAuthenticated, user } = useAuth();
   const [email, setEmail] = useState("");
@@ -183,4 +183,4 @@ const AdminLogin = () => {
     </div>
   );
 };
-export default AdminLogin;
+export default CommunityAccess;

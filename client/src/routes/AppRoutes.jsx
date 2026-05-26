@@ -42,7 +42,7 @@ const PrivacyPolicy = lazy(() => import('../pages/PrivacyPolicy'));
 const NotFound = lazy(() => import('../pages/NotFound'));
 
 // Admin Pages
-const AdminLogin = lazy(() => import('../pages/admin/AdminLogin'));
+const CommunityAccess = lazy(() => import('../pages/admin/CommunityAccess'));
 const AdminDashboard = lazy(() => import('../pages/admin/AdminDashboard'));
 const AdminUploadPng = lazy(() => import('../pages/admin/AdminUploadPng'));
 const AdminManagePngs = lazy(() => import('../pages/admin/AdminManagePngs'));
@@ -89,7 +89,7 @@ const AppRoutes = () => {
         <Route path="/privacy" element={<AppLayout><PrivacyPolicy /></AppLayout>} />
 
         {/* Admin Login */}
-        <Route path="/communityaccess" element={<AdminLogin />} />
+        <Route path="/communityaccess" element={<CommunityAccess />} />
 
         {/* Creator Routes */}
         <Route path="/creator" element={
