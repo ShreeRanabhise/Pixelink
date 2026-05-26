@@ -316,25 +316,7 @@ const PngDetail = () => {
             Transparent background • HD quality • 100% free
           </p>
 
-          {/* Tags Section below Image (Desktop) */}
-          <div className="pt-2 hidden lg:block">
-            <h3 className="text-sm font-bold text-slate-800 dark:text-slate-200 mb-3">Tags</h3>
-            {png.tags && png.tags.length > 0 ? (
-              <div className="flex flex-wrap gap-2">
-                {png.tags.map((tag) => (
-                  <Link
-                    key={tag}
-                    to={`/search?q=${encodeURIComponent(tag)}`}
-                    className="text-xs px-5 py-2.5 glass bg-white/60 dark:bg-slate-800/40 backdrop-blur-md border border-slate-200/60 dark:border-slate-700/50 hover:border-brand-500/30 hover:text-brand-600 dark:hover:text-brand-400 text-slate-700 dark:text-slate-300 rounded-full transition-all font-bold shadow-sm hover:scale-105"
-                  >
-                    {tag}
-                  </Link>
-                ))}
-              </div>
-            ) : (
-              <p className="text-sm text-slate-400">No tags available.</p>
-            )}
-          </div>
+
         </div>
 
         {/* Right Column: Metadata & Actions */}
@@ -359,25 +341,7 @@ const PngDetail = () => {
             </div>
           </div>
 
-          {/* Tags Section below Description (Mobile) */}
-          <div className="pt-2 block lg:hidden">
-            <h3 className="text-sm font-bold text-slate-800 dark:text-slate-200 mb-3">Tags</h3>
-            {png.tags && png.tags.length > 0 ? (
-              <div className="flex flex-wrap gap-2">
-                {png.tags.map((tag) => (
-                  <Link
-                    key={tag}
-                    to={`/search?q=${encodeURIComponent(tag)}`}
-                    className="text-xs px-5 py-2.5 glass bg-white/60 dark:bg-slate-800/40 backdrop-blur-md border border-slate-200/60 dark:border-slate-700/50 hover:border-brand-500/30 hover:text-brand-600 dark:hover:text-brand-400 text-slate-700 dark:text-slate-300 rounded-full transition-all font-bold shadow-sm hover:scale-105"
-                  >
-                    {tag}
-                  </Link>
-                ))}
-              </div>
-            ) : (
-              <p className="text-sm text-slate-400">No tags available.</p>
-            )}
-          </div>
+
 
 
 
