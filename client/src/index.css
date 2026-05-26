@@ -147,40 +147,36 @@
 }
 
 @keyframes animateTextGradient {
-  0% { background-position: 0% 0%; }
-  50% { background-position: 100% 100%; }
-  100% { background-position: 0% 0%; }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .animate-text-gradient {
-  background-size: 200% 200%;
+  background-size: 200% auto;
   animation: animateTextGradient 3s ease infinite;
 }
 
 @keyframes animateHeroSpiral {
-  0% { background-position: 0% 0%; }
-  25% { background-position: 100% 0%; }
-  50% { background-position: 100% 100%; }
-  75% { background-position: 0% 100%; }
-  100% { background-position: 0% 0%; }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .animate-hero-search-btn {
-  background-size: 200% 200%;
-  animation: animateHeroSpiral 4s linear infinite;
+  background-size: 200% auto;
+  animation: animateHeroSpiral 4s ease infinite;
 }
 
 @keyframes animateNavSpiral {
-  0% { background-position: 0% 0%; }
-  25% { background-position: 0% 100%; }
-  50% { background-position: 100% 100%; }
-  75% { background-position: 100% 0%; }
-  100% { background-position: 0% 0%; }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .animate-nav-search-btn {
-  background-size: 200% 200%;
-  animation: animateNavSpiral 2.5s linear infinite;
+  background-size: 200% auto;
+  animation: animateNavSpiral 2.5s ease infinite;
 }
 
 
