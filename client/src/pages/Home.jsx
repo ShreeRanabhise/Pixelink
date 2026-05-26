@@ -142,8 +142,13 @@ const Home = () => {
       <section className="relative z-20 bg-slate-50 dark:bg-[#090d16] text-slate-900 dark:text-white py-10 sm:py-16 flex flex-col justify-center items-center overflow-hidden">
         {/* Glow Spheres */}
         <div className="absolute inset-0 pointer-events-none">
+          {/* Upper Spheres (Left-to-Right) */}
           <div className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full bg-rose-400/20 dark:bg-brand-500/15 blur-[120px] animate-glow-upper"></div>
+          <div className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full bg-rose-400/20 dark:bg-brand-500/15 blur-[120px] animate-glow-upper" style={{ animationDelay: '-12.5s' }}></div>
+
+          {/* Lower Spheres (Right-to-Left) */}
           <div className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full bg-orange-400/20 dark:bg-purple-500/15 blur-[150px] animate-glow-lower"></div>
+          <div className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full bg-orange-400/20 dark:bg-purple-500/15 blur-[150px] animate-glow-lower" style={{ animationDelay: '-12.5s' }}></div>
         </div>
 
         <div className="relative max-w-4xl mx-auto px-4 text-center z-10 space-y-3">
