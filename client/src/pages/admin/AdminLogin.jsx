@@ -43,7 +43,7 @@ const AdminLogin = () => {
       <SEO title="Admin Login" /> {/* Floating Back to Site Link */}{" "}
       <a
         href="/"
-        className="absolute top-6 left-6 inline-flex items-center text-xs text-slate-600 dark:text-slate-500 dark:text-slate-400 hover:text-white transition-colors bg-slate-900/50 backdrop-blur border border-slate-300 dark:border-slate-800 px-3.5 py-2 rounded-xl"
+        className="absolute top-6 left-6 inline-flex items-center text-xs text-slate-700 dark:text-slate-300 hover:text-brand-500 dark:hover:text-brand-400 transition-colors bg-white/80 dark:bg-slate-900/50 backdrop-blur border border-slate-200 dark:border-slate-800 px-3.5 py-2 rounded-xl"
       >
         {" "}
         <ArrowLeft className="w-3.5 h-3.5 mr-1.5" /> Back to public site{" "}
@@ -68,7 +68,7 @@ const AdminLogin = () => {
         </div>{" "}
         <form
           onSubmit={handleSubmit}
-          className="glass p-8 rounded-3xl border border-slate-300 dark:border-slate-800 space-y-6 shadow-2xl bg-slate-900/80"
+          className="glass p-8 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-6 shadow-2xl bg-white/80 dark:bg-slate-900/80"
         >
           {" "}
           <div className="p-4 bg-brand-500/10 border border-brand-500/20 rounded-2xl flex items-start space-x-3 text-brand-600 dark:text-brand-400 text-xs font-semibold">
@@ -102,7 +102,7 @@ const AdminLogin = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@company.com"
-                  className="w-full rounded-2xl border border-slate-300 dark:border-slate-800 bg-slate-950/50 pl-10 pr-4 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-650 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all"
+                  className="w-full rounded-2xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-950/50 pl-10 pr-4 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all"
                   required
                 />{" "}
               </div>{" "}
@@ -124,7 +124,7 @@ const AdminLogin = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full rounded-2xl border border-slate-300 dark:border-slate-800 bg-slate-950/50 pl-10 pr-10 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-650 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all"
+                  className="w-full rounded-2xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-950/50 pl-10 pr-10 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all"
                   required
                 />{" "}
                 <button
@@ -145,7 +145,7 @@ const AdminLogin = () => {
                 <select
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
-                  className="w-full rounded-2xl border border-slate-300 dark:border-slate-800 bg-slate-950/50 px-4 py-3 text-sm text-slate-900 dark:text-slate-100 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all appearance-none"
+                  className="w-full rounded-2xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-950/50 px-4 py-3 text-sm text-slate-900 dark:text-slate-100 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all appearance-none"
                   required
                 >
                   <option value="admin" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-white">Admin</option>
