@@ -329,7 +329,7 @@ const Home = () => {
         </section>
 
         {/* 5. CTA Section - Public upload redirection */}
-        <section className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-rose-600 via-fuchsia-600 to-orange-650 animate-text-gradient text-white p-8 sm:p-12 shadow-2xl flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
+        <section className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-rose-500 via-fuchsia-500 to-orange-500 animate-text-gradient text-white p-8 sm:p-12 shadow-2xl flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
           <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-white/5 blur-[80px]"></div>
           
           <div className="space-y-3 max-w-xl text-center md:text-left z-10">
