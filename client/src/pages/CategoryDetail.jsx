@@ -59,8 +59,8 @@ const CategoryDetail = () => {
       )}
 
       {/* Header / Breadcrumb */}
-      {/* Dynamic Sticky Glass Header */}
-      <div className="space-y-4 glass bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800/60 p-6 sm:p-8 rounded-[2rem] shadow-sm relative overflow-hidden">
+      {/* Category Header */}
+      <div className="space-y-4 p-6 sm:p-8 relative overflow-hidden">
         
         {/* Banner image background if category has an image */}
         {category?.image && (
