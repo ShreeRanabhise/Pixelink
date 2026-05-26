@@ -59,8 +59,8 @@ const TrendingPngs = () => {
       ) : (
         <div className="space-y-10">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
-            {trendingRes?.data?.map((png) => (
-              <PngCard key={png._id} png={png} />
+            {trendingRes?.data?.map((png, index) => (
+              <PngCard key={png._id} png={png} rank={page === 1 ? index + 1 : undefined} />
             ))}
           </div>
 

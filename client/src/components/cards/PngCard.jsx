@@ -1,14 +1,28 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Download, Eye, Heart } from 'lucide-react';
+import { Download, Eye, Heart, Crown } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import api from '../../api/axios';
 import toast from 'react-hot-toast';
 
-const PngCard = ({ png, onDownloadSuccess }) => {
+const PngCard = ({ png, onDownloadSuccess, rank }) => {
   const [isDownloading, setIsDownloading] = useState(false);
+
+  let rankStyles = "";
+  let rankIconColor = "";
+
+  if (rank === 1) {
+    rankStyles = "ring-2 ring-yellow-400 shadow-[0_0_15px_rgba(250,204,21,0.6)] z-10 scale-[1.02]";
+    rankIconColor = "text-yellow-400 bg-yellow-400/20 border-yellow-400/50";
+  } else if (rank === 2) {
+    rankStyles = "ring-2 ring-slate-300 shadow-[0_0_15px_rgba(203,213,225,0.6)] z-10 scale-[1.01]";
+    rankIconColor = "text-slate-200 bg-slate-300/20 border-slate-300/50";
+  } else if (rank === 3) {
+    rankStyles = "ring-2 ring-amber-600 shadow-[0_0_15px_rgba(217,119,6,0.6)] z-10 scale-[1.01]";
+    rankIconColor = "text-amber-500 bg-amber-600/20 border-amber-600/50";
+  }
 
   const handleQuickDownload = async (e) => {
     e.preventDefault(); // Prevent navigating to PngDetail page
@@ -62,8 +76,13 @@ const PngCard = ({ png, onDownloadSuccess }) => {
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ y: -5 }}
       transition={{ duration: 0.2 }}
-      className="group relative glass border border-slate-200/60 dark:border-slate-800/60 bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl rounded-[1.5rem] overflow-hidden shadow-sm hover:shadow-2xl hover:border-brand-500/40 dark:hover:border-brand-500/40 transition-all duration-300 aspect-square"
+      className={`group relative glass border border-slate-200/60 dark:border-slate-800/60 bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl rounded-[1.5rem] overflow-hidden shadow-sm hover:shadow-2xl hover:border-brand-500/40 dark:hover:border-brand-500/40 transition-all duration-300 aspect-square ${rankStyles}`}
     >
+      {rank && rank <= 3 && (
+        <div className={`absolute top-0 right-0 m-3 z-20 flex items-center justify-center p-2 rounded-full border backdrop-blur-md shadow-lg ${rankIconColor}`}>
+          <Crown className="w-4 h-4 fill-current" />
+        </div>
+      )}
       <Link to={`/png/${png.slug}`} className="block w-full h-full">
         {/* Transparent Checkerboard Image Box */}
         <div className="relative w-full h-full checkerboard-bg flex items-center justify-center p-4 select-none overflow-hidden">
