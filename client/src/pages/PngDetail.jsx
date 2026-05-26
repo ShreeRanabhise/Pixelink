@@ -286,7 +286,7 @@ const PngDetail = () => {
               <button
                 onClick={handleDownload}
                 disabled={isDownloading}
-                className={`w-full h-full inline-flex items-center justify-center px-6 py-4 text-lg font-extrabold text-white bg-gradient-brand hover:opacity-90 rounded-2xl shadow-xl shadow-brand-500/20 transition-all ${
+                className={`w-full h-full inline-flex items-center justify-center px-6 py-4 text-lg font-extrabold text-white bg-gradient-to-r from-orange-500 via-rose-500 to-amber-500 animate-hero-search-btn hover:opacity-90 rounded-2xl shadow-xl shadow-orange-500/20 transition-all ${
                   isDownloading ? 'opacity-70 cursor-not-allowed' : 'active:scale-95 hover:scale-[1.02]'
                 }`}
               >
@@ -350,7 +350,7 @@ const PngDetail = () => {
             <button
               onClick={handleDownload}
               disabled={isDownloading}
-              className={`w-full inline-flex items-center justify-center px-6 py-4 text-lg font-extrabold text-white bg-gradient-brand hover:opacity-90 rounded-2xl shadow-xl shadow-brand-500/20 transition-all ${
+              className={`w-full inline-flex items-center justify-center px-6 py-4 text-lg font-extrabold text-white bg-gradient-to-r from-orange-500 via-rose-500 to-amber-500 animate-hero-search-btn hover:opacity-90 rounded-2xl shadow-xl shadow-orange-500/20 transition-all ${
                 isDownloading ? 'opacity-70 cursor-not-allowed' : 'active:scale-95 hover:scale-[1.02]'
               }`}
             >
