@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand Info */}
           <div className="space-y-4">
-            <span className="text-xl font-extrabold tracking-tight bg-gradient-brand bg-clip-text text-transparent">
+            <span className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-orange-500 via-violet-500 to-rose-500 animate-hero-search-btn bg-clip-text text-transparent">
               Pixelink
             </span>
             <p className="text-sm text-slate-500 dark:text-slate-400">
