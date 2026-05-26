@@ -71,9 +71,7 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
             <Link to="/" className="flex items-center space-x-2">
-              <div className="p-1.5 bg-white dark:bg-[#151c2c] border border-slate-200 dark:border-slate-800/60 rounded-xl shadow-sm flex items-center justify-center">
-                <img src={settings.logoUrl} alt={`${settings.siteName} Logo`} className="h-10 w-auto sm:h-12 object-contain" />
-              </div>
+              <img src={settings.logoUrl} alt={`${settings.siteName} Logo`} className="h-12 w-auto sm:h-[3.6rem] object-contain drop-shadow-sm" />
               <span className="text-2xl font-extrabold tracking-tight bg-gradient-brand bg-clip-text text-transparent hidden sm:block">
                 {settings.siteName}
               </span>
