@@ -157,26 +157,30 @@
   animation: animateTextGradient 3s ease infinite;
 }
 
-@keyframes animateHeroSearch {
+@keyframes animateHeroSpiral {
   0% { background-position: 0% 0%; }
+  25% { background-position: 100% 0%; }
   50% { background-position: 100% 100%; }
+  75% { background-position: 0% 100%; }
   100% { background-position: 0% 0%; }
 }
 
 .animate-hero-search-btn {
   background-size: 200% 200%;
-  animation: animateHeroSearch 4s ease-in-out infinite;
+  animation: animateHeroSpiral 4s linear infinite;
 }
 
-@keyframes animateNavSearch {
-  0% { background-position: 50% 0%; }
-  50% { background-position: 50% 100%; }
-  100% { background-position: 50% 0%; }
+@keyframes animateNavSpiral {
+  0% { background-position: 0% 0%; }
+  25% { background-position: 0% 100%; }
+  50% { background-position: 100% 100%; }
+  75% { background-position: 100% 0%; }
+  100% { background-position: 0% 0%; }
 }
 
 .animate-nav-search-btn {
-  background-size: auto 200%;
-  animation: animateNavSearch 2.5s ease-in-out infinite;
+  background-size: 200% 200%;
+  animation: animateNavSpiral 2.5s linear infinite;
 }
 
 
