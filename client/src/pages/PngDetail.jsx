@@ -279,6 +279,43 @@ const PngDetail = () => {
             </div>
           </div>
 
+          {/* Action Row & Download Section (Mobile Only Below Image) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 block lg:hidden">
+            {/* Download Button */}
+            <div className="space-y-3">
+              <button
+                onClick={handleDownload}
+                disabled={isDownloading}
+                className={`w-full h-full inline-flex items-center justify-center px-6 py-4 text-lg font-extrabold text-white bg-gradient-brand hover:opacity-90 rounded-2xl shadow-xl shadow-brand-500/20 transition-all ${
+                  isDownloading ? 'opacity-70 cursor-not-allowed' : 'active:scale-95 hover:scale-[1.02]'
+                }`}
+              >
+                <Download className={`w-5 h-5 mr-2 ${isDownloading ? 'animate-bounce' : ''}`} />
+                {isDownloading ? 'Downloading...' : 'Download PNG for free'}
+              </button>
+            </div>
+            
+            {/* Action Row */}
+            <div className="grid grid-cols-3 gap-3">
+              <button onClick={handleLike} className="flex flex-col items-center justify-center px-3 py-3.5 glass bg-white/50 dark:bg-slate-800/30 backdrop-blur-md border border-slate-200/60 dark:border-slate-700/50 hover:border-brand-500/30 dark:hover:border-brand-500/30 rounded-2xl text-xs font-bold text-slate-700 dark:text-slate-300 transition-all hover:-translate-y-1 hover:shadow-lg">
+                <Heart className={`w-5 h-5 mb-1.5 ${hasLiked ? 'fill-rose-500 text-rose-500' : ''}`} />
+                Like
+              </button>
+              <button onClick={handleShare} className="flex flex-col items-center justify-center px-3 py-3.5 glass bg-white/50 dark:bg-slate-800/30 backdrop-blur-md border border-slate-200/60 dark:border-slate-700/50 hover:border-brand-500/30 dark:hover:border-brand-500/30 rounded-2xl text-xs font-bold text-slate-700 dark:text-slate-300 transition-all hover:-translate-y-1 hover:shadow-lg">
+                <Share2 className="w-5 h-5 mb-1.5" />
+                Share
+              </button>
+              <button onClick={handleReport} className="flex flex-col items-center justify-center px-3 py-3.5 glass bg-white/50 dark:bg-slate-800/30 backdrop-blur-md border border-slate-200/60 dark:border-slate-700/50 hover:border-brand-500/30 dark:hover:border-brand-500/30 rounded-2xl text-xs font-bold text-slate-700 dark:text-slate-300 transition-all hover:-translate-y-1 hover:shadow-lg">
+                <Flag className="w-5 h-5 mb-1.5" />
+                Report
+              </button>
+            </div>
+          </div>
+          
+          <p className="text-[11px] font-bold text-slate-500 dark:text-slate-450 uppercase tracking-widest mt-1 block lg:hidden">
+            Transparent background • HD quality • 100% free
+          </p>
+
           {/* Tags Section below Image (Desktop) */}
           <div className="pt-2 hidden lg:block">
             <h3 className="text-sm font-bold text-slate-800 dark:text-slate-200 mb-3">Tags</h3>
@@ -342,7 +379,10 @@ const PngDetail = () => {
             )}
           </div>
 
-          <div className="space-y-3">
+
+
+          {/* Desktop Only: Download Button */}
+          <div className="space-y-3 hidden lg:block">
             <button
               onClick={handleDownload}
               disabled={isDownloading}
@@ -365,8 +405,10 @@ const PngDetail = () => {
             className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 border-dashed dark:border-slate-800 rounded-xl overflow-hidden flex items-center justify-center p-4 min-h-[120px]" 
           />
 
-          {/* Action Row */}
-          <div className="grid grid-cols-3 gap-3">
+
+
+          {/* Desktop Only: Action Row */}
+          <div className="hidden lg:grid grid-cols-3 gap-3">
             <button onClick={handleLike} className="flex flex-col items-center justify-center px-3 py-3.5 glass bg-white/50 dark:bg-slate-800/30 backdrop-blur-md border border-slate-200/60 dark:border-slate-700/50 hover:border-brand-500/30 dark:hover:border-brand-500/30 rounded-2xl text-xs font-bold text-slate-700 dark:text-slate-300 transition-all hover:-translate-y-1 hover:shadow-lg">
               <Heart className={`w-5 h-5 mb-1.5 ${hasLiked ? 'fill-rose-500 text-rose-500' : ''}`} />
               Like
