@@ -157,3 +157,26 @@
   animation: animateTextGradient 3s ease infinite;
 }
 
+@keyframes animateHeroSearch {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+.animate-hero-search-btn {
+  background-size: 200% 200%;
+  animation: animateHeroSearch 4s ease-in-out infinite;
+}
+
+@keyframes animateNavSearch {
+  0% { background-position: 50% 0%; }
+  50% { background-position: 50% 100%; }
+  100% { background-position: 50% 0%; }
+}
+
+.animate-nav-search-btn {
+  background-size: auto 200%;
+  animation: animateNavSearch 2.5s ease-in-out infinite;
+}
+
+
