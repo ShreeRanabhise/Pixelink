@@ -148,9 +148,9 @@ const AdminLogin = () => {
                   className="w-full rounded-2xl border border-slate-300 dark:border-slate-800 bg-slate-950/50 px-4 py-3 text-sm text-slate-900 dark:text-slate-100 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all appearance-none"
                   required
                 >
-                  <option value="admin">Admin</option>
-                  <option value="creator">Creator</option>
-                  <option value="inspector">Inspector</option>
+                  <option value="admin" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-white">Admin</option>
+                  <option value="creator" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-white">Creator</option>
+                  <option value="inspector" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-white">Inspector</option>
                 </select>
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-600 dark:text-slate-500">
                   <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Download, Eye, Share2, ArrowLeft, Heart, Flag, Maximize, FileImage, HardDrive, Calendar, User, ChevronRight } from 'lucide-react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 import api from '../api/axios';
 import PngCard from '../components/cards/PngCard';
 import SkeletonCard from '../components/loaders/SkeletonCard';
@@ -188,6 +190,19 @@ const PngDetail = () => {
 
   const uploadDate = new Date(png.createdAt).toLocaleDateString('en-GB');
 
+  const jsonLd = png ? {
+    "@context": "https://schema.org/",
+    "@type": "ImageObject",
+    "name": png.title,
+    "description": png.description || `${png.title} transparent PNG`,
+    "contentUrl": png.imageUrl,
+    "datePublished": png.createdAt,
+    "author": {
+      "@type": "Person",
+      "name": png.uploaderName || "Anonymous"
+    }
+  } : null;
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 space-y-16">
       <SEO 
@@ -195,6 +210,7 @@ const PngDetail = () => {
         description={png.description || `Download free high-resolution ${png.title} transparent PNG Png's.`}
         keywords={png.tags.join(', ')}
         image={png.imageUrl}
+        structuredData={jsonLd}
       />
 
       {/* Breadcrumb Navigation */}
@@ -220,10 +236,14 @@ const PngDetail = () => {
         {/* Left Column: Interactive Image Viewer & Tags */}
         <div className="lg:col-span-8 flex flex-col space-y-8">
           <div className={`relative w-full aspect-[4/3] rounded-[2rem] ${getBgClass()} flex items-center justify-center p-8 border border-slate-200/60 dark:border-slate-800/60 shadow-inner select-none transition-all duration-300 overflow-hidden`}>
-            <img
+            <LazyLoadImage
               src={png.imageUrl}
               alt={png.title}
-              className="max-h-full max-w-full object-contain drop-shadow-xl z-0"
+              effect="blur"
+              wrapperProps={{
+                  style: { display: "flex", width: "100%", height: "100%", justifyContent: "center", alignItems: "center", position: "relative", zIndex: 0 }
+              }}
+              className="max-h-full max-w-full object-contain drop-shadow-xl"
             />
             
             {/* Watermark Overlay */}

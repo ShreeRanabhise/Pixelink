@@ -8,7 +8,8 @@ const SEO = ({
   title, 
   description = "Download free transparent PNG images, clipart, and graphic vectors with high quality.",
   keywords = "png, free download, transparent image, clipart, Png's, photoshop assets",
-  url = window.location.href
+  url = window.location.href,
+  structuredData = null
 }) => {
   const { settings } = useSettings();
 
@@ -37,6 +38,13 @@ const SEO = ({
 
       {/* Favicon Sync */}
       <link rel="icon" href={image} />
+
+      {/* Structured Data (JSON-LD) */}
+      {structuredData && (
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
+      )}
     </Helmet>
   );
 };

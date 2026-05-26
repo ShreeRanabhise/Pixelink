@@ -38,6 +38,7 @@ const LatestUploads = lazy(() => import('../pages/LatestUploads'));
 const PublicUpload = lazy(() => import('../pages/PublicUpload'));
 const About = lazy(() => import('../pages/About'));
 const Contact = lazy(() => import('../pages/Contact'));
+const PrivacyPolicy = lazy(() => import('../pages/PrivacyPolicy'));
 const NotFound = lazy(() => import('../pages/NotFound'));
 
 // Admin Pages
@@ -85,6 +86,7 @@ const AppRoutes = () => {
         <Route path="/submit" element={<AppLayout><PublicUpload /></AppLayout>} />
         <Route path="/about" element={<AppLayout><About /></AppLayout>} />
         <Route path="/contact" element={<AppLayout><Contact /></AppLayout>} />
+        <Route path="/privacy" element={<AppLayout><PrivacyPolicy /></AppLayout>} />
 
         {/* Admin Login */}
         <Route path="/admin/login" element={<AdminLogin />} />

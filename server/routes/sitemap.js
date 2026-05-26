@@ -75,4 +75,17 @@ router.get('/sitemap.xml', async (req, res, next) => {
   }
 });
 
+router.get('/robots.txt', (req, res) => {
+  const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173';
+  const serverUrl = process.env.PORT ? `http://localhost:${process.env.PORT}` : 'http://localhost:5000';
+  // Use serverUrl for sitemap since it's served from the backend
+  const robots = `User-agent: *
+Allow: /
+
+Sitemap: ${serverUrl}/sitemap.xml
+`;
+  res.header('Content-Type', 'text/plain');
+  res.status(200).send(robots);
+});
+
 export default router;

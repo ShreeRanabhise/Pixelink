@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Download, Eye, Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 import api from '../../api/axios';
 import toast from 'react-hot-toast';
 
@@ -65,10 +67,13 @@ const PngCard = ({ png, onDownloadSuccess }) => {
       <Link to={`/png/${png.slug}`} className="block w-full h-full">
         {/* Transparent Checkerboard Image Box */}
         <div className="relative w-full h-full checkerboard-bg flex items-center justify-center p-4 select-none overflow-hidden">
-          <img
+          <LazyLoadImage
             src={getThumbnailUrl(png.imageUrl)}
             alt={png.title}
-            loading="lazy"
+            effect="blur"
+            wrapperProps={{
+                style: { display: "flex", width: "100%", height: "100%", justifyContent: "center", alignItems: "center" }
+            }}
             className="max-h-full max-w-full object-contain transform group-hover:scale-110 transition-transform duration-500 filter drop-shadow-xl"
           />
           

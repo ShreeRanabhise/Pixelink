@@ -95,6 +95,11 @@ const Footer = () => {
                   No Attribution Required
                 </span>
               </li>
+              <li>
+                <Link to="/privacy" className="text-sm text-slate-500 dark:text-slate-400 hover:text-brand-500 dark:hover:text-brand-400 block transition-colors">
+                  Privacy Policy
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
