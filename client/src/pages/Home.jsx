@@ -142,23 +142,41 @@ const Home = () => {
       <section className="relative z-20 bg-slate-50 dark:bg-[#090d16] text-slate-900 dark:text-white py-10 sm:py-16 flex flex-col justify-center items-center overflow-hidden">
         {/* Glow Spheres */}
         <div className="absolute inset-0 pointer-events-none">
-          {/* Sphere 1: Left to Right */}
+          {/* Sphere 1: Left to Right (Rose) */}
           <div className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full bg-rose-400/20 dark:bg-brand-500/15 blur-[120px] animate-glow-left-right" style={{ animationDelay: '-3s' }}></div>
           
-          {/* Sphere 2: Right to Left */}
+          {/* Sphere 2: Right to Left (Orange) */}
           <div className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full bg-orange-400/20 dark:bg-purple-500/15 blur-[150px] animate-glow-right-left" style={{ animationDelay: '-12s' }}></div>
           
-          {/* Sphere 3: Diagonal */}
+          {/* Sphere 3: Diagonal (Indigo) */}
           <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] rounded-full bg-indigo-400/20 dark:bg-indigo-500/15 blur-[100px] animate-glow-diagonal" style={{ animationDelay: '-7s' }}></div>
           
-          {/* Sphere 4: Reverse Diagonal */}
+          {/* Sphere 4: Reverse Diagonal (Violet) */}
           <div className="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] rounded-full bg-violet-400/20 dark:bg-violet-500/15 blur-[110px] animate-glow-diagonal-rev" style={{ animationDelay: '-18s' }}></div>
           
-          {/* Sphere 5: Organic Float 1 */}
+          {/* Sphere 5: Organic Float 1 (Fuchsia) */}
           <div className="absolute top-1/3 left-1/3 w-[350px] h-[350px] rounded-full bg-fuchsia-400/15 dark:bg-fuchsia-500/10 blur-[90px] animate-glow-float-1" style={{ animationDelay: '-10s' }}></div>
           
-          {/* Sphere 6: Organic Float 2 */}
+          {/* Sphere 6: Organic Float 2 (Amber) */}
           <div className="absolute bottom-1/3 right-1/3 w-[300px] h-[300px] rounded-full bg-amber-400/15 dark:bg-rose-500/10 blur-[80px] animate-glow-float-2" style={{ animationDelay: '-25s' }}></div>
+
+          {/* Sphere 7: Organic Float 1 (Rose) */}
+          <div className="absolute top-1/4 left-1/2 w-[380px] h-[380px] rounded-full bg-rose-400/15 dark:bg-brand-500/10 blur-[100px] animate-glow-float-1" style={{ animationDelay: '-5s' }}></div>
+          
+          {/* Sphere 8: Diagonal (Rose) */}
+          <div className="absolute top-0 right-1/4 w-[420px] h-[420px] rounded-full bg-rose-400/20 dark:bg-brand-500/15 blur-[110px] animate-glow-diagonal" style={{ animationDelay: '-15s' }}></div>
+
+          {/* Sphere 9: Left to Right (Violet) */}
+          <div className="absolute top-1/2 left-0 w-[520px] h-[520px] rounded-full bg-violet-400/25 dark:bg-violet-500/15 blur-[120px] animate-glow-left-right" style={{ animationDelay: '-9s' }}></div>
+          
+          {/* Sphere 10: Organic Float 2 (Violet) */}
+          <div className="absolute top-10 right-10 w-[320px] h-[320px] rounded-full bg-violet-400/15 dark:bg-violet-500/10 blur-[80px] animate-glow-float-2" style={{ animationDelay: '-19s' }}></div>
+
+          {/* Sphere 11: Reverse Diagonal (Orange) */}
+          <div className="absolute bottom-10 left-10 w-[480px] h-[480px] rounded-full bg-orange-400/20 dark:bg-orange-500/10 blur-[115px] animate-glow-diagonal-rev" style={{ animationDelay: '-22s' }}></div>
+
+          {/* Sphere 12: Organic Float 1 (Orange) */}
+          <div className="absolute bottom-1/2 right-1/2 w-[400px] h-[400px] rounded-full bg-orange-400/15 dark:bg-orange-500/10 blur-[95px] animate-glow-float-1" style={{ animationDelay: '-1s' }}></div>
         </div>
 
         <div className="relative max-w-4xl mx-auto px-4 text-center z-10 space-y-3">
