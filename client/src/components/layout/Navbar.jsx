@@ -72,7 +72,7 @@ const Navbar = () => {
           <div className="flex-shrink-0 flex items-center">
             <Link to="/" className="flex items-center space-x-2">
               <img src={settings.logoUrl} alt={`${settings.siteName} Logo`} className="h-12 w-auto sm:h-[3.6rem] object-contain drop-shadow-sm" />
-              <span className="text-xl sm:text-2xl font-extrabold tracking-tight bg-gradient-to-r from-orange-500 via-violet-500 to-rose-500 animate-hero-search-btn bg-clip-text text-transparent">
+              <span className="text-xl sm:text-2xl font-extrabold tracking-tight bg-gradient-to-r from-orange-500 via-violet-500 to-rose-500 animate-text-gradient bg-clip-text text-transparent">
                 {settings.siteName}
               </span>
             </Link>
