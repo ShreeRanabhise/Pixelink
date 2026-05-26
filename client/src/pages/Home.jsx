@@ -141,7 +141,7 @@ const Home = () => {
       {/* 1. Hero / Search Banner */}
       <section className="relative z-20 bg-slate-50 dark:bg-[#090d16] text-slate-900 dark:text-white py-10 sm:py-16 flex flex-col justify-center items-center overflow-hidden">
         {/* Glow Spheres */}
-        <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 pointer-events-none hidden md:block">
           {/* Sphere 1: Left to Right (Rose) */}
           <div className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full bg-rose-400/20 dark:bg-brand-500/15 blur-[120px] animate-glow-left-right" style={{ animationDelay: '-3s' }}></div>
           
@@ -331,7 +331,7 @@ const Home = () => {
         {/* 5. CTA Section - Public upload redirection */}
         <section className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-rose-500 via-fuchsia-500 to-orange-500 animate-text-gradient text-white p-8 sm:p-12 shadow-2xl flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
           {/* Background Glow Spheres */}
-          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none overflow-hidden hidden md:block">
             {/* Sphere 1: Left to Right (Rose) */}
             <div className="absolute top-[-20px] left-[-30px] w-[200px] h-[200px] rounded-full bg-rose-300/15 blur-[60px] animate-glow-left-right" style={{ animationDelay: '-2s', animationDuration: '14s' }}></div>
             
