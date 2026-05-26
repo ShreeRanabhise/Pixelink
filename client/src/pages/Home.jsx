@@ -177,6 +177,18 @@ const Home = () => {
 
           {/* Sphere 12: Organic Float 1 (Orange) */}
           <div className="absolute bottom-1/2 right-1/2 w-[400px] h-[400px] rounded-full bg-orange-400/15 dark:bg-orange-500/10 blur-[95px] animate-glow-float-1" style={{ animationDelay: '-1s' }}></div>
+
+          {/* Sphere 13: Organic Float 1 (Rose) - Centered-Left */}
+          <div className="absolute top-1/4 left-1/4 w-[450px] h-[450px] rounded-full bg-rose-400/15 dark:bg-brand-500/10 blur-[110px] animate-glow-float-1" style={{ animationDelay: '-14s' }}></div>
+
+          {/* Sphere 14: Organic Float 2 (Rose) - Centered-Right */}
+          <div className="absolute bottom-1/4 right-1/4 w-[380px] h-[380px] rounded-full bg-rose-400/15 dark:bg-brand-500/10 blur-[100px] animate-glow-float-2" style={{ animationDelay: '-28s' }}></div>
+
+          {/* Sphere 15: Organic Float 1 (Orange) - Center-ish */}
+          <div className="absolute top-1/3 left-1/2 w-[500px] h-[500px] rounded-full bg-orange-400/15 dark:bg-orange-500/10 blur-[120px] animate-glow-float-1" style={{ animationDelay: '-6s' }}></div>
+
+          {/* Sphere 16: Organic Float 2 (Orange) - Bottom-Center */}
+          <div className="absolute bottom-1/3 left-1/3 w-[420px] h-[420px] rounded-full bg-orange-400/15 dark:bg-orange-500/10 blur-[110px] animate-glow-float-2" style={{ animationDelay: '-18s' }}></div>
         </div>
 
         <div className="relative max-w-4xl mx-auto px-4 text-center z-10 space-y-3">
