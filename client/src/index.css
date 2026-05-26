@@ -154,6 +154,6 @@
 
 .animate-text-gradient {
   background-size: 200% auto;
-  animation: animateTextGradient 6s ease infinite;
+  animation: animateTextGradient 3s ease infinite;
 }
 
