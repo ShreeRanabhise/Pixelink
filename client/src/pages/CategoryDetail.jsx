@@ -58,11 +58,18 @@ const CategoryDetail = () => {
         />
       )}
 
+      {/* Header / Breadcrumb */}
       {/* Category Header */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-8 p-6 sm:p-8 relative">
+      <div className="space-y-4 p-6 sm:p-8 relative overflow-hidden">
         
-        {/* Part 1: Text Content */}
-        <div className="flex-1 space-y-5 w-full">
+        {/* Banner image background if category has an image */}
+        {category?.image && (
+          <div className="absolute inset-0 z-0 pointer-events-none">
+             <img src={category.image} className="w-full h-full object-cover object-right" alt="" />
+          </div>
+        )}
+
+        <div className="relative z-10 space-y-5">
           <Link
             to="/categories"
             className="inline-flex items-center text-[10px] font-bold text-slate-500 dark:text-slate-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors uppercase tracking-widest bg-white/50 dark:bg-slate-800/50 px-3 py-1.5 rounded-lg border border-slate-200/60 dark:border-slate-700/50"
@@ -74,7 +81,7 @@ const CategoryDetail = () => {
             <div className="p-3 bg-brand-500/10 text-brand-600 dark:text-brand-400 rounded-2xl shadow-inner hidden sm:block">
               <Folder className="w-6 h-6" />
             </div>
-            <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-slate-100">
+            <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100">
               {category ? <>{category.name} <span className="text-transparent bg-clip-text bg-gradient-brand">Assets</span></> : 'Category Details'}
             </h1>
           </div>
@@ -84,13 +91,6 @@ const CategoryDetail = () => {
             </p>
           )}
         </div>
-
-        {/* Part 2: Cover Image */}
-        {category?.image && (
-          <div className="flex-shrink-0 w-40 h-40 md:w-64 md:h-64 flex items-center justify-center">
-             <img src={category.image} className="max-w-full max-h-full object-contain filter drop-shadow-2xl" alt={`${category.name} cover`} />
-          </div>
-        )}
       </div>
 
       {/* PNG Grid list */}
