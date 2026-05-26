@@ -157,6 +157,7 @@ const PublicUpload = () => {
             Upload Another PNG
           </button>
         </div>
+      ) : (
         <form onSubmit={handleSubmit} className="space-y-8 glass bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800/60 p-6 sm:p-12 rounded-[2.5rem] shadow-2xl relative overflow-hidden">
           
           {/* Subtle background glow */}

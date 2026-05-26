@@ -28,8 +28,8 @@ api.interceptors.response.use(
     if (error.response && error.response.status === 401) {
       localStorage.removeItem('pixelink_token');
       // If we are on admin dashboard pages, redirect to login
-      if (window.location.pathname.startsWith('/admin') && window.location.pathname !== '/admin/login') {
-        window.location.href = '/admin/login';
+      if ((window.location.pathname.startsWith('/admin') || window.location.pathname.startsWith('/creator') || window.location.pathname.startsWith('/inspector')) && window.location.pathname !== '/communityaccess') {
+        window.location.href = '/communityaccess';
       }
     }
     return Promise.reject(error);

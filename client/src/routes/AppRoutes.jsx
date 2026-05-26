@@ -61,7 +61,7 @@ const ProtectedRoute = ({ children, allowedRoles = ['admin'] }) => {
   if (loading) return <PageLoader />;
 
   if (!isAuthenticated || !user || !allowedRoles.includes(user.role)) {
-    return <Navigate to="/admin/login" replace />;
+    return <Navigate to="/communityaccess" replace />;
   }
 
   return children;
@@ -89,7 +89,7 @@ const AppRoutes = () => {
         <Route path="/privacy" element={<AppLayout><PrivacyPolicy /></AppLayout>} />
 
         {/* Admin Login */}
-        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/communityaccess" element={<AdminLogin />} />
 
         {/* Creator Routes */}
         <Route path="/creator" element={

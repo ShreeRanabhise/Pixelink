@@ -67,7 +67,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/admin/login" className="text-sm text-slate-500 dark:text-slate-400 hover:text-brand-500 dark:hover:text-brand-400">
+                <Link to="/communityaccess" className="text-sm text-slate-500 dark:text-slate-400 hover:text-brand-500 dark:hover:text-brand-400">
                   Community Access
                 </Link>
               </li>
