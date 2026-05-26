@@ -69,25 +69,25 @@ const CategoryDetail = () => {
           </div>
         )}
 
-        <div className="relative z-10 space-y-5 flex flex-col items-start">
+        <div className="relative z-10 space-y-4 flex flex-col items-start">
           <Link
             to="/categories"
-            className="inline-flex items-center text-[10px] font-bold text-slate-700 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 transition-colors uppercase tracking-widest bg-white/80 dark:bg-slate-900/80 backdrop-blur-md px-4 py-2 rounded-xl border border-white/50 dark:border-slate-700/50 shadow-sm"
+            className="inline-flex items-center text-[10px] font-bold text-slate-700 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 transition-colors uppercase tracking-widest bg-white/30 dark:bg-slate-900/40 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/30 dark:border-slate-700/40 shadow-sm"
           >
             <ChevronLeft className="w-3.5 h-3.5 mr-1" />
             Back to categories
           </Link>
-          <div className="flex items-center space-x-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/50 dark:border-slate-700/50 shadow-sm inline-flex">
-            <div className="p-2 bg-brand-500/10 text-brand-600 dark:text-brand-400 rounded-xl hidden sm:block">
+          <div className="flex items-center space-x-3 bg-white/30 dark:bg-slate-900/40 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/30 dark:border-slate-700/40 shadow-sm inline-flex">
+            <div className="p-1.5 bg-brand-500/10 text-brand-600 dark:text-brand-400 rounded-lg hidden sm:block">
               <Folder className="w-5 h-5" />
             </div>
-            <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100 m-0">
+            <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-slate-100 m-0">
               {category ? <>{category.name} <span className="text-transparent bg-clip-text bg-gradient-brand">Assets</span></> : 'Category Details'}
             </h1>
           </div>
           {category?.description && (
-            <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md px-5 py-4 rounded-2xl border border-white/50 dark:border-slate-700/50 shadow-sm max-w-2xl">
-              <p className="text-sm sm:text-base font-medium text-slate-700 dark:text-slate-300 leading-relaxed m-0">
+            <div className="bg-white/30 dark:bg-slate-900/40 backdrop-blur-sm px-4 py-2.5 rounded-xl border border-white/30 dark:border-slate-700/40 shadow-sm max-w-2xl">
+              <p className="text-sm sm:text-base font-medium text-slate-800 dark:text-slate-200 leading-relaxed m-0">
                 {category.description}
               </p>
             </div>
