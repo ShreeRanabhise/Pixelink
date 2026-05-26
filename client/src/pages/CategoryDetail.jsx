@@ -65,9 +65,10 @@ const CategoryDetail = () => {
         {/* Banner image background if category has an image */}
         {category?.image && (
           <>
-            <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] z-0 pointer-events-none">
-               <img src={category.image} className="w-full h-full object-cover" alt="" />
+            <div className="absolute inset-0 z-0 pointer-events-none">
+               <img src={category.image} className="w-full h-full object-cover object-right" alt="" />
             </div>
+            {/* Gradient ensures text remains readable on the left while leaving the right side visible */}
             <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent dark:from-slate-900 dark:via-slate-900/80 z-0 pointer-events-none"></div>
           </>
         )}
