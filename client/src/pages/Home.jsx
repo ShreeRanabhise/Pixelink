@@ -221,7 +221,7 @@ const Home = () => {
               </div>
               <button
                 type="submit"
-                className="bg-gradient-brand hover:opacity-90 text-white font-bold px-8 py-3 rounded-full transition-all duration-300 flex items-center shadow-lg hover:shadow-brand-500/25 hover:scale-105 active:scale-95 text-base"
+                className="bg-gradient-to-r from-rose-500 via-fuchsia-500 to-orange-500 animate-text-gradient text-white font-bold px-8 py-3 rounded-full transition-all duration-300 flex items-center shadow-lg hover:shadow-fuchsia-500/25 hover:scale-105 active:scale-95 text-base"
               >
                 Search
               </button>
