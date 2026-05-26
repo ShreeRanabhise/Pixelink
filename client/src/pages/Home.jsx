@@ -204,7 +204,7 @@ const Home = () => {
 
           {/* Search Box Wrapper */}
           <div ref={suggestionRef} className="max-w-2xl mx-auto relative mt-6">
-            <form onSubmit={handleSearchSubmit} className="flex glass rounded-full overflow-hidden bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl border border-white/60 dark:border-slate-700/50 p-2 shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all focus-within:ring-2 focus-within:ring-rose-500/50 focus-within:shadow-[0_0_30px_rgba(244,63,94,0.4)]">
+            <form onSubmit={handleSearchSubmit} className="flex glass rounded-full overflow-hidden bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl border border-white/60 dark:border-slate-700/50 p-2 animate-search-glow transition-all focus-within:ring-2 focus-within:ring-rose-500/50">
               <div className="flex-grow flex items-center px-4 text-slate-400">
                 <Search className="w-5 h-5 mr-2.5 text-brand-500" />
                 <input

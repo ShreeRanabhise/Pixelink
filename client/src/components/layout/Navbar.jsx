@@ -109,7 +109,7 @@ const Navbar = () => {
                 }}
                 onFocus={() => setShowSuggestions(true)}
                 placeholder="Search PNGs..."
-                className="w-full pl-10 pr-24 py-2 rounded-full border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50 text-sm shadow-[0_0_10px_rgba(139,92,246,0.2)] focus:outline-none focus:border-rose-500 focus:ring-2 focus:ring-rose-500/50 focus:shadow-[0_0_15px_rgba(244,63,94,0.4)] text-slate-800 dark:text-slate-200 transition-all"
+                className="w-full pl-10 pr-24 py-2 rounded-full border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50 text-sm animate-search-glow focus:outline-none focus:border-rose-500 focus:ring-2 focus:ring-rose-500/50 text-slate-800 dark:text-slate-200 transition-all"
               />
               <Search className="absolute left-3.5 top-2.5 w-4 h-4 text-slate-400" />
               <button
