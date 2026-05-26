@@ -132,7 +132,7 @@ const PublicUpload = () => {
 
       <div className="space-y-6 text-center mb-10">
         <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
-          Submit Your Png's PNG
+          Submit Your Transparent PNG
         </h1>
         <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400 max-w-lg mx-auto">
           Share your high-quality transparent PNG graphics. Submissions go to a review queue and will be published once approved.
