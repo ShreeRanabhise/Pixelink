@@ -142,7 +142,7 @@ const AdminLayout = ({ children, title }) => {
         {/* Brand Header */}
         <div className="h-20 px-6 border-b border-slate-200/60 dark:border-slate-800/60 flex items-center space-x-3">
           <div className="p-1.5 bg-white dark:bg-[#151c2c] border border-slate-200 dark:border-slate-700/50 rounded-xl shadow-sm">
-            <img src={settings?.logoUrl || "/logo.png"} alt="Logo" className="w-7 h-7 object-contain drop-shadow-sm" />
+            <img src={settings?.logoUrl || "/logo.png"} alt="Logo" className="w-[34px] h-[34px] object-contain drop-shadow-sm" />
           </div>
           <div>
             <span className="text-lg font-black tracking-tight text-slate-900 dark:text-white">
@@ -213,7 +213,7 @@ const AdminLayout = ({ children, title }) => {
       <header className="md:hidden flex items-center justify-between px-6 h-16 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-30">
         <div className="flex items-center space-x-3">
           <div className="p-1.5 bg-white dark:bg-[#151c2c] border border-slate-200 dark:border-slate-700/50 rounded-lg shadow-sm">
-            <img src={settings?.logoUrl || "/logo.png"} alt="Logo" className="w-5 h-5 object-contain" />
+            <img src={settings?.logoUrl || "/logo.png"} alt="Logo" className="w-6 h-6 object-contain" />
           </div>
           <span className="font-extrabold text-sm text-slate-900 dark:text-white">
             {roleName} Panel
