@@ -280,7 +280,7 @@ const PngDetail = () => {
           </div>
 
           {/* Action Row & Download Section (Mobile Only Below Image) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 block lg:hidden">
+          <div className="grid lg:hidden grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
             {/* Download Button */}
             <div className="space-y-3">
               <button
@@ -312,7 +312,7 @@ const PngDetail = () => {
             </div>
           </div>
           
-          <p className="text-[11px] font-bold text-slate-500 dark:text-slate-450 uppercase tracking-widest mt-1 block lg:hidden">
+          <p className="text-[11px] font-bold text-slate-500 dark:text-slate-450 uppercase tracking-widest mt-1 lg:hidden">
             Transparent background • HD quality • 100% free
           </p>
 
