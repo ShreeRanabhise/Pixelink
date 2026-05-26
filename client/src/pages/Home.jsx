@@ -139,29 +139,29 @@ const Home = () => {
       <SEO title="Home" />
 
       {/* 1. Hero / Search Banner */}
-      <section className="relative z-20 bg-slate-50 dark:bg-[#090d16] text-slate-900 dark:text-white py-16 sm:py-24 flex flex-col justify-center items-center overflow-hidden">
+      <section className="relative z-20 bg-slate-50 dark:bg-[#090d16] text-slate-900 dark:text-white py-10 sm:py-16 flex flex-col justify-center items-center overflow-hidden">
         {/* Glow Spheres */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-rose-400/20 dark:bg-brand-500/15 blur-[120px] animate-pulse-slow"></div>
-          <div className="absolute bottom-0 right-1/4 translate-x-1/2 translate-y-1/4 w-[600px] h-[600px] rounded-full bg-orange-400/20 dark:bg-purple-500/15 blur-[150px]"></div>
+          <div className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full bg-rose-400/20 dark:bg-brand-500/15 blur-[120px] animate-glow-upper"></div>
+          <div className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full bg-orange-400/20 dark:bg-purple-500/15 blur-[150px] animate-glow-lower"></div>
         </div>
 
-        <div className="relative max-w-4xl mx-auto px-4 text-center z-10 space-y-4">
+        <div className="relative max-w-4xl mx-auto px-4 text-center z-10 space-y-3">
 
-          <h1 className="text-4xl sm:text-5xl lg:text-[4.5rem] font-black tracking-tight leading-[1.1] text-slate-900 dark:text-white">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-[1.15] text-slate-900 dark:text-white">
             Download <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 via-fuchsia-500 to-orange-500">High-Quality Transparent</span>
             <br className="hidden sm:block" />
             {' '}PNG Images <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-rose-500">Free</span>
           </h1>
-          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto font-medium">
+          <p className="text-base text-slate-600 dark:text-slate-300 max-w-xl mx-auto font-medium">
             {settings.heroSubtitle?.replace("0+", `${categoriesRes?.data?.length || 0}+`)}
           </p>
 
           {/* Search Box Wrapper */}
-          <div ref={suggestionRef} className="max-w-3xl mx-auto relative mt-10">
-            <form onSubmit={handleSearchSubmit} className="flex glass rounded-full overflow-hidden bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl border border-white/60 dark:border-slate-700/50 p-2.5 shadow-2xl transition-all focus-within:ring-4 focus-within:ring-brand-500/20 focus-within:border-brand-500/50">
-              <div className="flex-grow flex items-center px-5 text-slate-400">
-                <Search className="w-6 h-6 mr-3 text-brand-500" />
+          <div ref={suggestionRef} className="max-w-2xl mx-auto relative mt-6">
+            <form onSubmit={handleSearchSubmit} className="flex glass rounded-full overflow-hidden bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl border border-white/60 dark:border-slate-700/50 p-2 shadow-2xl transition-all focus-within:ring-4 focus-within:ring-brand-500/20 focus-within:border-brand-500/50">
+              <div className="flex-grow flex items-center px-4 text-slate-400">
+                <Search className="w-5 h-5 mr-2.5 text-brand-500" />
                 <input
                   type="text"
                   placeholder="Try diwali diya, ganpati bappa, rakhi..."
@@ -171,12 +171,12 @@ const Home = () => {
                     setShowSuggestions(true);
                   }}
                   onFocus={() => setShowSuggestions(true)}
-                  className="w-full bg-transparent border-0 text-slate-900 dark:text-slate-100 placeholder-slate-400 font-medium focus:ring-0 focus:outline-none py-3 text-lg"
+                  className="w-full bg-transparent border-0 text-slate-900 dark:text-slate-100 placeholder-slate-400 font-medium focus:ring-0 focus:outline-none py-2 text-base"
                 />
               </div>
               <button
                 type="submit"
-                className="bg-gradient-brand hover:opacity-90 text-white font-bold px-10 py-4 rounded-full transition-all duration-300 flex items-center shadow-lg hover:shadow-brand-500/25 hover:scale-105 active:scale-95 text-lg"
+                className="bg-gradient-brand hover:opacity-90 text-white font-bold px-8 py-3 rounded-full transition-all duration-300 flex items-center shadow-lg hover:shadow-brand-500/25 hover:scale-105 active:scale-95 text-base"
               >
                 Search
               </button>

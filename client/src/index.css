@@ -87,3 +87,30 @@
 .glow-card:hover::after {
   opacity: 1;
 }
+
+/* Glow Animations */
+@keyframes moveLeftToRight {
+  0% {
+    transform: translate(-100%, -50%);
+  }
+  100% {
+    transform: translate(100vw, -50%);
+  }
+}
+
+@keyframes moveRightToLeft {
+  0% {
+    transform: translate(100%, 25%);
+  }
+  100% {
+    transform: translate(-100vw, 25%);
+  }
+}
+
+.animate-glow-upper {
+  animation: moveLeftToRight 25s infinite linear;
+}
+
+.animate-glow-lower {
+  animation: moveRightToLeft 25s infinite linear;
+}
