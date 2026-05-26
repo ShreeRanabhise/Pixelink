@@ -136,7 +136,7 @@ const Home = () => {
 
   return (
     <div className="pb-20">
-      <SEO title="Home" />
+      <SEO />
 
       {/* 1. Hero / Search Banner */}
       <section className="relative z-20 bg-slate-50 dark:bg-[#090d16] text-slate-900 dark:text-white py-10 sm:py-16 flex flex-col justify-center items-center overflow-hidden">

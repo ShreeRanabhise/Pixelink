@@ -40,7 +40,7 @@ const AdminLogin = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950 px-4 relative overflow-hidden bg-grid-pattern bg-[size:40px_40px] text-slate-900 dark:text-white">
       {" "}
-      <SEO title="Admin Login" /> {/* Floating Back to Site Link */}{" "}
+      <SEO title="Community Access" /> {/* Floating Back to Site Link */}{" "}
       <a
         href="/"
         className="absolute top-6 left-6 inline-flex items-center text-xs text-slate-700 dark:text-slate-300 hover:text-brand-500 dark:hover:text-brand-400 transition-colors bg-white/80 dark:bg-slate-900/50 backdrop-blur border border-slate-200 dark:border-slate-800 px-3.5 py-2 rounded-xl"
