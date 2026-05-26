@@ -204,7 +204,7 @@ const PngDetail = () => {
   } : null;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 space-y-16">
+    <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 space-y-10">
       <SEO 
         title={`${png.title} Transparent PNG`} 
         description={png.description || `Download free high-resolution ${png.title} transparent PNG Png's.`}
@@ -232,7 +232,7 @@ const PngDetail = () => {
         </span>
       </nav>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Left Column: Interactive Image Viewer & Tags */}
         <div className="lg:col-span-8 flex flex-col space-y-8">
           <div className={`relative w-full aspect-[4/3] rounded-[2rem] ${getBgClass()} flex items-center justify-center p-8 border border-slate-200/60 dark:border-slate-800/60 shadow-inner select-none transition-all duration-300 overflow-hidden`}>
@@ -435,7 +435,7 @@ const PngDetail = () => {
         {relatedRes?.data?.length === 0 ? (
           <p className="text-sm text-slate-400">No related transparent files in this category.</p>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
             {relatedRes?.data ? (
               relatedRes.data.map((rPng) => <PngCard key={rPng._id} png={rPng} />)
             ) : (

@@ -36,7 +36,7 @@ const Categories = () => {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 space-y-12">
+    <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 space-y-10">
       <SEO title="Categories" description="Browse free transparent PNG Png's by topic: animals, tech, nature, food, and more." />
 
       <div className="space-y-3">
@@ -105,7 +105,7 @@ const Categories = () => {
           ))}
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {filteredCategories.map((cat) => (
             <Link
               key={cat._id}

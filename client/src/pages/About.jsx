@@ -4,7 +4,7 @@ import SEO from '../components/common/SEO';
 
 const About = () => {
   return (
-    <div className="max-w-5xl mx-auto px-4 py-16 sm:px-6 lg:px-8 space-y-16">
+    <div className="max-w-5xl mx-auto px-4 py-12 sm:px-6 lg:px-8 space-y-10">
       <SEO title="About Us" />
 
       {/* Hero Section */}
@@ -18,7 +18,7 @@ const About = () => {
       </div>
 
       {/* Feature Blocks */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="glass bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl p-8 rounded-[2rem] space-y-5 border border-slate-200/60 dark:border-slate-800/60 shadow-lg hover:shadow-2xl transition-all hover:-translate-y-1">
           <div className="p-3 bg-brand-500/10 text-brand-500 rounded-2xl w-fit shadow-inner">
             <Layers className="w-6 h-6" />

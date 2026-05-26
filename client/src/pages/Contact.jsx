@@ -49,7 +49,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8 space-y-12">
+    <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 space-y-10">
       <SEO title="Contact Us" />
 
       {/* Header */}
@@ -129,7 +129,7 @@ const Contact = () => {
 
         {/* Contact Form (Right Panel) */}
         <div className="lg:col-span-2">
-          <form onSubmit={handleSubmit} className="glass bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl p-8 sm:p-10 rounded-[2.5rem] border border-slate-200/60 dark:border-slate-800/60 space-y-8 shadow-xl relative overflow-hidden">
+          <form onSubmit={handleSubmit} className="glass bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl p-8 sm:p-10 rounded-[2.5rem] border border-slate-200/60 dark:border-slate-800/60 space-y-6 shadow-xl relative overflow-hidden">
              {/* Glow */}
             <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-brand-500/10 blur-[80px] pointer-events-none"></div>
             

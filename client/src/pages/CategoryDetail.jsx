@@ -50,7 +50,7 @@ const CategoryDetail = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 space-y-12">
+    <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 space-y-10">
       {category && (
         <SEO
           title={`${category.name} Transparent PNGs`}
@@ -115,7 +115,7 @@ const CategoryDetail = () => {
         </div>
       ) : (
         <div className="space-y-10">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
             {pngsRes.data.map((png) => (
               <PngCard key={png._id} png={png} />
             ))}
