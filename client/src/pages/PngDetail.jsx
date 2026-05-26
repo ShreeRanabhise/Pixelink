@@ -248,15 +248,7 @@ const PngDetail = () => {
               draggable="false"
             />
             
-            {/* Watermark Overlay */}
-            <div 
-              className="absolute inset-0 z-10 pointer-events-none opacity-[0.60] dark:opacity-70"
-              style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg width='180' height='180' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='50%25' y='50%25' font-size='25' fill='%23000' font-family='ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Arial' font-weight='900' text-anchor='middle' transform='rotate(-35 90 90)'%3EPixelink%3C/text%3E%3C/svg%3E")`,
-                backgroundRepeat: 'repeat',
-                backgroundPosition: 'center center'
-              }}
-            ></div>
+
 
             {/* Checkerboard controls */}
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 glass bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl p-1.5 rounded-2xl flex space-x-1.5 border border-slate-200/60 dark:border-white/10 shadow-2xl">
