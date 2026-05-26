@@ -14,13 +14,13 @@ const PngCard = ({ png, onDownloadSuccess, rank }) => {
   let rankIconColor = "";
 
   if (rank === 1) {
-    rankStyles = "ring-2 ring-yellow-400 shadow-[0_0_15px_rgba(250,204,21,0.6)] z-10 scale-[1.02]";
+    rankStyles = "ring-2 ring-yellow-400 z-10 scale-[1.02] animate-glow-gold";
     rankIconColor = "text-yellow-400 bg-yellow-400/20 border-yellow-400/50";
   } else if (rank === 2) {
-    rankStyles = "ring-2 ring-slate-300 shadow-[0_0_15px_rgba(203,213,225,0.6)] z-10 scale-[1.01]";
+    rankStyles = "ring-2 ring-slate-300 z-10 scale-[1.01] animate-glow-silver";
     rankIconColor = "text-slate-200 bg-slate-300/20 border-slate-300/50";
   } else if (rank === 3) {
-    rankStyles = "ring-2 ring-amber-600 shadow-[0_0_15px_rgba(217,119,6,0.6)] z-10 scale-[1.01]";
+    rankStyles = "ring-2 ring-amber-600 z-10 scale-[1.01] animate-glow-bronze";
     rankIconColor = "text-amber-500 bg-amber-600/20 border-amber-600/50";
   }
 
