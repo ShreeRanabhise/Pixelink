@@ -38,8 +38,8 @@ const AdminManageCategories = () => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      if (!file.type.includes("jpeg") && !file.type.includes("jpg")) {
-        toast.error("Only JPG or JPEG images are allowed for category covers.");
+      if (!file.type.includes("jpeg") && !file.type.includes("jpg") && !file.type.includes("png")) {
+        toast.error("Only JPG, JPEG, or PNG images are allowed for category covers.");
         return;
       }
       setImageFile(file);
@@ -219,7 +219,7 @@ const AdminManageCategories = () => {
                         <input
                           type="file"
                           onChange={handleImageChange}
-                          accept="image/jpeg"
+                          accept="image/jpeg,image/png"
                           className="hidden"
                         />{" "}
                       </label>{" "}
@@ -233,12 +233,12 @@ const AdminManageCategories = () => {
                       Click to upload cover
                     </span>{" "}
                     <span className="text-[10px] text-slate-600 dark:text-slate-500 mt-1">
-                      JPG or JPEG format only
+                      JPG, JPEG, or PNG format only
                     </span>{" "}
                     <input
                       type="file"
                       onChange={handleImageChange}
-                      accept="image/jpeg"
+                      accept="image/jpeg,image/png"
                       className="hidden"
                     />{" "}
                   </label>
