@@ -243,7 +243,9 @@ const PngDetail = () => {
               wrapperProps={{
                   style: { display: "flex", width: "100%", height: "100%", justifyContent: "center", alignItems: "center", position: "relative", zIndex: 0 }
               }}
-              className="max-h-full max-w-full object-contain drop-shadow-xl"
+              className="max-h-full max-w-full object-contain drop-shadow-xl pointer-events-none select-none"
+              onContextMenu={(e) => e.preventDefault()}
+              draggable="false"
             />
             
             {/* Watermark Overlay */}
