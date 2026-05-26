@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { ChevronLeft, Folder, ChevronRight } from 'lucide-react';
-import { motion } from 'framer-motion';
 import api from '../api/axios';
 import PngCard from '../components/cards/PngCard';
 import SkeletonCard from '../components/loaders/SkeletonCard';
@@ -61,10 +60,19 @@ const CategoryDetail = () => {
 
       {/* Header / Breadcrumb */}
       {/* Dynamic Sticky Glass Header */}
-      <div className="glass bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800/60 p-6 sm:p-10 rounded-[2.5rem] shadow-lg relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
+      <div className="space-y-4 glass bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800/60 p-6 sm:p-8 rounded-[2rem] shadow-sm relative overflow-hidden">
         
-        {/* Left Content */}
-        <div className="relative z-10 flex-1 space-y-5 w-full">
+        {/* Banner image background if category has an image */}
+        {category?.image && (
+          <>
+            <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] z-0 pointer-events-none">
+               <img src={category.image} className="w-full h-full object-cover" alt="" />
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent dark:from-slate-900 dark:via-slate-900/80 z-0 pointer-events-none"></div>
+          </>
+        )}
+
+        <div className="relative z-10 space-y-5">
           <Link
             to="/categories"
             className="inline-flex items-center text-[10px] font-bold text-slate-500 dark:text-slate-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors uppercase tracking-widest bg-white/50 dark:bg-slate-800/50 px-3 py-1.5 rounded-lg border border-slate-200/60 dark:border-slate-700/50"
@@ -73,40 +81,19 @@ const CategoryDetail = () => {
             Back to categories
           </Link>
           <div className="flex items-center space-x-4">
-            <div className="p-3.5 bg-brand-500/10 text-brand-600 dark:text-brand-400 rounded-2xl shadow-inner hidden sm:block">
-              <Folder className="w-7 h-7" />
+            <div className="p-3 bg-brand-500/10 text-brand-600 dark:text-brand-400 rounded-2xl shadow-inner hidden sm:block">
+              <Folder className="w-6 h-6" />
             </div>
-            <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-slate-100">
+            <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100">
               {category ? <>{category.name} <span className="text-transparent bg-clip-text bg-gradient-brand">Assets</span></> : 'Category Details'}
             </h1>
           </div>
           {category?.description && (
-            <p className="text-sm sm:text-base font-medium text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed pt-3 border-t border-slate-200/60 dark:border-slate-800/60">
+            <p className="text-sm sm:text-base font-medium text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed pt-2 border-t border-slate-200/60 dark:border-slate-800/60">
               {category.description}
             </p>
           )}
         </div>
-
-        {/* Right Asset (Improved Premium Cover Image) */}
-        {category?.image && (
-          <div className="relative z-10 flex-shrink-0 w-32 h-32 md:w-56 md:h-56 flex items-center justify-center group">
-            {/* Ambient Glow behind the image */}
-            <div className="absolute inset-0 bg-brand-500/20 dark:bg-brand-500/30 blur-3xl rounded-full"></div>
-            
-            <motion.div 
-              initial={{ y: 0 }}
-              animate={{ y: [-8, 8, -8] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="relative w-full h-full checkerboard-bg rounded-[2.5rem] border border-white/50 dark:border-slate-700/60 shadow-2xl p-4 md:p-8 overflow-hidden glass group-hover:scale-105 transition-transform duration-500 flex items-center justify-center"
-            >
-              <img 
-                src={category.image} 
-                className="max-w-full max-h-full object-contain filter drop-shadow-2xl group-hover:rotate-3 transition-transform duration-500" 
-                alt={`${category.name} cover`} 
-              />
-            </motion.div>
-          </div>
-        )}
       </div>
 
       {/* PNG Grid list */}
