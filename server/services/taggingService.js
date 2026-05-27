@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Setting from '../models/Setting.js';
 
 // Stopwords for local tag generation fallback
 const STOPWORDS = new Set([
@@ -14,7 +15,8 @@ const STOPWORDS = new Set([
  * @returns {Promise<string[]>} - Array of unique tag strings
  */
 export const generateTags = async (title, description = '', categoryName = '') => {
-  const apiKey = process.env.OPENAI_API_KEY;
+  const settings = await Setting.findOne() || {};
+  const apiKey = process.env.OPENAI_API_KEY || settings.openAiApiKey;
 
   if (apiKey) {
     try {

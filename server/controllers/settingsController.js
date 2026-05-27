@@ -20,7 +20,10 @@ export const getSettings = async (req, res, next) => {
 
 export const updateSettings = async (req, res, next) => {
   try {
-    const { siteName, heroTitle, heroSubtitle, contactEmail, contactPhone, contactAddress, adsenseEnabled } = req.body;
+    const { 
+      siteName, heroTitle, heroSubtitle, contactEmail, contactPhone, contactAddress, adsenseEnabled,
+      cloudinaryCloudName, cloudinaryApiKey, cloudinaryApiSecret, removeBgApiKey, openAiApiKey 
+    } = req.body;
     let settings = await Setting.findOne();
     if (!settings) settings = new Setting();
     
@@ -31,6 +34,11 @@ export const updateSettings = async (req, res, next) => {
     if (contactPhone !== undefined) settings.contactPhone = contactPhone;
     if (contactAddress !== undefined) settings.contactAddress = contactAddress;
     if (adsenseEnabled !== undefined) settings.adsenseEnabled = adsenseEnabled;
+    if (cloudinaryCloudName !== undefined) settings.cloudinaryCloudName = cloudinaryCloudName;
+    if (cloudinaryApiKey !== undefined) settings.cloudinaryApiKey = cloudinaryApiKey;
+    if (cloudinaryApiSecret !== undefined) settings.cloudinaryApiSecret = cloudinaryApiSecret;
+    if (removeBgApiKey !== undefined) settings.removeBgApiKey = removeBgApiKey;
+    if (openAiApiKey !== undefined) settings.openAiApiKey = openAiApiKey;
 
     await settings.save();
     
@@ -75,12 +83,13 @@ export const updateLogo = async (req, res, next) => {
 
 export const getSystemHealth = async (req, res, next) => {
   try {
+    const settings = await Setting.findOne() || {};
     const isCloudinaryConfigured = !!(
-      process.env.CLOUDINARY_CLOUD_NAME &&
-      process.env.CLOUDINARY_API_KEY &&
-      process.env.CLOUDINARY_API_SECRET
+      (process.env.CLOUDINARY_CLOUD_NAME || settings.cloudinaryCloudName) &&
+      (process.env.CLOUDINARY_API_KEY || settings.cloudinaryApiKey) &&
+      (process.env.CLOUDINARY_API_SECRET || settings.cloudinaryApiSecret)
     );
-    const isRemoveBgConfigured = !!process.env.REMOVE_BG_API_KEY;
+    const isRemoveBgConfigured = !!(process.env.REMOVE_BG_API_KEY || settings.removeBgApiKey);
 
     res.status(200).json({
       success: true,

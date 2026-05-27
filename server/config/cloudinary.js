@@ -3,23 +3,20 @@ import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 
-// Flag to check if Cloudinary is configured
-const isCloudinaryConfigured = !!(
-  process.env.CLOUDINARY_CLOUD_NAME &&
-  process.env.CLOUDINARY_API_KEY &&
-  process.env.CLOUDINARY_API_SECRET
-);
+import Setting from '../models/Setting.js';
 
-if (isCloudinaryConfigured) {
-  cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
-  });
-  console.log('Cloudinary initialized successfully.');
-} else {
-  console.warn('Cloudinary environment variables missing. Falling back to local storage in server/uploads/ directory.');
-}
+const getCloudinaryConfig = async () => {
+  const settings = await Setting.findOne() || {};
+  const cloud_name = process.env.CLOUDINARY_CLOUD_NAME || settings.cloudinaryCloudName;
+  const api_key = process.env.CLOUDINARY_API_KEY || settings.cloudinaryApiKey;
+  const api_secret = process.env.CLOUDINARY_API_SECRET || settings.cloudinaryApiSecret;
+
+  if (cloud_name && api_key && api_secret) {
+    cloudinary.config({ cloud_name, api_key, api_secret });
+    return true;
+  }
+  return false;
+};
 
 /**
  * Uploads a buffer to Cloudinary, or falls back to local file storage.
@@ -29,6 +26,7 @@ if (isCloudinaryConfigured) {
  * @returns {Promise<{ secure_url: string, public_id: string }>}
  */
 export const uploadBuffer = async (buffer, folder, originalName = 'image.png') => {
+  const isCloudinaryConfigured = await getCloudinaryConfig();
   if (isCloudinaryConfigured) {
     return new Promise((resolve, reject) => {
       const uploadStream = cloudinary.uploader.upload_stream(
@@ -90,6 +88,7 @@ export const uploadBuffer = async (buffer, folder, originalName = 'image.png') =
 export const deleteAsset = async (publicId) => {
   if (!publicId) return;
 
+  const isCloudinaryConfigured = await getCloudinaryConfig();
   if (isCloudinaryConfigured && !publicId.startsWith('local/')) {
     return new Promise((resolve, reject) => {
       cloudinary.uploader.destroy(publicId, (error, result) => {

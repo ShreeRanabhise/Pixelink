@@ -35,6 +35,11 @@ const AdminSettings = () => {
     contactPhone: currentSettings?.contactPhone || "+1 (555) 123-4567",
     contactAddress: currentSettings?.contactAddress || "100 Alpha Strip, San Francisco, CA",
     adsenseEnabled: currentSettings?.adsenseEnabled || false,
+    cloudinaryCloudName: currentSettings?.cloudinaryCloudName || "",
+    cloudinaryApiKey: currentSettings?.cloudinaryApiKey || "",
+    cloudinaryApiSecret: currentSettings?.cloudinaryApiSecret || "",
+    removeBgApiKey: currentSettings?.removeBgApiKey || "",
+    openAiApiKey: currentSettings?.openAiApiKey || "",
   });
   const [isSaving, setIsSaving] = useState(false);
 
@@ -45,6 +50,11 @@ const AdminSettings = () => {
         contactPhone: currentSettings.contactPhone || "+1 (555) 123-4567",
         contactAddress: currentSettings.contactAddress || "100 Alpha Strip, San Francisco, CA",
         adsenseEnabled: currentSettings.adsenseEnabled || false,
+        cloudinaryCloudName: currentSettings.cloudinaryCloudName || "",
+        cloudinaryApiKey: currentSettings.cloudinaryApiKey || "",
+        cloudinaryApiSecret: currentSettings.cloudinaryApiSecret || "",
+        removeBgApiKey: currentSettings.removeBgApiKey || "",
+        openAiApiKey: currentSettings.openAiApiKey || "",
       });
     }
   }, [currentSettings]);
@@ -219,10 +229,10 @@ const AdminSettings = () => {
                 </div>
                 <div>
                   <h2 className="text-xl font-black text-slate-900 dark:text-white">
-                    Monetization
+                    Monetization & API Keys
                   </h2>
                   <p className="text-sm font-semibold text-slate-500 dark:text-slate-400 mt-1">
-                    Control advertising and revenue streams globally.
+                    Control advertising and external API service keys globally.
                   </p>
                 </div>
               </div>
@@ -253,6 +263,82 @@ const AdminSettings = () => {
                   <div className="w-14 h-8 bg-slate-300 dark:bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-brand-500 shadow-inner"></div>
                 </label>
               </div>
+
+              {/* API Keys Settings */}
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2.5">
+                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider flex items-center">
+                      <Cloud className="w-4 h-4 mr-2 text-slate-400" /> Cloudinary Cloud Name
+                    </label>
+                    <input
+                      type="text"
+                      name="cloudinaryCloudName"
+                      value={formData.cloudinaryCloudName}
+                      onChange={handleInputChange}
+                      placeholder="Optional, overrides .env"
+                      className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900/50 px-5 py-3.5 text-sm font-medium text-slate-900 dark:text-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all shadow-sm"
+                    />
+                  </div>
+                  <div className="space-y-2.5">
+                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider flex items-center">
+                      <Cloud className="w-4 h-4 mr-2 text-slate-400" /> Cloudinary API Key
+                    </label>
+                    <input
+                      type="text"
+                      name="cloudinaryApiKey"
+                      value={formData.cloudinaryApiKey}
+                      onChange={handleInputChange}
+                      placeholder="Optional, overrides .env"
+                      className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900/50 px-5 py-3.5 text-sm font-medium text-slate-900 dark:text-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all shadow-sm"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2.5 md:col-span-2">
+                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider flex items-center">
+                      <Cloud className="w-4 h-4 mr-2 text-slate-400" /> Cloudinary API Secret
+                    </label>
+                    <input
+                      type="password"
+                      name="cloudinaryApiSecret"
+                      value={formData.cloudinaryApiSecret}
+                      onChange={handleInputChange}
+                      placeholder="Optional, overrides .env"
+                      className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900/50 px-5 py-3.5 text-sm font-medium text-slate-900 dark:text-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all shadow-sm"
+                    />
+                  </div>
+
+                  <div className="space-y-2.5">
+                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider flex items-center">
+                      <Cpu className="w-4 h-4 mr-2 text-slate-400" /> Remove.bg API Key
+                    </label>
+                    <input
+                      type="password"
+                      name="removeBgApiKey"
+                      value={formData.removeBgApiKey}
+                      onChange={handleInputChange}
+                      placeholder="Optional, overrides .env"
+                      className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900/50 px-5 py-3.5 text-sm font-medium text-slate-900 dark:text-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all shadow-sm"
+                    />
+                  </div>
+                  <div className="space-y-2.5">
+                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider flex items-center">
+                      <Cpu className="w-4 h-4 mr-2 text-slate-400" /> OpenAI API Key
+                    </label>
+                    <input
+                      type="password"
+                      name="openAiApiKey"
+                      value={formData.openAiApiKey}
+                      onChange={handleInputChange}
+                      placeholder="Optional, overrides .env"
+                      className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900/50 px-5 py-3.5 text-sm font-medium text-slate-900 dark:text-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all shadow-sm"
+                    />
+                  </div>
+                </div>
+              </div>
+
 
               {/* Floating Save Bar */}
               <div className="mt-8 flex justify-end">

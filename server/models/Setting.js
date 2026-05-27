@@ -9,7 +9,12 @@ const settingSchema = new mongoose.Schema(
     contactEmail: { type: String, default: 'support@pixelink.com' },
     contactPhone: { type: String, default: '+1 (555) 123-4567' },
     contactAddress: { type: String, default: '100 Alpha Strip, San Francisco, CA' },
-    adsenseEnabled: { type: Boolean, default: false }
+    adsenseEnabled: { type: Boolean, default: false },
+    cloudinaryCloudName: { type: String, default: '' },
+    cloudinaryApiKey: { type: String, default: '' },
+    cloudinaryApiSecret: { type: String, default: '' },
+    removeBgApiKey: { type: String, default: '' },
+    openAiApiKey: { type: String, default: '' }
   },
   { timestamps: true }
 );

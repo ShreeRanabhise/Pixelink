@@ -1,4 +1,5 @@
 import { removeBackground as imglyRemoveBackground } from '@imgly/background-removal-node';
+import Setting from '../models/Setting.js';
 import axios from 'axios';
 import FormData from 'form-data';
 import sharp from 'sharp';
@@ -22,7 +23,8 @@ export const removeBackground = async (buffer) => {
     console.error('[AI Service] Failed to analyze image transparency. Proceeding with removal:', error.message);
   }
 
-  const apiKey = process.env.REMOVE_BG_API_KEY;
+  const settings = await Setting.findOne() || {};
+  const apiKey = process.env.REMOVE_BG_API_KEY || settings.removeBgApiKey;
 
   if (apiKey) {
     try {
