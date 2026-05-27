@@ -22,8 +22,6 @@ const AdminUploadPng = () => {
   const [description, setDescription] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [tags, setTags] = useState("");
-  const [featured, setFeatured] = useState(false);
-  const [runAI, setRunAI] = useState(false);
   const [submitting, setSubmitting] =
     useState(false); /* Fetch categories for select dropdown  */
   const { data: categoriesRes, isLoading: catsLoading } = useQuery({
@@ -93,8 +91,6 @@ const AdminUploadPng = () => {
     formData.append("description", description.trim());
     formData.append("categoryId", categoryId);
     formData.append("tags", tags);
-    formData.append("featured", featured ? "true" : "false");
-    formData.append("runAI", runAI ? "true" : "false");
     try {
       await api.post("/pngs", formData, {
         headers: { "Content-Type": "multipart/form-data" },
@@ -277,66 +273,11 @@ const AdminUploadPng = () => {
                     onChange={(e) => setTags(e.target.value)}
                     placeholder="chair, luxury, furniture, leather"
                     className="w-full rounded-2xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-950/40 px-4 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-650 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all"
-                    disabled={runAI}
                   />{" "}
-                  {runAI && (
-                    <p className="text-[10px] text-brand-400">
-                      AI auto-tagging will generate optimized keyword indices.
-                    </p>
-                  )}{" "}
                 </div>{" "}
               </div>{" "}
             </div>{" "}
-            {/* Checkbox / Switch controls */}{" "}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-slate-200 dark:border-slate-850">
-              {" "}
-              <div className="flex items-center space-x-3 bg-slate-900/30 border border-slate-200 dark:border-slate-850 p-4 rounded-2xl">
-                {" "}
-                <input
-                  type="checkbox"
-                  id="featured"
-                  checked={featured}
-                  onChange={(e) => setFeatured(e.target.checked)}
-                  className="rounded text-brand-650 focus:ring-brand-500 border-slate-300 dark:border-slate-800 w-4 h-4 bg-slate-50 dark:bg-slate-950"
-                />{" "}
-                <label htmlFor="featured" className="cursor-pointer">
-                  {" "}
-                  <span className="text-sm font-bold text-white block">
-                    Pin to Featured
-                  </span>{" "}
-                  <span className="text-[10px] text-slate-600 dark:text-slate-500">
-                    Showcase this PNG on the home page gallery.
-                  </span>{" "}
-                </label>{" "}
-              </div>{" "}
-              <div className="flex items-center space-x-3 bg-slate-900/30 border border-slate-200 dark:border-slate-850 p-4 rounded-2xl">
-                {" "}
-                <input
-                  type="checkbox"
-                  id="runAI"
-                  checked={runAI}
-                  onChange={(e) => setRunAI(e.target.checked)}
-                  className="rounded text-brand-650 focus:ring-brand-500 border-slate-300 dark:border-slate-800 w-4 h-4 bg-slate-50 dark:bg-slate-950"
-                />{" "}
-                <label
-                  htmlFor="runAI"
-                  className="cursor-pointer flex items-center space-x-2"
-                >
-                  {" "}
-                  <div>
-                    {" "}
-                    <span className="text-sm font-bold text-white flex items-center">
-                      {" "}
-                      Run AI Pipelines{" "}
-                      <Sparkles className="w-3.5 h-3.5 ml-1.5 text-brand-450 animate-pulse" />{" "}
-                    </span>{" "}
-                    <span className="text-[10px] text-slate-600 dark:text-slate-500">
-                      Execute BG removal fallback & auto-labeling.
-                    </span>{" "}
-                  </div>{" "}
-                </label>{" "}
-              </div>{" "}
-            </div>{" "}
+
             <button
               type="submit"
               disabled={submitting || catsLoading}
