@@ -1,4 +1,3 @@
-import { removeBackground } from './backgroundRemovalService.js';
 import { enhanceImage } from './imageEnhancementService.js';
 import { generateTags } from './taggingService.js';
 
@@ -13,9 +12,6 @@ export const processUploadAI = async (file, metadata) => {
   let processedBuffer = file.buffer;
 
   try {
-    // 1. Remove background
-    processedBuffer = await removeBackground(processedBuffer);
-
     // 2. Enhance image
     processedBuffer = await enhanceImage(processedBuffer);
 

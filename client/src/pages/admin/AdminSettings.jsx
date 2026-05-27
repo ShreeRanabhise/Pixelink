@@ -107,14 +107,7 @@ const AdminSettings = () => {
         ? "Connected and routing assets directly to Cloudinary cloud storage." 
         : "Credentials absent. Storing files locally in /server/uploads.",
     },
-    {
-      name: "Remove.bg Pipeline",
-      status: "Local ML Active",
-      isActive: true,
-      type: "AI Background Png's",
-      icon: Cpu,
-      details: "Processing backgrounds using a free local ONNX ML model.",
-    },
+
     {
       name: "OpenAI Tagging",
       status: "Heuristics Active",
