@@ -265,7 +265,7 @@ const AdminSettings = () => {
               </div>
 
               {/* API Keys Settings */}
-              <div className="space-y-6">
+              <div className="space-y-6 mt-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2.5">
                     <label className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider flex items-center">
