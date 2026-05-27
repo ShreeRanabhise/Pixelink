@@ -195,28 +195,3 @@
   animation: none !important;
   box-shadow: 0 0 30px rgba(244, 63, 94, 0.6) !important;
 }
-
-/* Rank Glow Animations */
-@keyframes glowGold {
-  0%, 100% { box-shadow: 0 0 15px rgba(250, 204, 21, 0.5); }
-  50% { box-shadow: 0 0 30px rgba(250, 204, 21, 0.9); }
-}
-.animate-glow-gold {
-  animation: glowGold 2.5s ease-in-out infinite;
-}
-
-@keyframes glowSilver {
-  0%, 100% { box-shadow: 0 0 15px rgba(203, 213, 225, 0.5); }
-  50% { box-shadow: 0 0 30px rgba(203, 213, 225, 0.9); }
-}
-.animate-glow-silver {
-  animation: glowSilver 2.5s ease-in-out infinite;
-}
-
-@keyframes glowBronze {
-  0%, 100% { box-shadow: 0 0 15px rgba(217, 119, 6, 0.5); }
-  50% { box-shadow: 0 0 30px rgba(217, 119, 6, 0.9); }
-}
-.animate-glow-bronze {
-  animation: glowBronze 2.5s ease-in-out infinite;
-}
