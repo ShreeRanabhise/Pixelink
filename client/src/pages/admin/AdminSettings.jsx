@@ -38,7 +38,6 @@ const AdminSettings = () => {
     cloudinaryCloudName: currentSettings?.cloudinaryCloudName || "",
     cloudinaryApiKey: currentSettings?.cloudinaryApiKey || "",
     cloudinaryApiSecret: currentSettings?.cloudinaryApiSecret || "",
-    removeBgApiKey: currentSettings?.removeBgApiKey || "",
     openAiApiKey: currentSettings?.openAiApiKey || "",
   });
   const [isSaving, setIsSaving] = useState(false);
@@ -53,7 +52,6 @@ const AdminSettings = () => {
         cloudinaryCloudName: currentSettings.cloudinaryCloudName || "",
         cloudinaryApiKey: currentSettings.cloudinaryApiKey || "",
         cloudinaryApiSecret: currentSettings.cloudinaryApiSecret || "",
-        removeBgApiKey: currentSettings.removeBgApiKey || "",
         openAiApiKey: currentSettings.openAiApiKey || "",
       });
     }
@@ -89,7 +87,6 @@ const AdminSettings = () => {
   });
 
   const isCloudinaryActive = healthRes?.health?.cloudinary;
-  const isRemoveBgActive = healthRes?.health?.removeBg;
 
   const systemStatus = [
     {
@@ -112,13 +109,11 @@ const AdminSettings = () => {
     },
     {
       name: "Remove.bg Pipeline",
-      status: isRemoveBgActive ? "Active" : "Local ML Fallback",
-      isActive: isRemoveBgActive,
+      status: "Local ML Active",
+      isActive: true,
       type: "AI Background Png's",
       icon: Cpu,
-      details: isRemoveBgActive
-        ? "Connected to API. Bypassing calls for already transparent images."
-        : "Credentials absent. Processing backgrounds using a free local ONNX ML model.",
+      details: "Processing backgrounds using a free local ONNX ML model.",
     },
     {
       name: "OpenAI Tagging",
@@ -310,19 +305,7 @@ const AdminSettings = () => {
                     />
                   </div>
 
-                  <div className="space-y-2.5">
-                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider flex items-center">
-                      <Cpu className="w-4 h-4 mr-2 text-slate-400" /> Remove.bg API Key
-                    </label>
-                    <input
-                      type="password"
-                      name="removeBgApiKey"
-                      value={formData.removeBgApiKey}
-                      onChange={handleInputChange}
-                      placeholder="Optional, overrides .env"
-                      className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900/50 px-5 py-3.5 text-sm font-medium text-slate-900 dark:text-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all shadow-sm"
-                    />
-                  </div>
+
                   <div className="space-y-2.5">
                     <label className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider flex items-center">
                       <Cpu className="w-4 h-4 mr-2 text-slate-400" /> OpenAI API Key

@@ -13,7 +13,6 @@ const settingSchema = new mongoose.Schema(
     cloudinaryCloudName: { type: String, default: '' },
     cloudinaryApiKey: { type: String, default: '' },
     cloudinaryApiSecret: { type: String, default: '' },
-    removeBgApiKey: { type: String, default: '' },
     openAiApiKey: { type: String, default: '' }
   },
   { timestamps: true }

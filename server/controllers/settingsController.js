@@ -22,7 +22,7 @@ export const updateSettings = async (req, res, next) => {
   try {
     const { 
       siteName, heroTitle, heroSubtitle, contactEmail, contactPhone, contactAddress, adsenseEnabled,
-      cloudinaryCloudName, cloudinaryApiKey, cloudinaryApiSecret, removeBgApiKey, openAiApiKey 
+      cloudinaryCloudName, cloudinaryApiKey, cloudinaryApiSecret, openAiApiKey 
     } = req.body;
     let settings = await Setting.findOne();
     if (!settings) settings = new Setting();
@@ -37,7 +37,6 @@ export const updateSettings = async (req, res, next) => {
     if (cloudinaryCloudName !== undefined) settings.cloudinaryCloudName = cloudinaryCloudName;
     if (cloudinaryApiKey !== undefined) settings.cloudinaryApiKey = cloudinaryApiKey;
     if (cloudinaryApiSecret !== undefined) settings.cloudinaryApiSecret = cloudinaryApiSecret;
-    if (removeBgApiKey !== undefined) settings.removeBgApiKey = removeBgApiKey;
     if (openAiApiKey !== undefined) settings.openAiApiKey = openAiApiKey;
 
     await settings.save();
@@ -89,7 +88,7 @@ export const getSystemHealth = async (req, res, next) => {
       (process.env.CLOUDINARY_API_KEY || settings.cloudinaryApiKey) &&
       (process.env.CLOUDINARY_API_SECRET || settings.cloudinaryApiSecret)
     );
-    const isRemoveBgConfigured = !!(process.env.REMOVE_BG_API_KEY || settings.removeBgApiKey);
+    const isRemoveBgConfigured = false;
 
     res.status(200).json({
       success: true,

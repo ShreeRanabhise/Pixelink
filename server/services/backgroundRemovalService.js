@@ -1,7 +1,4 @@
 import { removeBackground as imglyRemoveBackground } from '@imgly/background-removal-node';
-import Setting from '../models/Setting.js';
-import axios from 'axios';
-import FormData from 'form-data';
 import sharp from 'sharp';
 
 /**
@@ -23,38 +20,7 @@ export const removeBackground = async (buffer) => {
     console.error('[AI Service] Failed to analyze image transparency. Proceeding with removal:', error.message);
   }
 
-  const settings = await Setting.findOne() || {};
-  const apiKey = process.env.REMOVE_BG_API_KEY || settings.removeBgApiKey;
-
-  if (apiKey) {
-    try {
-      console.log('[AI Service] Attempting to remove background via Remove.bg API...');
-      const formData = new FormData();
-      formData.append('image_file', buffer, { filename: 'input.png' });
-      formData.append('size', 'auto');
-
-      const response = await axios({
-        method: 'post',
-        url: 'https://api.remove.bg/v1.0/removebg',
-        data: formData,
-        headers: {
-          ...formData.getHeaders(),
-          'X-Api-Key': apiKey,
-        },
-        responseType: 'arraybuffer',
-      });
-
-      console.log('[AI Service] Remove.bg background removal successful.');
-      return Buffer.from(response.data);
-    } catch (error) {
-      console.error('[AI Service] Remove.bg API failed:', error.response?.data?.toString() || error.message);
-      console.log('[AI Service] Falling back to local ML model due to API failure...');
-    }
-  } else {
-    console.log('[AI Service] No REMOVE_BG_API_KEY found. Using free local ML model.');
-  }
-
-  // Fallback / Local ML approach
+  // Local ML approach
   try {
     console.log('[AI Service] Processing via local ML model (@imgly/background-removal-node)...');
     
