@@ -238,11 +238,11 @@ const Home = () => {
           </div>
 
           {popLoading ? (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
               {[...Array(5)].map((_, i) => <SkeletonCard key={i} />)}
             </div>
           ) : (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
               {popularRes?.data?.map((png, index) => (
                 <PngCard key={png._id} png={png} rank={index + 1} />
               ))}
@@ -266,7 +266,7 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
             {randomPngs?.slice(0, visibleCount).map((png) => (
               <PngCard key={png._id} png={png} />
             ))}

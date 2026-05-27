@@ -88,7 +88,7 @@ const SearchResults = () => {
       <AdBanner adSlot="search_top" className="py-4" />
 
       {isLoading ? (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {[...Array(8)].map((_, i) => <SkeletonCard key={i} />)}
         </div>
       ) : !searchRes || searchRes.data.length === 0 ? (
@@ -119,7 +119,7 @@ const SearchResults = () => {
         </div>
       ) : (
         <div className="space-y-10">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
             {searchRes.data.map((png) => (
               <PngCard key={png._id} png={png} />
             ))}
