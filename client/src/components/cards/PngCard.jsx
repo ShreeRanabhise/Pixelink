@@ -94,11 +94,7 @@ const PngCard = ({ png, onDownloadSuccess, rank }) => {
           <div className="absolute inset-0 bg-slate-900/80 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-between p-5 text-white">
             {/* Top row: Category */}
             <div className="flex justify-between items-start translate-y-[-10px] group-hover:translate-y-0 transition-transform duration-300">
-              {png.category ? (
-                <span className="bg-gradient-brand text-white text-[10px] uppercase tracking-widest px-3 py-1.5 rounded-full font-bold shadow-lg shadow-brand-500/30 border border-white/20">
-                  {png.category.name}
-                </span>
-              ) : <div />}
+              <div />
               
               {/* Quick Download Action */}
               <button
