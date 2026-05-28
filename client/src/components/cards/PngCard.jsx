@@ -91,7 +91,7 @@ const PngCard = ({ png, onDownloadSuccess, rank }) => {
           />
           
           {/* Hover Overlay */}
-          <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-between p-5 text-white">
+          <div className="absolute inset-0 bg-slate-900/80 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-between p-5 text-white">
             {/* Top row: Category */}
             <div className="flex justify-between items-start translate-y-[-10px] group-hover:translate-y-0 transition-transform duration-300">
               {png.category ? (
