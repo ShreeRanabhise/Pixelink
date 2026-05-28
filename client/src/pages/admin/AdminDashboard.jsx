@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "../../context/AuthContext";
 import {
   Image,
-  FolderTree,
+  Folder,
   FileClock,
   Download,
   UploadCloud,
@@ -111,7 +111,7 @@ const AdminDashboard = () => {
     {
       name: "PNG Categories",
       value: catsLoading ? "..." : `${totalCategoriesCount}`,
-      icon: FolderTree,
+      icon: Folder,
       color: "from-purple-600/20 to-indigo-600/10 text-purple-500 border-purple-500/20",
       description: "Organized folders",
     },

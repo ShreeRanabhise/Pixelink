@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import {
   Image,
-  FolderTree,
+  Folder,
   UploadCloud,
   ArrowRight,
   Eye,
@@ -50,7 +50,7 @@ const CreatorDashboard = () => {
     {
       name: "Active Categories",
       value: catsLoading ? "..." : `${totalCategoriesCount} categories`,
-      icon: FolderTree,
+      icon: Folder,
       color: "from-purple-600/20 to-indigo-600/10 text-purple-400 border-purple-500/20",
       description: "Organized folders available",
     },
@@ -209,7 +209,7 @@ const CreatorDashboard = () => {
                 >
                   <div className="flex items-center space-x-3.5">
                     <div className="p-3 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-colors">
-                      <FolderTree className="w-5 h-5" />
+                      <Folder className="w-5 h-5" />
                     </div>
                     <div>
                       <p className="text-sm font-bold text-slate-900 dark:text-white">
