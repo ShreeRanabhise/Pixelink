@@ -87,23 +87,23 @@ const Footer = () => {
             </h3>
             <ul className="space-y-2.5">
               <li>
-                <span className="text-sm text-slate-500 dark:text-slate-400 block">
-                  Creative Commons Zero (CC0)
-                </span>
-              </li>
-              <li>
-                <span className="text-sm text-slate-500 dark:text-slate-400 block">
-                  Free for Personal & Commercial Use
-                </span>
-              </li>
-              <li>
-                <span className="text-sm text-slate-500 dark:text-slate-400 block">
-                  No Attribution Required
-                </span>
+                <Link to="/terms" className="text-sm text-slate-500 dark:text-slate-400 hover:text-brand-500 dark:hover:text-brand-400 block transition-colors">
+                  Terms of Service
+                </Link>
               </li>
               <li>
                 <Link to="/privacy" className="text-sm text-slate-500 dark:text-slate-400 hover:text-brand-500 dark:hover:text-brand-400 block transition-colors">
                   Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link to="/license" className="text-sm text-slate-500 dark:text-slate-400 hover:text-brand-500 dark:hover:text-brand-400 block transition-colors">
+                  License
+                </Link>
+              </li>
+              <li>
+                <Link to="/dmca" className="text-sm text-slate-500 dark:text-slate-400 hover:text-brand-500 dark:hover:text-brand-400 block transition-colors">
+                  DMCA
                 </Link>
               </li>
             </ul>
