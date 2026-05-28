@@ -90,26 +90,26 @@ const PngCard = ({ png, onDownloadSuccess, rank }) => {
             className="max-h-full max-w-full object-contain transform group-hover:scale-110 transition-transform duration-500 filter drop-shadow-xl"
           />
           
-          {/* Mobile Persistent & Desktop Hover Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/30 to-transparent md:bg-none md:bg-slate-900/80 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-4 text-white">
+          {/* Hover Overlay */}
+          <div className="absolute inset-0 bg-slate-900/80 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-5 text-white">
             
-            <div className="flex justify-between items-end transform translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300">
+            <div className="flex justify-between items-end transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
               {/* Left: Title & Stats */}
               <div className="flex-1 min-w-0 pr-3">
                 <h3 className="text-sm font-black mb-2 line-clamp-2 leading-tight">
                   {png.title}
                 </h3>
-                <div className="flex items-center space-x-2 text-[10px] font-bold text-slate-300">
-                  <span className="flex items-center bg-white/10 px-1.5 py-1 rounded-md border border-white/5">
-                    <Eye className="w-3 h-3 mr-1 opacity-70" />
+                <div className="flex items-center space-x-3 text-[11px] font-bold text-slate-300">
+                  <span className="flex items-center bg-white/10 px-2 py-1 rounded-md border border-white/5">
+                    <Eye className="w-3.5 h-3.5 mr-1.5 opacity-70" />
                     {png.views || 0}
                   </span>
-                  <span className="flex items-center bg-white/10 px-1.5 py-1 rounded-md border border-white/5">
-                    <Download className="w-3 h-3 mr-1 opacity-70" />
+                  <span className="flex items-center bg-white/10 px-2 py-1 rounded-md border border-white/5">
+                    <Download className="w-3.5 h-3.5 mr-1.5 opacity-70" />
                     {png.downloads || 0}
                   </span>
-                  <span className="flex items-center bg-rose-500/20 text-rose-300 px-1.5 py-1 rounded-md border border-rose-500/30">
-                    <Heart className="w-3 h-3 mr-1" />
+                  <span className="flex items-center bg-rose-500/20 text-rose-300 px-2 py-1 rounded-md border border-rose-500/30">
+                    <Heart className="w-3.5 h-3.5 mr-1.5" />
                     {png.likes || 0}
                   </span>
                 </div>
@@ -119,7 +119,7 @@ const PngCard = ({ png, onDownloadSuccess, rank }) => {
               <button
                 onClick={handleQuickDownload}
                 disabled={isDownloading}
-                className={`shrink-0 p-3 rounded-xl bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 shadow-lg transition-all ${
+                className={`shrink-0 p-3 rounded-2xl bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 shadow-lg transition-all ${
                   isDownloading ? 'opacity-50 cursor-not-allowed' : 'active:scale-90 hover:scale-110 hover:rotate-3'
                 }`}
                 title="Quick Download"
