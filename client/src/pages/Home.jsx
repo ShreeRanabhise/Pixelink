@@ -184,7 +184,7 @@ const Home = () => {
                   />
                   {!searchVal && (
                     <div className="absolute inset-0 flex items-center pointer-events-none text-slate-400 font-medium z-0 overflow-hidden">
-                      <span>Search Transparent PNGs for '</span>
+                      <span>Search PNG for '</span>
                       <span key={placeholderIndex} className="text-brand-500 animate-keyword-slide inline-block">
                         {displayTrending[placeholderIndex]}
                       </span>
