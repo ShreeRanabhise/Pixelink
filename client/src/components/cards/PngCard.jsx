@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Download, Eye, Heart, Crown } from 'lucide-react';
+import { Download, Eye, Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
@@ -11,17 +11,29 @@ const PngCard = ({ png, onDownloadSuccess, rank }) => {
   const [isDownloading, setIsDownloading] = useState(false);
 
   let rankStyles = "";
-  let rankIconColor = "";
+  let rankBadge = null;
 
   if (rank === 1) {
-    rankStyles = "ring-2 ring-yellow-400 z-10 scale-[1.02] animate-subtle-gold";
-    rankIconColor = "text-yellow-400 bg-yellow-400/20 border-yellow-400/50";
+    rankStyles = "border-[1.5px] border-yellow-400/50 shadow-[0_0_40px_-10px_rgba(250,204,21,0.25)] bg-gradient-to-b from-yellow-400/10 to-transparent z-10 scale-[1.02]";
+    rankBadge = (
+      <div className="absolute top-3 right-3 z-20 flex items-center justify-center px-3.5 py-1.5 rounded-xl bg-gradient-to-tr from-yellow-500/90 to-yellow-300/90 backdrop-blur-md border border-yellow-200/60 shadow-xl shadow-yellow-500/20">
+        <span className="text-[10px] font-black text-yellow-950 uppercase tracking-widest">#1 Trending</span>
+      </div>
+    );
   } else if (rank === 2) {
-    rankStyles = "ring-2 ring-slate-300 z-10 scale-[1.01] animate-subtle-silver";
-    rankIconColor = "text-slate-200 bg-slate-300/20 border-slate-300/50";
+    rankStyles = "border-[1.5px] border-slate-300/60 shadow-[0_0_40px_-10px_rgba(148,163,184,0.2)] bg-gradient-to-b from-slate-400/10 to-transparent z-10 scale-[1.01]";
+    rankBadge = (
+      <div className="absolute top-3 right-3 z-20 flex items-center justify-center px-3.5 py-1.5 rounded-xl bg-gradient-to-tr from-slate-400/90 to-slate-200/90 backdrop-blur-md border border-white/60 shadow-xl shadow-slate-500/20">
+        <span className="text-[10px] font-black text-slate-900 uppercase tracking-widest">#2 Popular</span>
+      </div>
+    );
   } else if (rank === 3) {
-    rankStyles = "ring-2 ring-amber-600 z-10 scale-[1.01] animate-subtle-bronze";
-    rankIconColor = "text-amber-500 bg-amber-600/20 border-amber-600/50";
+    rankStyles = "border-[1.5px] border-amber-600/50 shadow-[0_0_40px_-10px_rgba(217,119,6,0.2)] bg-gradient-to-b from-amber-600/10 to-transparent z-10 scale-[1.01]";
+    rankBadge = (
+      <div className="absolute top-3 right-3 z-20 flex items-center justify-center px-3.5 py-1.5 rounded-xl bg-gradient-to-tr from-amber-600/90 to-amber-400/90 backdrop-blur-md border border-amber-300/50 shadow-xl shadow-amber-600/20">
+        <span className="text-[10px] font-black text-amber-950 uppercase tracking-widest">#3 Rising</span>
+      </div>
+    );
   }
 
   const handleQuickDownload = async (e) => {
@@ -78,11 +90,7 @@ const PngCard = ({ png, onDownloadSuccess, rank }) => {
       transition={{ duration: 0.2 }}
       className={`group relative glass border border-slate-200/60 dark:border-slate-800/60 bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl rounded-[1.5rem] overflow-hidden shadow-sm hover:shadow-2xl hover:border-brand-500/40 dark:hover:border-brand-500/40 transition-all duration-300 aspect-square ${rankStyles}`}
     >
-      {rank && rank <= 3 && (
-        <div className={`absolute top-0 right-0 m-3 z-20 flex items-center justify-center p-2 rounded-full border backdrop-blur-md shadow-lg transition-opacity duration-300 group-hover:opacity-0 ${rankIconColor}`}>
-          <Crown className="w-4 h-4 fill-current" />
-        </div>
-      )}
+      {rankBadge && rankBadge}
       <Link to={`/png/${png.slug}`} className="block w-full h-full">
         {/* Transparent Checkerboard Image Box */}
         <div className="relative w-full h-full checkerboard-bg flex items-center justify-center p-4 select-none overflow-hidden">
