@@ -169,19 +169,29 @@ const Home = () => {
           {/* Search Box Wrapper */}
           <div ref={suggestionRef} className="max-w-2xl mx-auto relative mt-6">
             <form onSubmit={handleSearchSubmit} className="flex glass rounded-full overflow-hidden bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl border border-white/60 dark:border-slate-700/50 p-2 animate-search-glow transition-all focus-within:ring-2 focus-within:ring-rose-500/50">
-              <div className="flex-grow flex items-center px-4 text-slate-400">
-                <Search className="w-5 h-5 mr-2.5 text-brand-500" />
-                <input
-                  type="text"
-                  placeholder={`Search Transparent PNGs for '${displayTrending[placeholderIndex]}'`}
-                  value={searchVal}
-                  onChange={(e) => {
-                    setSearchVal(e.target.value);
-                    setShowSuggestions(true);
-                  }}
-                  onFocus={() => setShowSuggestions(true)}
-                  className="w-full bg-transparent border-0 text-slate-900 dark:text-slate-100 placeholder-slate-400 font-medium focus:ring-0 focus:outline-none py-2 text-base"
-                />
+              <div className="flex-grow flex items-center px-4 text-slate-400 relative">
+                <Search className="w-5 h-5 mr-2.5 text-brand-500 z-10" />
+                <div className="relative w-full flex items-center">
+                  <input
+                    type="text"
+                    value={searchVal}
+                    onChange={(e) => {
+                      setSearchVal(e.target.value);
+                      setShowSuggestions(true);
+                    }}
+                    onFocus={() => setShowSuggestions(true)}
+                    className="w-full bg-transparent border-0 text-slate-900 dark:text-slate-100 font-medium focus:ring-0 focus:outline-none py-2 text-base z-10 relative placeholder-transparent"
+                  />
+                  {!searchVal && (
+                    <div className="absolute inset-0 flex items-center pointer-events-none text-slate-400 font-medium z-0 overflow-hidden">
+                      <span>Search Transparent PNGs for '</span>
+                      <span key={placeholderIndex} className="text-brand-500 animate-keyword-slide ml-1 inline-block">
+                        {displayTrending[placeholderIndex]}
+                      </span>
+                      <span>'</span>
+                    </div>
+                  )}
+                </div>
               </div>
               <button
                 type="submit"
