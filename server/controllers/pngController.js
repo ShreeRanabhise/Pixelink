@@ -206,6 +206,7 @@ export const createPng = async (req, res, next) => {
 
     let finalBuffer = req.file.buffer;
     let finalTags = [];
+    let finalDescription = description || '';
 
     // Check if AI services requested
     if (runAI === 'true') {
@@ -216,6 +217,9 @@ export const createPng = async (req, res, next) => {
       });
       finalBuffer = aiResults.buffer;
       finalTags = aiResults.tags;
+      if (aiResults.description) {
+        finalDescription = aiResults.description;
+      }
     } else {
       // Basic Local Tag Extraction if no AI
       // Parse custom tags if supplied in req.body
@@ -242,7 +246,7 @@ export const createPng = async (req, res, next) => {
     const png = await Png.create({
       title,
       slug,
-      description,
+      description: finalDescription,
       imageUrl: uploadResult.secure_url,
       thumbnailUrl: uploadResult.secure_url, // Cloudinary handles resize or we map to same URL
       cloudinaryId: uploadResult.public_id,

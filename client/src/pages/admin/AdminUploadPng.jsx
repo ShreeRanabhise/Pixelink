@@ -8,6 +8,7 @@ import {
   AlertCircle,
   ArrowLeft,
   RefreshCw,
+  Wand2,
 } from "lucide-react";
 import api from "../../api/axios";
 import AdminLayout from "../../components/layout/AdminLayout";
@@ -22,8 +23,10 @@ const AdminUploadPng = () => {
   const [description, setDescription] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [tags, setTags] = useState("");
-  const [submitting, setSubmitting] =
-    useState(false); /* Fetch categories for select dropdown  */
+  const [submitting, setSubmitting] = useState(false);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+
+  /* Fetch categories for select dropdown  */
   const { data: categoriesRes, isLoading: catsLoading } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
@@ -70,6 +73,53 @@ const AdminUploadPng = () => {
       }
     }
   };
+
+  const handleAutoFill = async () => {
+    if (!file) {
+      toast.error("Please upload an image file first to analyze.");
+      return;
+    }
+
+    setIsAnalyzing(true);
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+      const res = await api.post("/ai/analyze-image", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      const data = res.data.data;
+      
+      if (data.title) setTitle(data.title);
+      if (data.description) setDescription(data.description);
+      if (data.tags) {
+        if (Array.isArray(data.tags)) {
+          setTags(data.tags.join(', '));
+        } else {
+          setTags(data.tags);
+        }
+      }
+      
+      if (data.categoryName && categoriesRes?.data) {
+        // Try to match category name
+        const matchedCategory = categoriesRes.data.find(
+          c => c.name.toLowerCase() === data.categoryName.toLowerCase() || 
+               data.categoryName.toLowerCase().includes(c.name.toLowerCase())
+        );
+        if (matchedCategory) {
+          setCategoryId(matchedCategory._id);
+        }
+      }
+      
+      toast.success("AI analysis complete! Metadata auto-filled.");
+    } catch (err) {
+      console.error(err);
+      toast.error(err.response?.data?.message || "Failed to analyze image with AI");
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!file) {
@@ -198,12 +248,24 @@ const AdminUploadPng = () => {
         </div>{" "}
         {/* Form fields & toggles (Right Panels) */}{" "}
         <div className="lg:col-span-2 space-y-6">
-          {" "}
           <div className="glass p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-850 bg-white/80 dark:bg-slate-900/10 space-y-6">
-            {" "}
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white">
-              PNG Asset Properties
-            </h2>{" "}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+                PNG Asset Properties
+              </h2>
+              <button
+                type="button"
+                onClick={handleAutoFill}
+                disabled={isAnalyzing || !file}
+                className="inline-flex items-center px-4 py-2 text-sm font-bold bg-brand-500/10 text-brand-600 dark:text-brand-400 hover:bg-brand-500/20 rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-brand-500/20"
+              >
+                {isAnalyzing ? (
+                  <><RefreshCw className="w-4 h-4 mr-2 animate-spin" /> Analyzing...</>
+                ) : (
+                  <><Wand2 className="w-4 h-4 mr-2" /> Auto-fill with AI</>
+                )}
+              </button>
+            </div>
             <div className="space-y-4">
               {" "}
               <div className="space-y-2">

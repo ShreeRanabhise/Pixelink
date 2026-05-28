@@ -51,6 +51,8 @@ const AdminPendingSubmissions = lazy(() => import('../pages/admin/AdminPendingSu
 const AdminAnalytics = lazy(() => import('../pages/admin/AdminAnalytics'));
 const AdminSettings = lazy(() => import('../pages/admin/AdminSettings'));
 const AdminMessages = lazy(() => import('../pages/admin/AdminMessages'));
+const AdminAIGenerator = lazy(() => import('../pages/admin/AdminAIGenerator'));
+
 const AdminManageTeam = lazy(() => import('../pages/admin/AdminManageTeam'));
 import DashboardRouter from './DashboardRouter';
 
@@ -141,6 +143,12 @@ const AppRoutes = () => {
             <AdminUploadPng />
           </ProtectedRoute>
         } />
+        <Route path="/admin/ai-generator" element={
+          <ProtectedRoute allowedRoles={['admin']}>
+            <AdminAIGenerator />
+          </ProtectedRoute>
+        } />
+
         <Route path="/admin/pngs" element={
           <ProtectedRoute allowedRoles={['admin']}>
             <AdminManagePngs />

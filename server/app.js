@@ -22,6 +22,8 @@ import analyticsRoutes from './routes/analytics.js';
 import userRoutes from './routes/users.js';
 import sitemapRoutes from './routes/sitemap.js';
 import contactMessageRoutes from './routes/contactMessages.js';
+import aiRoutes from './routes/ai.js';
+
 
 const app = express();
 
@@ -93,7 +95,9 @@ app.use('/api/v1/settings', settingsRoutes);
 app.use('/api/v1/analytics', analyticsRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/contact-messages', contactMessageRoutes);
+app.use('/api/v1/ai', aiRoutes);
 app.use('/', sitemapRoutes);
+
 
 // Serve frontend in production or local fallback
 app.use(express.static(path.join(__dirname, '../client/dist')));

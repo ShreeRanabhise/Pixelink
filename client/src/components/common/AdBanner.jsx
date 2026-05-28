@@ -3,7 +3,7 @@ import { useSettings } from '../../context/SettingsContext';
 
 const AdBanner = ({ adSlot, format = 'auto', responsive = 'true', className = '' }) => {
   const { settings } = useSettings();
-  const clientId = import.meta.env.VITE_ADSENSE_CLIENT_ID;
+  const clientId = settings?.adsenseClientId || import.meta.env.VITE_ADSENSE_CLIENT_ID;
 
   if (!settings?.adsenseEnabled) {
     return null;

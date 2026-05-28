@@ -39,6 +39,7 @@ const AdminSettings = () => {
     cloudinaryApiKey: currentSettings?.cloudinaryApiKey || "",
     cloudinaryApiSecret: currentSettings?.cloudinaryApiSecret || "",
     openAiApiKey: currentSettings?.openAiApiKey || "",
+    adsenseClientId: currentSettings?.adsenseClientId || "",
   });
   const [isSaving, setIsSaving] = useState(false);
 
@@ -53,6 +54,7 @@ const AdminSettings = () => {
         cloudinaryApiKey: currentSettings.cloudinaryApiKey || "",
         cloudinaryApiSecret: currentSettings.cloudinaryApiSecret || "",
         openAiApiKey: currentSettings.openAiApiKey || "",
+        adsenseClientId: currentSettings.adsenseClientId || "",
       });
     }
   }, [currentSettings]);
@@ -309,6 +311,20 @@ const AdminSettings = () => {
                       value={formData.openAiApiKey}
                       onChange={handleInputChange}
                       placeholder="Optional, overrides .env"
+                      className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900/50 px-5 py-3.5 text-sm font-medium text-slate-900 dark:text-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all shadow-sm"
+                    />
+                  </div>
+
+                  <div className="space-y-2.5">
+                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider flex items-center">
+                      <DollarSign className="w-4 h-4 mr-2 text-slate-400" /> AdSense Client ID
+                    </label>
+                    <input
+                      type="text"
+                      name="adsenseClientId"
+                      value={formData.adsenseClientId}
+                      onChange={handleInputChange}
+                      placeholder="ca-pub-XXXXXXXXXXXXXXXX"
                       className="w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900/50 px-5 py-3.5 text-sm font-medium text-slate-900 dark:text-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all shadow-sm"
                     />
                   </div>

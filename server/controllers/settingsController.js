@@ -22,7 +22,7 @@ export const updateSettings = async (req, res, next) => {
   try {
     const { 
       siteName, heroTitle, heroSubtitle, contactEmail, contactPhone, contactAddress, adsenseEnabled,
-      cloudinaryCloudName, cloudinaryApiKey, cloudinaryApiSecret, openAiApiKey 
+      cloudinaryCloudName, cloudinaryApiKey, cloudinaryApiSecret, openAiApiKey, adsenseClientId 
     } = req.body;
     let settings = await Setting.findOne();
     if (!settings) settings = new Setting();
@@ -38,6 +38,7 @@ export const updateSettings = async (req, res, next) => {
     if (cloudinaryApiKey !== undefined) settings.cloudinaryApiKey = cloudinaryApiKey;
     if (cloudinaryApiSecret !== undefined) settings.cloudinaryApiSecret = cloudinaryApiSecret;
     if (openAiApiKey !== undefined) settings.openAiApiKey = openAiApiKey;
+    if (adsenseClientId !== undefined) settings.adsenseClientId = adsenseClientId;
 
     await settings.save();
     

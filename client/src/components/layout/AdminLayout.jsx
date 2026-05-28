@@ -24,8 +24,10 @@ import {
   Eye,
   EyeOff,
   ChevronRight,
-  Bell
+  Bell,
+  Wand2
 } from "lucide-react";
+
 import api from "../../api/axios";
 import toast from "react-hot-toast";
 
@@ -58,9 +60,11 @@ const AdminLayout = ({ children, title }) => {
       items: [
         { name: "Manage PNGs", href: `${basePath}/pngs`, icon: Image, roles: ['admin', 'creator'] },
         { name: "Direct Upload", href: `${basePath}/upload`, icon: UploadCloud, roles: ['admin', 'creator'] },
+        { name: "AI Generator", href: `${basePath}/ai-generator`, icon: Wand2, roles: ['admin'] },
         { name: "Manage Categories", href: `${basePath}/categories`, icon: FolderTree, roles: ['admin', 'creator'] },
       ]
     },
+
     {
       label: "Moderation",
       items: [
