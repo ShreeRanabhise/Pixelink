@@ -73,7 +73,7 @@ const PngCard = ({ png, onDownloadSuccess, rank }) => {
       className={`group relative glass border border-slate-200/60 dark:border-slate-800/60 bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl rounded-[1.5rem] overflow-hidden hover:border-brand-500/40 dark:hover:border-brand-500/40 transition-all duration-300 aspect-square ${rank ? rankStyles : 'shadow-sm hover:shadow-2xl'}`}
     >
       {rank && rank <= 3 && (
-        <div className={`absolute top-0 left-0 m-3 z-20 flex items-center justify-center w-8 h-8 rounded-full border backdrop-blur-md shadow-lg font-black text-sm tracking-tighter ${rankIconColor}`}>
+        <div className={`absolute top-0 left-1/2 -translate-x-1/2 m-3 z-20 flex items-center justify-center w-8 h-8 rounded-full border backdrop-blur-md shadow-lg font-black text-sm tracking-tighter ${rankIconColor}`}>
           #{rank}
         </div>
       )}
@@ -94,7 +94,11 @@ const PngCard = ({ png, onDownloadSuccess, rank }) => {
           <div className="absolute inset-0 bg-slate-900/80 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-between p-5 text-white">
             
             {/* Top row */}
-            <div className="flex justify-end items-start transform translate-y-[-10px] group-hover:translate-y-0 transition-transform duration-300">
+            <div className="flex justify-between items-start transform translate-y-[-10px] group-hover:translate-y-0 transition-transform duration-300">
+              <span className="flex items-center bg-rose-500/20 text-rose-300 px-2 py-1.5 rounded-xl border border-rose-500/30 text-[11px] font-bold shadow-lg">
+                <Heart className="w-3.5 h-3.5 mr-1.5" />
+                {png.likes || 0}
+              </span>
               <button
                 onClick={handleQuickDownload}
                 disabled={isDownloading}
@@ -120,10 +124,6 @@ const PngCard = ({ png, onDownloadSuccess, rank }) => {
                 <span className="flex items-center bg-white/10 px-2 py-1 rounded-md border border-white/5">
                   <Download className="w-3.5 h-3.5 mr-1.5 opacity-70" />
                   {png.downloads || 0}
-                </span>
-                <span className="flex items-center bg-rose-500/20 text-rose-300 px-2 py-1 rounded-md border border-rose-500/30">
-                  <Heart className="w-3.5 h-3.5 mr-1.5" />
-                  {png.likes || 0}
                 </span>
               </div>
             </div>
