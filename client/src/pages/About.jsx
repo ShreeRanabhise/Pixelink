@@ -60,7 +60,7 @@ const About = () => {
           Design workflows should be frictionless. Searching for a transparent asset shouldn't result in clicking links that redirect to spam or download fake PNGs with hardcoded grids. Pixelink is built to offer direct, clean, and instant transparent graphic assets.
         </p>
         <div className="flex flex-wrap gap-4 pt-4 relative z-10">
-          {['Alpha checks', 'Auto-tagging suggestions', 'Vibrant community', 'CC0 licensing'].map((item) => (
+          {['Alpha checks', 'Vibrant community', 'CC0 licensing'].map((item) => (
             <div key={item} className="flex items-center space-x-2 text-sm text-slate-700 dark:text-slate-300 font-bold bg-white/50 dark:bg-slate-800/50 px-4 py-2 rounded-xl border border-slate-200/60 dark:border-slate-700/50 shadow-sm">
               <CheckCircle2 className="w-5 h-5 text-emerald-500" />
               <span>{item}</span>
