@@ -38,16 +38,16 @@ const TrendingPngs = () => {
       <SEO title="Trending PNGs" description="Browse most popular transparent PNG downloads on Pixelink." />
 
       {/* Dynamic Sticky Glass Header */}
-      <div className="space-y-4 glass bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800/60 p-6 sm:p-8 rounded-[2rem] shadow-sm">
-        <div className="flex items-center space-x-4">
-          <div className="p-3 bg-brand-500/10 text-brand-600 dark:text-brand-400 rounded-2xl shadow-inner hidden sm:block">
-            <TrendingUp className="w-6 h-6" />
+      <div className="space-y-3 glass bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800/60 p-4 sm:p-5 rounded-2xl shadow-sm">
+        <div className="flex items-center space-x-3">
+          <div className="p-2 bg-brand-500/10 text-brand-600 dark:text-brand-400 rounded-xl shadow-inner hidden sm:block">
+            <TrendingUp className="w-5 h-5" />
           </div>
-          <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100">
+          <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-slate-100">
             Trending <span className="text-transparent bg-clip-text bg-gradient-brand">PNGs</span>
           </h1>
         </div>
-        <p className="text-sm sm:text-base font-medium text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed pt-2 border-t border-slate-200/60 dark:border-slate-800/60">
+        <p className="text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed pt-2 border-t border-slate-200/60 dark:border-slate-800/60">
           The most popular transparent Png's, vectors, and graphic clipart assets downloaded by our designer community.
         </p>
       </div>

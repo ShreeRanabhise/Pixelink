@@ -39,18 +39,19 @@ const Categories = () => {
     <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 space-y-10">
       <SEO title="Categories" description="Browse free transparent PNG Png's by topic: animals, tech, nature, food, and more." />
 
-      <div className="space-y-3">
+      <div className="space-y-3 glass bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800/60 p-4 sm:p-5 rounded-2xl shadow-sm">
         <div className="flex items-center space-x-3">
-          <div className="p-3 bg-brand-500/10 text-brand-600 dark:text-brand-400 rounded-2xl shadow-inner">
-            <LayoutGrid className="w-7 h-7" />
+          <div className="p-2 bg-brand-500/10 text-brand-600 dark:text-brand-400 rounded-xl shadow-inner hidden sm:block">
+            <LayoutGrid className="w-5 h-5" />
           </div>
-          <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100">
+          <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-slate-100">
             Explore <span className="text-transparent bg-clip-text bg-gradient-brand">Categories</span>
           </h1>
         </div>
-        <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400">
+        <p className="text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-300 leading-relaxed pt-2 border-t border-slate-200/60 dark:border-slate-800/60">
           Browse through our curated collections to find the perfect background-free Png's for your design layouts.
         </p>
+      </div>
 
         {/* Search Bar & Dropdown */}
         <div className="relative max-w-lg mt-8" ref={dropdownRef}>
@@ -96,7 +97,6 @@ const Categories = () => {
             </div>
           )}
         </div>
-      </div>
 
       {isLoading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -45,7 +45,7 @@ const SearchResults = () => {
       <SEO title={`Search: "${query}"`} />
 
       {/* Dynamic Sticky Glass Header */}
-      <div className="space-y-6 glass bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800/60 p-6 sm:p-8 rounded-[2rem] shadow-sm">
+      <div className="space-y-4 glass bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800/60 p-4 sm:p-5 rounded-2xl shadow-sm">
         <Link
           to="/"
           className="inline-flex items-center text-[10px] font-bold text-slate-500 dark:text-slate-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors uppercase tracking-widest bg-white/50 dark:bg-slate-800/50 px-3 py-1.5 rounded-lg border border-slate-200/60 dark:border-slate-700/50"
@@ -53,11 +53,11 @@ const SearchResults = () => {
           <ChevronLeft className="w-3.5 h-3.5 mr-1" />
           Back to gallery
         </Link>
-        <div className="flex items-center space-x-4">
-          <div className="p-3 bg-brand-500/10 text-brand-600 dark:text-brand-400 rounded-2xl shadow-inner hidden sm:block">
-            <Search className="w-6 h-6" />
+        <div className="flex items-center space-x-3">
+          <div className="p-2 bg-brand-500/10 text-brand-600 dark:text-brand-400 rounded-xl shadow-inner hidden sm:block">
+            <Search className="w-5 h-5" />
           </div>
-          <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100">
+          <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-slate-100">
             Search Results for <span className="text-transparent bg-clip-text bg-gradient-brand">"{query}"</span>
           </h1>
         </div>
