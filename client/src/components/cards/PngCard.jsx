@@ -20,8 +20,8 @@ const PngCard = ({ png, onDownloadSuccess, rank }) => {
     rankStyles = "ring-2 ring-slate-300 z-10 scale-[1.01] shadow-[0_0_25px_rgba(203,213,225,0.6)] hover:shadow-[0_0_35px_rgba(203,213,225,0.8)]";
     rankIconColor = "text-slate-200 bg-slate-300/20 border-slate-300/50";
   } else if (rank === 3) {
-    rankStyles = "ring-2 ring-amber-600 z-10 scale-[1.01] shadow-[0_0_25px_rgba(217,119,6,0.6)] hover:shadow-[0_0_35px_rgba(217,119,6,0.8)]";
-    rankIconColor = "text-amber-500 bg-amber-600/20 border-amber-600/50";
+    rankStyles = "ring-2 ring-[#D2691E] z-10 scale-[1.01] shadow-[0_0_25px_rgba(210,105,30,0.6)] hover:shadow-[0_0_35px_rgba(210,105,30,0.8)]";
+    rankIconColor = "text-[#D2691E] bg-[#D2691E]/20 border-[#D2691E]/50";
   }
 
   const handleQuickDownload = async (e) => {
