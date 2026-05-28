@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, MessageSquare, ArrowRight } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, MessageSquare, ArrowRight, ChevronDown } from 'lucide-react';
 import toast from 'react-hot-toast';
 import SEO from '../components/common/SEO';
 import { useSettings } from '../context/SettingsContext';
@@ -172,15 +172,18 @@ const Contact = () => {
                 <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">
                   Message Type
                 </label>
-                <select
-                  name="type"
-                  value={formData.type}
-                  onChange={handleChange}
-                  className="w-full rounded-2xl border border-slate-200/60 dark:border-slate-700/50 glass bg-white/50 dark:bg-slate-900/50 backdrop-blur-md px-5 py-4 text-sm font-bold text-slate-800 dark:text-slate-100 focus:border-brand-500/50 focus:ring-4 focus:ring-brand-500/20 focus:outline-none transition-all appearance-none shadow-sm"
-                >
-                  <option value="Query">Query</option>
-                  <option value="Suggestion">Suggestion</option>
-                </select>
+                <div className="relative">
+                  <select
+                    name="type"
+                    value={formData.type}
+                    onChange={handleChange}
+                    className="w-full rounded-2xl border border-slate-200/60 dark:border-slate-700/50 glass bg-white/50 dark:bg-slate-900/50 backdrop-blur-md px-5 py-4 pr-12 text-sm font-bold text-slate-800 dark:text-slate-100 focus:border-brand-500/50 focus:ring-4 focus:ring-brand-500/20 focus:outline-none transition-all appearance-none shadow-sm cursor-pointer"
+                  >
+                    <option value="Query">Query</option>
+                    <option value="Suggestion">Suggestion</option>
+                  </select>
+                  <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 pointer-events-none" />
+                </div>
               </div>
 
               <div className="space-y-2">
