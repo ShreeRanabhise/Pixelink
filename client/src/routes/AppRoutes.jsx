@@ -54,7 +54,6 @@ const AdminMessages = lazy(() => import('../pages/admin/AdminMessages'));
 const AdminAIGenerator = lazy(() => import('../pages/admin/AdminAIGenerator'));
 
 const AdminManageTeam = lazy(() => import('../pages/admin/AdminManageTeam'));
-import DashboardRouter from './DashboardRouter';
 
 // Protected Route wrapper with RBAC
 const ProtectedRoute = ({ children, allowedRoles = ['admin'] }) => {
