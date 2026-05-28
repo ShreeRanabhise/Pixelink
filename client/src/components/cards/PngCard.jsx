@@ -73,8 +73,8 @@ const PngCard = ({ png, onDownloadSuccess, rank }) => {
       className={`group relative glass border border-slate-200/60 dark:border-slate-800/60 bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl rounded-[1.5rem] overflow-hidden hover:border-brand-500/40 dark:hover:border-brand-500/40 transition-all duration-300 aspect-square ${rank ? rankStyles : 'shadow-sm hover:shadow-2xl'}`}
     >
       {rank && rank <= 3 && (
-        <div className={`absolute top-0 right-0 m-3 z-20 flex items-center justify-center p-2 rounded-full border backdrop-blur-md shadow-lg transition-opacity duration-300 group-hover:opacity-0 ${rankIconColor}`}>
-          <Crown className="w-4 h-4 fill-current" />
+        <div className={`absolute top-0 right-0 m-3 z-20 flex items-center justify-center w-8 h-8 rounded-full border backdrop-blur-md shadow-lg transition-opacity duration-300 group-hover:opacity-0 font-black text-sm tracking-tighter ${rankIconColor}`}>
+          #{rank}
         </div>
       )}
       <Link to={`/png/${png.slug}`} className="block w-full h-full">
