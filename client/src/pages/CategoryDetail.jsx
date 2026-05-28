@@ -62,12 +62,7 @@ const CategoryDetail = () => {
       {/* Category Header */}
       <div className="space-y-4 p-6 sm:p-8 relative overflow-hidden">
         
-        {/* Banner image background if category has an image */}
-        {category?.image && (
-          <div className="absolute inset-0 z-0 pointer-events-none">
-             <img src={category.image} className="w-full h-full object-cover object-right" alt="" />
-          </div>
-        )}
+
 
         <div className="relative z-10 space-y-4 flex flex-col items-start">
           <Link

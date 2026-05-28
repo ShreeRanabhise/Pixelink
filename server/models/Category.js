@@ -14,10 +14,7 @@ const categorySchema = new mongoose.Schema(
       unique: true,
       lowercase: true,
     },
-    image: {
-      type: String,
-      required: [true, 'Please provide a category image URL'],
-    },
+
     description: {
       type: String,
       trim: true,

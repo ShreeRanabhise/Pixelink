@@ -24,8 +24,6 @@ const AdminManageCategories = () => {
     useState(null); /* Form states  */
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [imageFile, setImageFile] = useState(null);
-  const [imagePreview, setImagePreview] = useState("");
   const [submitting, setSubmitting] = useState(false); /* Fetch Categories  */
   const { data: categoriesRes, isLoading } = useQuery({
     queryKey: ["categories"],
@@ -35,30 +33,16 @@ const AdminManageCategories = () => {
     },
   });
   const categories = categoriesRes?.data || [];
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      if (!file.type.includes("jpeg") && !file.type.includes("jpg") && !file.type.includes("png")) {
-        toast.error("Only JPG, JPEG, or PNG images are allowed for category covers.");
-        return;
-      }
-      setImageFile(file);
-      setImagePreview(URL.createObjectURL(file));
-    }
-  };
+
   const resetForm = () => {
     setEditingCategory(null);
     setName("");
     setDescription("");
-    setImageFile(null);
-    setImagePreview("");
   };
   const handleEditClick = (cat) => {
     setEditingCategory(cat);
     setName(cat.name);
     setDescription(cat.description || "");
-    setImageFile(null);
-    setImagePreview(cat.image || "");
   }; /* Submit Handler (Create or Update)  */
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -66,28 +50,23 @@ const AdminManageCategories = () => {
       toast.error("Category name is required.");
       return;
     }
-    if (!editingCategory && !imageFile) {
-      toast.error("Please upload a cover image for the new category.");
-      return;
-    }
     setSubmitting(true);
     const formData = new FormData();
     formData.append("name", name.trim());
     formData.append("description", description.trim());
-    if (imageFile) {
-      formData.append("image", imageFile);
-    }
     try {
       if (editingCategory) {
         /* Update  */
-        await api.put(`/categories/${editingCategory._id}`, formData, {
-          headers: { "Content-Type": "multipart/form-data" },
+        await api.put(`/categories/${editingCategory._id}`, {
+          name: name.trim(),
+          description: description.trim()
         });
         toast.success("Category updated successfully!");
       } else {
         /* Create  */
-        await api.post("/categories", formData, {
-          headers: { "Content-Type": "multipart/form-data" },
+        await api.post("/categories", {
+          name: name.trim(),
+          description: description.trim()
         });
         toast.success("Category created successfully!");
       }
@@ -197,53 +176,7 @@ const AdminManageCategories = () => {
                   className="w-full rounded-2xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-950/40 px-4 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-650 focus:border-brand-500 focus:outline-none resize-none transition-all"
                 />{" "}
               </div>{" "}
-              {/* Cover Image Upload */}{" "}
-              <div className="space-y-1.5">
-                {" "}
-                <label className="text-xs font-semibold text-slate-600 dark:text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                  Cover Image *
-                </label>{" "}
-                {imagePreview ? (
-                  <div className="relative rounded-2xl overflow-hidden h-36 border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 flex items-center justify-center group">
-                    {" "}
-                    <img
-                      src={imagePreview}
-                      alt="Cover preview"
-                      className="w-full h-full object-cover filter brightness-75 group-hover:scale-105 transition-all duration-300"
-                    />{" "}
-                    <div className="absolute inset-0 bg-slate-950/75 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-all duration-200">
-                      {" "}
-                      <label className="cursor-pointer bg-slate-100 dark:bg-slate-850 hover:bg-slate-200 dark:bg-slate-800 px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-400 dark:border-slate-700">
-                        {" "}
-                        Replace Cover{" "}
-                        <input
-                          type="file"
-                          onChange={handleImageChange}
-                          accept="image/jpeg,image/png"
-                          className="hidden"
-                        />{" "}
-                      </label>{" "}
-                    </div>{" "}
-                  </div>
-                ) : (
-                  <label className="cursor-pointer flex flex-col items-center justify-center border-2 border-dashed border-slate-300 dark:border-slate-800 hover:border-brand-500/50 hover:bg-slate-100 dark:bg-slate-950/40 rounded-2xl py-8 transition-all">
-                    {" "}
-                    <Upload className="w-6 h-6 text-slate-600 dark:text-slate-500 mb-2" />{" "}
-                    <span className="text-xs font-bold text-slate-700 dark:text-slate-300">
-                      Click to upload cover
-                    </span>{" "}
-                    <span className="text-[10px] text-slate-600 dark:text-slate-500 mt-1">
-                      JPG, JPEG, or PNG format only
-                    </span>{" "}
-                    <input
-                      type="file"
-                      onChange={handleImageChange}
-                      accept="image/jpeg,image/png"
-                      className="hidden"
-                    />{" "}
-                  </label>
-                )}{" "}
-              </div>{" "}
+
             </div>{" "}
             <div className="flex items-center space-x-3 pt-4 border-t border-slate-200 dark:border-slate-850">
               {" "}
@@ -311,23 +244,15 @@ const AdminManageCategories = () => {
                     className={`glass rounded-2xl overflow-hidden border transition-all flex flex-col justify-between ${editingCategory?._id === cat._id ? "border-brand-500 bg-brand-500/5 shadow-brand-500/5 shadow-lg" : "border-slate-200 dark:border-slate-850 hover:border-slate-400 dark:border-slate-700 bg-slate-100 dark:bg-slate-950/20"}`}
                   >
                     {" "}
-                    {/* Header Image */}{" "}
-                    <div className="h-28 relative">
+                    {/* Header */}{" "}
+                    <div className="p-4 bg-gradient-to-r from-slate-100 to-slate-50 dark:from-slate-800 dark:to-slate-850 border-b border-slate-200 dark:border-slate-800 flex flex-col justify-end min-h-[5rem]">
                       {" "}
-                      <img
-                        src={cat.image}
-                        alt={cat.name}
-                        className="w-full h-full object-cover filter brightness-50"
-                      />{" "}
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent p-4 flex flex-col justify-end">
-                        {" "}
-                        <span className="font-extrabold text-slate-900 dark:text-white text-base tracking-tight">
-                          {cat.name}
-                        </span>{" "}
-                        <span className="text-[10px] text-brand-400 font-mono font-semibold mt-0.5">
-                          /{cat.slug}
-                        </span>{" "}
-                      </div>{" "}
+                      <span className="font-extrabold text-slate-900 dark:text-white text-base tracking-tight">
+                        {cat.name}
+                      </span>{" "}
+                      <span className="text-[10px] text-brand-500 font-mono font-semibold mt-0.5">
+                        /{cat.slug}
+                      </span>{" "}
                     </div>{" "}
                     {/* Description & Buttons */}{" "}
                     <div className="p-4 space-y-4">
