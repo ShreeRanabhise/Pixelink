@@ -11,8 +11,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand Info */}
           <div className="space-y-4">
-            <Link to="/" className="flex items-center space-x-2 w-max group">
-              <img src={settings.logoUrl} alt={`${settings.siteName} Logo`} className="h-8 w-auto object-contain drop-shadow-sm grayscale group-hover:grayscale-0 transition-all duration-500 opacity-70 group-hover:opacity-100" />
+            <Link to="/" className="flex items-center space-x-2 w-max">
+              <img src={settings.logoUrl} alt={`${settings.siteName} Logo`} className="h-8 w-auto object-contain drop-shadow-sm" />
               <span className="inline-block text-xl font-extrabold tracking-tight bg-gradient-to-r from-orange-500 via-violet-500 to-rose-500 animate-text-gradient bg-clip-text text-transparent">
                 {settings.siteName}
               </span>
