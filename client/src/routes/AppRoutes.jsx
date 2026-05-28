@@ -29,7 +29,7 @@ const PageLoader = () => {
       <img 
         src={settings?.logoUrl || '/logo.png'} 
         alt="Loading..." 
-        className="w-16 h-auto object-contain animate-bounce drop-shadow-md"
+        className="w-32 h-auto object-contain animate-bounce drop-shadow-md"
       />
       <p className="text-sm font-medium text-slate-500 dark:text-slate-400 animate-pulse tracking-wide">Loading Pixelink...</p>
     </div>
