@@ -436,7 +436,7 @@ const PngDetail = () => {
         {relatedRes?.data?.length === 0 ? (
           <p className="text-sm text-slate-400">No related transparent files in this category.</p>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
             {relatedRes?.data ? (
               relatedRes.data.map((rPng) => <PngCard key={rPng._id} png={rPng} />)
             ) : (
