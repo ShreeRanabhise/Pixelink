@@ -91,31 +91,10 @@ const PngCard = ({ png, onDownloadSuccess, rank }) => {
           />
           
           {/* Hover Overlay */}
-          <div className="absolute inset-0 bg-slate-900/80 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-5 text-white">
+          <div className="absolute inset-0 bg-slate-900/80 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-between p-5 text-white">
             
-            <div className="flex justify-between items-end transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-              {/* Left: Title & Stats */}
-              <div className="flex-1 min-w-0 pr-3">
-                <h3 className="text-sm font-black mb-2 line-clamp-2 leading-tight">
-                  {png.title}
-                </h3>
-                <div className="flex items-center space-x-3 text-[11px] font-bold text-slate-300">
-                  <span className="flex items-center bg-white/10 px-2 py-1 rounded-md border border-white/5">
-                    <Eye className="w-3.5 h-3.5 mr-1.5 opacity-70" />
-                    {png.views || 0}
-                  </span>
-                  <span className="flex items-center bg-white/10 px-2 py-1 rounded-md border border-white/5">
-                    <Download className="w-3.5 h-3.5 mr-1.5 opacity-70" />
-                    {png.downloads || 0}
-                  </span>
-                  <span className="flex items-center bg-rose-500/20 text-rose-300 px-2 py-1 rounded-md border border-rose-500/30">
-                    <Heart className="w-3.5 h-3.5 mr-1.5" />
-                    {png.likes || 0}
-                  </span>
-                </div>
-              </div>
-
-              {/* Right: Quick Download Action */}
+            {/* Top row */}
+            <div className="flex justify-end items-start transform translate-y-[-10px] group-hover:translate-y-0 transition-transform duration-300">
               <button
                 onClick={handleQuickDownload}
                 disabled={isDownloading}
@@ -126,6 +105,27 @@ const PngCard = ({ png, onDownloadSuccess, rank }) => {
               >
                 <Download className={`w-4 h-4 ${isDownloading ? 'animate-bounce' : ''}`} />
               </button>
+            </div>
+
+            {/* Bottom row: Title & Stats */}
+            <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+              <h3 className="text-sm font-black mb-2 line-clamp-2 leading-tight pr-3">
+                {png.title}
+              </h3>
+              <div className="flex items-center space-x-3 text-[11px] font-bold text-slate-300">
+                <span className="flex items-center bg-white/10 px-2 py-1 rounded-md border border-white/5">
+                  <Eye className="w-3.5 h-3.5 mr-1.5 opacity-70" />
+                  {png.views || 0}
+                </span>
+                <span className="flex items-center bg-white/10 px-2 py-1 rounded-md border border-white/5">
+                  <Download className="w-3.5 h-3.5 mr-1.5 opacity-70" />
+                  {png.downloads || 0}
+                </span>
+                <span className="flex items-center bg-rose-500/20 text-rose-300 px-2 py-1 rounded-md border border-rose-500/30">
+                  <Heart className="w-3.5 h-3.5 mr-1.5" />
+                  {png.likes || 0}
+                </span>
+              </div>
             </div>
           </div>
         </div>
