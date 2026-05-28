@@ -95,7 +95,7 @@ const PngCard = ({ png, onDownloadSuccess, rank }) => {
             
             {/* Top row */}
             <div className="flex justify-between items-start transform translate-y-[-10px] group-hover:translate-y-0 transition-transform duration-300">
-              <span className="flex items-center bg-rose-500/20 text-rose-300 px-2 py-1.5 rounded-xl border border-rose-500/30 text-[11px] font-bold shadow-lg">
+              <span className="flex items-center bg-emerald-500/20 text-emerald-400 px-2 py-1.5 rounded-xl border border-emerald-500/30 text-[11px] font-bold shadow-lg">
                 <Heart className="w-3.5 h-3.5 mr-1.5" />
                 {png.likes || 0}
               </span>
