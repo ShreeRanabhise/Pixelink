@@ -25,7 +25,7 @@ const PageLoader = () => {
   const { settings } = useSettings();
   
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-6">
+    <div className="flex flex-col items-center justify-center min-h-screen w-full">
       <img 
         src={settings?.logoUrl || '/logo.png'} 
         alt="Loading..." 
