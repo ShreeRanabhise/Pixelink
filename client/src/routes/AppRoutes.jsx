@@ -47,6 +47,7 @@ const PublicUpload = lazy(() => import('../pages/PublicUpload'));
 const About = lazy(() => import('../pages/About'));
 const Contact = lazy(() => import('../pages/Contact'));
 const PrivacyPolicy = lazy(() => import('../pages/PrivacyPolicy'));
+const DMCA = lazy(() => import('../pages/DMCA'));
 const NotFound = lazy(() => import('../pages/NotFound'));
 
 // Admin Pages
@@ -96,6 +97,7 @@ const AppRoutes = () => {
         <Route path="/about" element={<AppLayout><About /></AppLayout>} />
         <Route path="/contact" element={<AppLayout><Contact /></AppLayout>} />
         <Route path="/privacy" element={<AppLayout><PrivacyPolicy /></AppLayout>} />
+        <Route path="/dmca" element={<AppLayout><DMCA /></AppLayout>} />
 
         {/* Admin Login */}
         <Route path="/communityaccess" element={<CommunityAccess />} />
