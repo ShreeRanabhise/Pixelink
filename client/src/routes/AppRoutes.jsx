@@ -46,6 +46,7 @@ const LatestUploads = lazy(() => import('../pages/LatestUploads'));
 const PublicUpload = lazy(() => import('../pages/PublicUpload'));
 const About = lazy(() => import('../pages/About'));
 const Contact = lazy(() => import('../pages/Contact'));
+const License = lazy(() => import('../pages/License'));
 const TermsOfService = lazy(() => import('../pages/TermsOfService'));
 const PrivacyPolicy = lazy(() => import('../pages/PrivacyPolicy'));
 const DMCA = lazy(() => import('../pages/DMCA'));
@@ -98,6 +99,7 @@ const AppRoutes = () => {
         <Route path="/about" element={<AppLayout><About /></AppLayout>} />
         <Route path="/contact" element={<AppLayout><Contact /></AppLayout>} />
         <Route path="/terms" element={<AppLayout><TermsOfService /></AppLayout>} />
+        <Route path="/license" element={<AppLayout><License /></AppLayout>} />
         <Route path="/privacy" element={<AppLayout><PrivacyPolicy /></AppLayout>} />
         <Route path="/dmca" element={<AppLayout><DMCA /></AppLayout>} />
 
