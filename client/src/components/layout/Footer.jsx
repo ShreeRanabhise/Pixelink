@@ -1,16 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSettings } from '../../context/SettingsContext';
 
 const Footer = () => {
+  const { settings } = useSettings();
+
   return (
     <footer className="bg-slate-100 dark:bg-slate-950/40 border-t border-slate-200 dark:border-slate-800/40 py-12 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand Info */}
           <div className="space-y-4">
-            <span className="inline-block text-xl font-extrabold tracking-tight bg-gradient-to-r from-orange-500 via-violet-500 to-rose-500 animate-text-gradient bg-clip-text text-transparent">
-              Pixelink
-            </span>
+            <Link to="/" className="flex items-center space-x-2 w-max group">
+              <img src={settings.logoUrl} alt={`${settings.siteName} Logo`} className="h-8 w-auto object-contain drop-shadow-sm grayscale group-hover:grayscale-0 transition-all duration-500 opacity-70 group-hover:opacity-100" />
+              <span className="inline-block text-xl font-extrabold tracking-tight bg-gradient-to-r from-orange-500 via-violet-500 to-rose-500 animate-text-gradient bg-clip-text text-transparent">
+                {settings.siteName}
+              </span>
+            </Link>
             <p className="text-sm text-slate-500 dark:text-slate-400">
               The premier source for completely transparent, high-resolution PNG images. Download free Png's for UI/UX projects, graphic designs, and marketing assets.
             </p>
