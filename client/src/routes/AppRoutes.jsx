@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useSettings } from '../context/SettingsContext';
 
 // Layout wraps
 import Navbar from '../components/layout/Navbar';
@@ -20,12 +21,20 @@ const AppLayout = ({ children }) => (
   </div>
 );
 
-const PageLoader = () => (
-  <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-4">
-    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-brand-500"></div>
-    <p className="text-sm text-slate-500 dark:text-slate-400">Loading Pixelink...</p>
-  </div>
-);
+const PageLoader = () => {
+  const { settings } = useSettings();
+  
+  return (
+    <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-6">
+      <img 
+        src={settings?.logoUrl || '/logo.png'} 
+        alt="Loading..." 
+        className="w-16 h-auto object-contain animate-bounce drop-shadow-md"
+      />
+      <p className="text-sm font-medium text-slate-500 dark:text-slate-400 animate-pulse tracking-wide">Loading Pixelink...</p>
+    </div>
+  );
+};
 
 // Lazy Loaded Pages
 const Home = lazy(() => import('../pages/Home'));
