@@ -14,13 +14,13 @@ const PngCard = ({ png, onDownloadSuccess, rank }) => {
   let rankIconColor = "";
 
   if (rank === 1) {
-    rankStyles = "ring-2 ring-yellow-400 z-10 scale-[1.02] shadow-[0_0_15px_rgba(250,204,21,0.6)]";
+    rankStyles = "ring-2 ring-yellow-400 z-10 scale-[1.02] shadow-[0_0_25px_rgba(250,204,21,0.6)] hover:shadow-[0_0_35px_rgba(250,204,21,0.8)]";
     rankIconColor = "text-yellow-400 bg-yellow-400/20 border-yellow-400/50";
   } else if (rank === 2) {
-    rankStyles = "ring-2 ring-slate-300 z-10 scale-[1.01] shadow-[0_0_15px_rgba(203,213,225,0.6)]";
+    rankStyles = "ring-2 ring-slate-300 z-10 scale-[1.01] shadow-[0_0_25px_rgba(203,213,225,0.6)] hover:shadow-[0_0_35px_rgba(203,213,225,0.8)]";
     rankIconColor = "text-slate-200 bg-slate-300/20 border-slate-300/50";
   } else if (rank === 3) {
-    rankStyles = "ring-2 ring-amber-600 z-10 scale-[1.01] shadow-[0_0_15px_rgba(217,119,6,0.6)]";
+    rankStyles = "ring-2 ring-amber-600 z-10 scale-[1.01] shadow-[0_0_25px_rgba(217,119,6,0.6)] hover:shadow-[0_0_35px_rgba(217,119,6,0.8)]";
     rankIconColor = "text-amber-500 bg-amber-600/20 border-amber-600/50";
   }
 
@@ -76,7 +76,7 @@ const PngCard = ({ png, onDownloadSuccess, rank }) => {
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ y: -5 }}
       transition={{ duration: 0.2 }}
-      className={`group relative glass border border-slate-200/60 dark:border-slate-800/60 bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl rounded-[1.5rem] overflow-hidden shadow-sm hover:shadow-2xl hover:border-brand-500/40 dark:hover:border-brand-500/40 transition-all duration-300 aspect-square ${rankStyles}`}
+      className={`group relative glass border border-slate-200/60 dark:border-slate-800/60 bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl rounded-[1.5rem] overflow-hidden hover:border-brand-500/40 dark:hover:border-brand-500/40 transition-all duration-300 aspect-square ${rank ? rankStyles : 'shadow-sm hover:shadow-2xl'}`}
     >
       {rank && rank <= 3 && (
         <div className={`absolute top-0 right-0 m-3 z-20 flex items-center justify-center p-2 rounded-full border backdrop-blur-md shadow-lg transition-opacity duration-300 group-hover:opacity-0 ${rankIconColor}`}>
