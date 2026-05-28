@@ -120,8 +120,8 @@ const Home = () => {
   };
 
   const defaultTrending = ['diwali diya', 'rangoli', 'ganpati bappa', 'modak', 'rakhi', 'festival lights', 'lakshmi'];
-  const displayTrending = (trendingRes?.trending && trendingRes.trending.length >= 4) 
-    ? trendingRes.trending 
+  const displayTrending = (trendingRes?.trending && trendingRes.trending.length >= 4)
+    ? trendingRes.trending
     : defaultTrending;
 
   useEffect(() => {
@@ -185,7 +185,7 @@ const Home = () => {
                   />
                   {!searchVal && (
                     <div className="absolute inset-0 flex items-center pointer-events-none text-slate-400 font-medium z-0 overflow-hidden">
-                      <span>Search PNG for '</span>
+                      <span>Search transparent PNG for '</span>
                       <span key={placeholderIndex} className="text-brand-500 animate-keyword-slide inline-block">
                         {displayTrending[placeholderIndex]}
                       </span>
@@ -204,7 +204,7 @@ const Home = () => {
 
             {/* Auto Suggestions Overlay */}
             {showSuggestions && suggestionsRes?.data && suggestionsRes.data.length > 0 && (
-               <div className="absolute left-0 right-0 mt-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl py-2 text-left overflow-hidden z-50">
+              <div className="absolute left-0 right-0 mt-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl py-2 text-left overflow-hidden z-50">
                 <p className="text-xs text-slate-400 px-4 pb-2 pt-1 uppercase font-semibold tracking-wider border-b border-slate-100 dark:border-slate-800/65">
                   Suggested PNGs
                 </p>
@@ -289,16 +289,16 @@ const Home = () => {
             {randomPngs?.slice(0, visibleCount).map((png) => (
               <PngCard key={png._id} png={png} />
             ))}
-            
+
             {randomLoading && (
               [...Array(10)].map((_, i) => <SkeletonCard key={`sk-${i}`} />)
             )}
           </div>
-          
+
           {/* Intersection Observer Target for pagination simulation */}
           {(!randomPngs || visibleCount < randomPngs.length) && (
             <div ref={observerTarget} className="h-10 w-full flex items-center justify-center">
-               <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-brand-500"></div>
+              <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-brand-500"></div>
             </div>
           )}
         </section>
@@ -317,7 +317,7 @@ const Home = () => {
             <div className="hidden md:block absolute bottom-[25px] left-[35px] w-[240px] h-[240px] rounded-full bg-orange-300/15 blur-[70px] animate-glow-float-2" style={{ animationDelay: '-10s', animationDuration: '19s' }}></div>
             <div className="hidden md:block absolute top-[55%] left-[-15px] w-[200px] h-[200px] rounded-full bg-violet-300/15 blur-[60px] animate-glow-left-right" style={{ animationDelay: '-13s', animationDuration: '17s' }}></div>
           </div>
-          
+
           <div className="space-y-3 max-w-xl text-center md:text-left z-10">
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
               Submit Your PNG and Join Pixelink!
