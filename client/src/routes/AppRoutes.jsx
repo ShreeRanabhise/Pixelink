@@ -29,7 +29,8 @@ const PageLoader = () => {
       <img 
         src={settings?.logoUrl || '/logo.png'} 
         alt="Loading..." 
-        className="w-32 h-auto object-contain drop-shadow-md"
+        className="w-32 h-auto object-contain animate-pixel-bounce drop-shadow-md"
+        style={{ imageRendering: 'pixelated' }}
       />
     </div>
   );
