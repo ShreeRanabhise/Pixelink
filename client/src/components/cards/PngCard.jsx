@@ -17,8 +17,8 @@ const PngCard = ({ png, onDownloadSuccess, rank }) => {
     rankStyles = "ring-2 ring-yellow-400 z-10 scale-[1.02] shadow-[0_0_25px_rgba(250,204,21,0.6)] hover:shadow-[0_0_35px_rgba(250,204,21,0.8)]";
     rankIconColor = "text-yellow-400 bg-yellow-400/20 border-yellow-400/50";
   } else if (rank === 2) {
-    rankStyles = "ring-2 ring-[#A9A9A9] z-10 scale-[1.01] shadow-[0_0_25px_rgba(169,169,169,0.6)] hover:shadow-[0_0_35px_rgba(169,169,169,0.8)]";
-    rankIconColor = "text-[#A9A9A9] bg-[#A9A9A9]/20 border-[#A9A9A9]/50";
+    rankStyles = "ring-2 ring-[#747D8C] z-10 scale-[1.01] shadow-[0_0_25px_rgba(116,125,140,0.35)] dark:shadow-[0_0_25px_rgba(116,125,140,0.6)] hover:shadow-[0_0_35px_rgba(116,125,140,0.5)] dark:hover:shadow-[0_0_35px_rgba(116,125,140,0.8)]";
+    rankIconColor = "text-[#747D8C] bg-[#747D8C]/15 border-[#747D8C]/40";
   } else if (rank === 3) {
     rankStyles = "ring-2 ring-[#D2691E] z-10 scale-[1.01] shadow-[0_0_25px_rgba(210,105,30,0.6)] hover:shadow-[0_0_35px_rgba(210,105,30,0.8)]";
     rankIconColor = "text-[#D2691E] bg-[#D2691E]/20 border-[#D2691E]/50";
