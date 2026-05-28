@@ -60,34 +60,27 @@ const CategoryDetail = () => {
 
       {/* Header / Breadcrumb */}
       {/* Category Header */}
-      <div className="space-y-4 p-6 sm:p-8 relative overflow-hidden">
-        
-
-
-        <div className="relative z-10 space-y-4 flex flex-col items-start">
-          <Link
-            to="/categories"
-            className="inline-flex items-center text-[10px] font-bold text-slate-700 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 transition-colors uppercase tracking-widest bg-white/30 dark:bg-slate-900/40 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/30 dark:border-slate-700/40 shadow-sm"
-          >
-            <ChevronLeft className="w-3.5 h-3.5 mr-1" />
-            Back to categories
-          </Link>
-          <div className="flex items-center space-x-3 bg-white/30 dark:bg-slate-900/40 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/30 dark:border-slate-700/40 shadow-sm inline-flex">
-            <div className="p-1.5 bg-brand-500/10 text-brand-600 dark:text-brand-400 rounded-lg hidden sm:block">
-              <Folder className="w-5 h-5" />
-            </div>
-            <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-slate-100 m-0">
-              {category ? <>{category.name} <span className="text-transparent bg-clip-text bg-gradient-brand">Assets</span></> : 'Category Details'}
-            </h1>
+      <div className="space-y-4 glass bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200/60 dark:border-slate-800/60 p-6 sm:p-8 rounded-[2rem] shadow-sm">
+        <Link
+          to="/categories"
+          className="inline-flex items-center text-[10px] font-bold text-slate-500 dark:text-slate-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors uppercase tracking-widest mb-2"
+        >
+          <ChevronLeft className="w-3.5 h-3.5 mr-1" />
+          Back to categories
+        </Link>
+        <div className="flex items-center space-x-4">
+          <div className="p-3 bg-brand-500/10 text-brand-600 dark:text-brand-400 rounded-2xl shadow-inner hidden sm:block">
+            <Folder className="w-6 h-6" />
           </div>
-          {category?.description && (
-            <div className="bg-white/30 dark:bg-slate-900/40 backdrop-blur-sm px-4 py-2.5 rounded-xl border border-white/30 dark:border-slate-700/40 shadow-sm max-w-2xl">
-              <p className="text-sm sm:text-base font-medium text-slate-800 dark:text-slate-200 leading-relaxed m-0">
-                {category.description}
-              </p>
-            </div>
-          )}
+          <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100">
+            {category ? <>{category.name} <span className="text-transparent bg-clip-text bg-gradient-brand">Assets</span></> : 'Category Details'}
+          </h1>
         </div>
+        {category?.description && (
+          <p className="text-sm sm:text-base font-medium text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed pt-2 border-t border-slate-200/60 dark:border-slate-800/60">
+            {category.description}
+          </p>
+        )}
       </div>
 
       {/* PNG Grid list */}
