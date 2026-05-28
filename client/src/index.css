@@ -181,19 +181,57 @@
 
 
 
-@keyframes searchGlow {
-  0% { box-shadow: 0 0 15px rgba(139, 92, 246, 0.3); }
-  50% { box-shadow: 0 0 25px rgba(244, 63, 94, 0.5); }
-  100% { box-shadow: 0 0 15px rgba(139, 92, 246, 0.3); }
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0turn;
+}
+
+@keyframes spinCircularGlow {
+  to {
+    --border-angle: 1turn;
+  }
 }
 
 .animate-search-glow {
-  animation: searchGlow 4s ease-in-out infinite;
+  position: relative;
+  z-index: 1;
 }
 
-.animate-search-glow:focus-within {
-  animation: none !important;
-  box-shadow: 0 0 30px rgba(244, 63, 94, 0.6) !important;
+/* Outer blur for glow */
+.animate-search-glow::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 9999px;
+  background: conic-gradient(from var(--border-angle), #f97316, #8b5cf6, #f43f5e, #f97316);
+  animation: spinCircularGlow 3s linear infinite;
+  filter: blur(12px);
+  z-index: -1;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Inner border for sharp edge */
+.animate-search-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  padding: 2px;
+  background: conic-gradient(from var(--border-angle), #f97316, #8b5cf6, #f43f5e, #f97316);
+  animation: spinCircularGlow 3s linear infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.animate-search-glow:focus-within::before {
+  opacity: 1;
+  filter: blur(16px);
 }
 
 /* Subtle Rank Glow Animations */
