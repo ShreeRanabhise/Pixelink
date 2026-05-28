@@ -256,7 +256,7 @@ const PngDetail = () => {
               <button
                 onClick={() => setBgPreview('checkerboard')}
                 className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-colors ${
-                  bgPreview === 'checkerboard' ? 'bg-brand-600 text-white' : 'text-slate-600 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10'
+                  bgPreview === 'checkerboard' ? 'bg-rose-500 text-white' : 'text-slate-600 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10'
                 }`}
               >
                 Grid
@@ -264,7 +264,7 @@ const PngDetail = () => {
               <button
                 onClick={() => setBgPreview('dark')}
                 className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-colors ${
-                  bgPreview === 'dark' ? 'bg-brand-600 text-white' : 'text-slate-600 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10'
+                  bgPreview === 'dark' ? 'bg-violet-500 text-white' : 'text-slate-600 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10'
                 }`}
               >
                 Dark
@@ -272,7 +272,7 @@ const PngDetail = () => {
               <button
                 onClick={() => setBgPreview('light')}
                 className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-colors ${
-                  bgPreview === 'light' ? 'bg-brand-600 text-white' : 'text-slate-600 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10'
+                  bgPreview === 'light' ? 'bg-orange-500 text-white' : 'text-slate-600 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10'
                 }`}
               >
                 Light
