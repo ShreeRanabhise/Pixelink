@@ -48,7 +48,7 @@ const TrendingPngs = () => {
           </h1>
         </div>
         <p className="text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed pt-2 border-t border-slate-200/60 dark:border-slate-800/60">
-          The most popular transparent Png's, vectors, and graphic clipart assets downloaded by our designer community.
+          The most trending transparent Png's, vectors, and graphic clipart assets uploaded by our designer community.
         </p>
       </div>
 
