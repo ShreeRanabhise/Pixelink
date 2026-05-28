@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Link, useNavigate } from 'react-router-dom';
-import { LayoutGrid, Layers, Search } from 'lucide-react';
+import { LayoutGrid, Layers, Search, Folder } from 'lucide-react';
 import api from '../api/axios';
 import SEO from '../components/common/SEO';
 import AdBanner from '../components/common/AdBanner';
@@ -80,8 +80,8 @@ const Categories = () => {
                         onClick={() => navigate(`/category/${cat.slug}`)}
                         className="w-full text-left px-5 py-3.5 hover:bg-slate-100/50 dark:hover:bg-slate-800/50 rounded-2xl text-slate-800 dark:text-slate-200 transition-all flex items-center space-x-4"
                       >
-                        <div className="w-10 h-10 rounded-xl overflow-hidden shrink-0">
-                           <img src={cat.image} className="w-full h-full object-cover" alt={cat.name} />
+                        <div className="w-10 h-10 rounded-xl bg-brand-500/10 flex items-center justify-center shrink-0">
+                           <Folder className="w-5 h-5 text-brand-600 dark:text-brand-400" />
                         </div>
                         <span className="font-bold text-base">{cat.name}</span>
                       </button>
@@ -112,13 +112,13 @@ const Categories = () => {
               to={`/category/${cat.slug}`}
               className="group relative block h-[220px] rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-1.5 border border-slate-200/50 dark:border-slate-700/50"
             >
-              {/* Image box */}
-              <img
-                src={cat.image}
-                alt={cat.name}
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 filter brightness-90"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/95 via-slate-900/50 to-transparent transition-opacity duration-300"></div>
+              {/* Card Background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-950 group-hover:from-slate-700 group-hover:to-slate-900 transition-colors duration-500"></div>
+              
+              {/* Watermark Icon */}
+              <div className="absolute -bottom-6 -right-6 text-white opacity-[0.03] group-hover:opacity-[0.08] group-hover:scale-110 group-hover:-rotate-6 transition-all duration-500 pointer-events-none">
+                <Folder className="w-40 h-40" />
+              </div>
               
               <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-md text-white text-[10px] px-3 py-1.5 rounded-full font-bold flex items-center space-x-1.5 border border-white/20 shadow-lg">
                 <Layers className="w-3 h-3" />
