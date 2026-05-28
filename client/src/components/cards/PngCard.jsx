@@ -6,6 +6,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import api from '../../api/axios';
 import toast from 'react-hot-toast';
+import { getOptimizedImageUrl } from '../../utils/imageUtils';
 
 const PngCard = ({ png, onDownloadSuccess, rank }) => {
   const [isDownloading, setIsDownloading] = useState(false);
@@ -61,14 +62,7 @@ const PngCard = ({ png, onDownloadSuccess, rank }) => {
     }
   };
 
-  const getThumbnailUrl = (url) => {
-    if (!url) return '';
-    // Optimize Cloudinary URLs on the fly
-    if (url.includes('res.cloudinary.com') && url.includes('/upload/')) {
-      return url.replace('/upload/', '/upload/c_limit,w_400,q_auto,f_auto/');
-    }
-    return url;
-  };
+
 
   return (
     <motion.div
@@ -87,7 +81,7 @@ const PngCard = ({ png, onDownloadSuccess, rank }) => {
         {/* Transparent Checkerboard Image Box */}
         <div className="relative w-full h-full checkerboard-bg flex items-center justify-center p-4 select-none overflow-hidden">
           <LazyLoadImage
-            src={getThumbnailUrl(png.imageUrl)}
+            src={getOptimizedImageUrl(png.imageUrl, { width: 400 })}
             alt={png.title}
             effect="blur"
             wrapperProps={{

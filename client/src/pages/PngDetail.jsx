@@ -10,6 +10,7 @@ import SkeletonCard from '../components/loaders/SkeletonCard';
 import toast from 'react-hot-toast';
 import SEO from '../components/common/SEO';
 import AdBanner from '../components/common/AdBanner';
+import { getOptimizedImageUrl } from '../utils/imageUtils';
 
 const PngDetail = () => {
   const { slug } = useParams();
@@ -237,7 +238,7 @@ const PngDetail = () => {
         <div className="lg:col-span-8 flex flex-col space-y-8">
           <div className={`relative w-full aspect-[4/3] rounded-[2rem] ${getBgClass()} flex items-center justify-center p-8 border border-slate-200/60 dark:border-slate-800/60 shadow-inner select-none transition-all duration-300 overflow-hidden`}>
             <LazyLoadImage
-              src={png.imageUrl}
+              src={getOptimizedImageUrl(png.imageUrl)}
               alt={png.title}
               effect="blur"
               wrapperProps={{

@@ -9,6 +9,7 @@ import SkeletonCard from '../components/loaders/SkeletonCard';
 import SEO from '../components/common/SEO';
 import AdBanner from '../components/common/AdBanner';
 import { useSettings } from '../context/SettingsContext';
+import { getOptimizedImageUrl } from '../utils/imageUtils';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -214,7 +215,7 @@ const Home = () => {
                       onClick={() => navigate(`/png/${png.slug}`)}
                       className="w-full px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-800/50 text-left transition-colors flex items-center space-x-3"
                     >
-                      <img src={png.imageUrl} alt={png.title} className="w-10 h-10 object-contain bg-slate-100 dark:bg-slate-800 rounded-lg p-1" />
+                      <img src={getOptimizedImageUrl(png.imageUrl, { width: 100 })} alt={png.title} className="w-10 h-10 object-contain bg-slate-100 dark:bg-slate-800 rounded-lg p-1" />
                       <span className="font-medium text-sm text-slate-700 dark:text-slate-200 truncate">{png.title}</span>
                     </button>
                   ))}
