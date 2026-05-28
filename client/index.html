@@ -10,59 +10,7 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=%VITE_ADSENSE_CLIENT_ID%" crossorigin="anonymous"></script>
   </head>
   <body>
-    <div id="root">
-      <style>
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; }
-        .pixelink-loader-container {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          height: 100vh;
-          width: 100vw;
-          background: #f8fafc;
-          font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
-        @media (prefers-color-scheme: dark) {
-          .pixelink-loader-container {
-            background: #020617; /* Slate 950 to match app dark mode */
-          }
-        }
-        .pixelink-loader-logo {
-          width: 110px;
-          height: auto;
-          animation: bounce-soft 2.5s infinite ease-in-out;
-          filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
-        }
-        @media (prefers-color-scheme: dark) {
-          .pixelink-loader-logo {
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.4));
-          }
-        }
-        .pixelink-loader-text {
-          margin-top: 1.5rem;
-          font-size: 1.75rem;
-          font-weight: 800;
-          letter-spacing: -0.025em;
-          background: linear-gradient(to right, #f97316, #8b5cf6, #f43f5e);
-          -webkit-background-clip: text;
-          color: transparent;
-          animation: shimmer 3s linear infinite;
-          background-size: 200% auto;
-        }
-        @keyframes bounce-soft {
-          0%, 100% { transform: translateY(0) scale(1); }
-          50% { transform: translateY(-12px) scale(1.03); }
-        }
-        @keyframes shimmer {
-          to { background-position: 200% center; }
-        }
-      </style>
-      <div class="pixelink-loader-container">
-        <img src="/logo.png" alt="Pixelink Logo" class="pixelink-loader-logo" />
-        <div class="pixelink-loader-text">Pixelink</div>
-      </div>
-    </div>
+    <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
