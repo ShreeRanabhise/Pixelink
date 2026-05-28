@@ -31,7 +31,6 @@ const PageLoader = () => {
         alt="Loading..." 
         className="w-32 h-auto object-contain drop-shadow-md"
       />
-      <p className="text-sm font-medium text-slate-500 dark:text-slate-400 animate-pulse tracking-wide">Loading Pixelink...</p>
     </div>
   );
 };
