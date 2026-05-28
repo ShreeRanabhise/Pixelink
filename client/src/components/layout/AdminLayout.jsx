@@ -6,7 +6,7 @@ import { useSettings } from "../../context/SettingsContext";
 import {
   LayoutDashboard,
   Image,
-  FolderTree,
+  Folder,
   UploadCloud,
   FileCheck,
   BarChart3,
@@ -61,7 +61,7 @@ const AdminLayout = ({ children, title }) => {
         { name: "Manage PNGs", href: `${basePath}/pngs`, icon: Image, roles: ['admin', 'creator'] },
         { name: "Direct Upload", href: `${basePath}/upload`, icon: UploadCloud, roles: ['admin', 'creator'] },
         { name: "AI Generator", href: `${basePath}/ai-generator`, icon: Wand2, roles: ['admin'] },
-        { name: "Manage Categories", href: `${basePath}/categories`, icon: FolderTree, roles: ['admin', 'creator'] },
+        { name: "Manage Categories", href: `${basePath}/categories`, icon: Folder, roles: ['admin', 'creator'] },
       ]
     },
 
