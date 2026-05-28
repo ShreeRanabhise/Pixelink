@@ -19,6 +19,7 @@ const Home = () => {
   const suggestionRef = useRef(null);
   const observerTarget = useRef(null);
   const [visibleCount, setVisibleCount] = useState(12);
+  const [placeholderIndex, setPlaceholderIndex] = useState(0);
 
   // Fetch Categories for dynamic count
   const { data: categoriesRes } = useQuery({
@@ -122,6 +123,13 @@ const Home = () => {
     ? trendingRes.trending 
     : defaultTrending;
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPlaceholderIndex((prev) => (prev + 1) % displayTrending.length);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, [displayTrending.length]);
+
   return (
     <div className="pb-20">
       <SEO />
@@ -165,7 +173,7 @@ const Home = () => {
                 <Search className="w-5 h-5 mr-2.5 text-brand-500" />
                 <input
                   type="text"
-                  placeholder="Try diwali diya, ganpati bappa, rakhi..."
+                  placeholder={`Search Transparent PNGs for '${displayTrending[placeholderIndex]}'`}
                   value={searchVal}
                   onChange={(e) => {
                     setSearchVal(e.target.value);
